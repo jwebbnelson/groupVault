@@ -39,6 +39,7 @@ class Messages: FirebaseType {
             
             }
         }
+        return json
     }
     
     required init?(json: [String: AnyObject], identifier: String) {

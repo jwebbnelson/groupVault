@@ -51,7 +51,17 @@ class userController {
         }
     }
     
-    static func authenticateUser(email: String, password: String, username: String?, completion: (success: Bool, user: User?) -> Void) {
+    static func fetchAllUsers(completion: (users: [User]) -> Void) {
+        
+        FirebaseController.dataAtEndpoint("users") { (data) in
+            if let json = data as? [String: AnyObject] {
+                
+                let users = json.flatMap({User})
+            }
+        }
+    }
+    
+    static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
         
         FirebaseController.base.authUser(email, password: password) { (error, response) -> Void in
             
@@ -81,7 +91,7 @@ class userController {
                 var user = User(username: username, groups: [], identifier: userID)
                 user.save()
                 
-                authenticateUser(email, password: password, username: username, completion: { (success, user) -> Void in
+                authenticateUser(email, password: password, completion: { (success, user) -> Void in
                     completion(success: success, user: user)
                 })
             } else {

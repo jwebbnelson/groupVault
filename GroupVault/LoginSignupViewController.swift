@@ -10,6 +10,8 @@ import UIKit
 
 class LoginSignupViewController: UIViewController {
     
+    var user: User?
+    
     
     @IBOutlet weak var titleLabel: UILabel!
 
@@ -23,9 +25,6 @@ class LoginSignupViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
 
-    @IBOutlet weak var usernameLabel: UILabel!
-    
-    @IBOutlet weak var usernameTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -37,6 +36,30 @@ class LoginSignupViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    
+    @IBAction func loginSignUpButtonTapped(sender: AnyObject) {
+        
+        if let email = emailTextField.text where email != "",
+            let password = passwordTextField.text where password != "" {
+            
+            userController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success, user) in
+                if success {
+                    self.performSegueWithIdentifier("toWelcomView", sender: nil)
+                } else {
+                    print("Unable to authenticate user. Please Try again Later")
+                }
+                
+                ///FINISH AUTHENTICATION
+            })
+        }
+    }
+    
+    
+    @IBAction func CreateAccount(sender: AnyObject) {
     }
     
 
