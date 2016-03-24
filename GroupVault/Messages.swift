@@ -8,24 +8,80 @@
 
 import Foundation
 
-class Messages {
+class Messages: FirebaseType {
+    
+    let kSender = "sender"
+    let kText = "text"
+    let kPhoto = "photo"
+    let kDateString = "dateString"
+    let kViewedBy = "viewedBy"
     
     
-    var user: User
-    var messageID: String
-    var sender: String
+    var sender = ""
     var text: String?
     var photo: String?
-    var dateString: String?
-    var viewedBy: [User] = []
+    var dateString: String
+    var viewedBy: [String]
+    
+    var identifier: String?
     var endpoint: String {
         return "messages"
     }
     
-    init(user: User, messageID: String, sender: String) {
-        self.user = user
-        self.messageID = messageID
+    var jsonValue: [String: AnyObject] {
+        var json: [String: AnyObject] = [kSender: sender, kDateString: dateString]
+        
+        if let text = text {
+            json.updateValue(text, forKey: kText)
+        
+        if let photo = photo {
+            json.updateValue(photo, forKey: kPhoto)
+            
+            }
+        }
+    }
+    
+    required init?(json: [String: AnyObject], identifier: String) {
+        
+        guard let sender = json[kSender] as? String,
+        let text = json[kText] as? String,
+        let photo = json[kPhoto] as? String,
+        let dateString = json[kDateString] as? String,
+        let viewedBy = json[kViewedBy] as? [String] else { return nil }
+        
         self.sender = sender
+        self.text = text
+        self.photo = photo
+        self.dateString = dateString
+        self.viewedBy = viewedBy
+        
+    }
+    
+    init(sender: String, text: String, photo: String?, dateString: String?, viewedBy: [String], identifier: String) {
+        self.sender = sender
+        self.text = text
+        self.photo = photo
+        self.dateString = ""
+        self.viewedBy = []
+        self.identifier = identifier
+        
     }
     
 }
+
+
+
+
+
+//func timeBomb() {
+//    
+//    // this is where I want to make the function where the user will only see the text/ image for ten seconds.
+//    //Once the ten seconds are up, the text/image will be converted into an image of a lock that has a timestamp.
+//    //something that could end up being useful is the firebase function .willChangeValue
+//}
+
+
+
+
+
+

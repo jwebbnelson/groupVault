@@ -6,47 +6,57 @@
 //  Copyright © 2016 Jonathan Rogers. All rights reserved.
 //
 
-import Foundation
 
-class User {
+
+
+//////MAKE EVERYTHING CONFORM TO THE FIREBASE TYPE. ADD THE PROTOCOLS WHICH I CREATED. THE EXTENSION ON FIREBASE IS SAYING "IF IT CONFORMS TO THE PROTOCOL, THEn THE EXTENSION WILL ALLOW SAVING, AND DELETING."
+
+import Foundation
+import Firebase
+
+class User: Equatable, FirebaseType {
+    
+    let kUsername = "username"
+    let kGroups = "groups"
     
     
+    var username = ""
+    var groups: [String]
     
-    var username: String
-    var userID: String
-    var groups: [Groups]
+    var identifier: String?
     var endpoint: String {
         return "users"
     }
     
-    init(username: String, userID: String, groups: [Groups]) {
-            self.username = username
-            self.userID = userID
-            self.groups = groups
-        }
-    func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
+    var jsonValue: [String: AnyObject] {
         
+        return [kUsername: username, kGroups: groups]
+    }
+    
+    required init?(json: [String: AnyObject], identifier: String) {
+        
+        guard let username = json[kUsername] as? String ,
+        let groups = json[kGroups] as? [String] else { return nil }
+        
+        self.username = username
+        self.groups = groups
+        self.identifier = identifier
         
     }
     
-    
-    func createUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
-        FirebaseController.base.createUser(email, password: password) { (error, _, result) -> Void in
-            
-            if error != nil {
-                completion(success: false, user: nil)
-                print("there was an error creating your account. Please Try again later.")
-                
-            } else {
-                if let uID = result["uid"] as? String {
-                    userForIdentifier(uID, completion: { (user) -> Void in
-                        completion(success: true, user: user)
-                    })
-                }
-            }
-        }
+    init(username: String, groups: [String], identifier: String) {
+        self.username = username
+        self.groups = []
+        self.identifier = identifier
     }
-
 }
+
+func == (lhs: User, rhs: User)-> Bool {
+    
+    return (lhs.username == rhs.username) && (lhs.identifier == rhs.identifier)
+}
+
+
+///Right now I am trying to figure out how to set up my jsonDictionaries so that they can be displayed in firebase. my main problem is trying to figue out how to add optionals to the jsonDictionary variable.
 
 

@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class FirebaseController {
+class FirebaseController{
     
     static let base = Firebase(url: "groupvault.firebaseIO.com")
     
@@ -51,7 +51,6 @@ protocol FirebaseType {
     
     mutating func save()
     func delete()
-    func timebomb()
 }
 
 extension FirebaseType {
@@ -77,15 +76,7 @@ extension FirebaseType {
         }
     }
     
-    func timeBomb() {
-        
-        // this is where I want to make the function where the user will only see the text/ image for ten seconds. 
-        //Once the ten seconds are up, the text/image will be converted into an image of a lock that has a timestamp.
-        //something that could end up being useful is the firebase function .willChangeValue
-}
-
-
-
+    
 
 
 }
