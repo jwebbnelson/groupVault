@@ -31,6 +31,8 @@ class LoginSignupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,12 +50,14 @@ class LoginSignupViewController: UIViewController {
             
             userController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success, user) in
                 if success {
+                    
+                    
+                    
+                    
                     self.performSegueWithIdentifier("toWelcomView", sender: nil)
                 } else {
                     print("Unable to authenticate user. Please Try again Later")
                 }
-                
-                ///FINISH AUTHENTICATION
             })
         }
     }

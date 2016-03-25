@@ -51,15 +51,19 @@ class userController {
         }
     }
     
-    static func fetchAllUsers(completion: (users: [User]) -> Void) {
-        
-        FirebaseController.dataAtEndpoint("users") { (data) in
-            if let json = data as? [String: AnyObject] {
-                
-                let users = json.flatMap({User})
-            }
-        }
-    }
+//    static func fetchAllUsers(completion: (users: [User]) -> Void) {
+//        
+//        FirebaseController.dataAtEndpoint("users") { (data) in
+//            if let json = data as? [String: AnyObject] {
+//                
+//                let users = json.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+//                
+//                completion(users: users)
+//            } else {
+//                completion(users: [])
+//            }
+//        }
+//    }
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
         
@@ -72,6 +76,9 @@ class userController {
                 print("User ID: \(response.uid) was successfully authenticated")
                 userController.userForIdentifier(response.uid, completion: { (user) -> Void in
                     
+                    FirebaseController.base.childByAppendingPath("users").childByAppendingPath(response.uid)
+                    
+                                        
                     if let user = user {
                         self.sharedController.currentUser = user
                     }
@@ -79,7 +86,6 @@ class userController {
                     completion(success: true, user: user)
                 })
             }
-            
         }
     }
     
@@ -89,23 +95,26 @@ class userController {
             
             if let userID = response["uid"] as? String {
                 var user = User(username: username, groups: [], identifier: userID)
+                
                 user.save()
                 
                 authenticateUser(email, password: password, completion: { (success, user) -> Void in
                     completion(success: success, user: user)
+                    
                 })
             } else {
                 completion(success: false, user: nil)
             }
         }
     }
+    
+    static func userAddsUserToGroup(user: User, addsUser: User, completion: (success: Bool) -> Void) {
+        
+        var locationOfgroup = FirebaseController.base.childByAppendingPath("users")
+        
+        
+    }
 }
-
-
-
-
-
-
 
 
 

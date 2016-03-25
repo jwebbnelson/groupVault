@@ -16,20 +16,18 @@ class Groups: Equatable, FirebaseType {
     
     var groupName: String = ""
     var users: [String] = []
-    // should I change this to "[User]"
     var messages: [String] = []
-    // same for this one
     
     var identifier: String? // is this the same as the groupID
     var endpoint: String {
         return "Groups"
     }
     
-    init(groupName: String = "", users:[String]) {
+    init(groupName: String, users:[String], identifier: String) {
         
-        self.groupName = ""
-        self.users = []
-        self.messages = []
+        self.groupName = groupName
+        self.users = users
+        self.identifier = identifier
     }
     
     var jsonValue: [String: AnyObject] {

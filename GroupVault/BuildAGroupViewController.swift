@@ -10,6 +10,10 @@ import UIKit
 
 class BuildAGroupViewController: UIViewController {
 
+    @IBOutlet weak var groupNameTextField: UITextField!
+    
+    //// have the textField.text = Groups property "username"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +25,7 @@ class BuildAGroupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBOutlet weak var nextButtonTapped: UIButton!
 
     /*
     // MARK: - Navigation

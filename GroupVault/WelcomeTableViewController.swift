@@ -17,8 +17,17 @@ class WelcomeTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem())
+        
+        MessageController.createMessage("Steve", text: "sup", photo: "", dateString: "11/25/93", viewedBy: ["Jake"]) { (success) in
+            print("the completion block for message worked")
+        }
+        groupsController.createGroup("Bish Crib", users: ["Steve", "Greg", "Paul"], completion: { (success) in
+            print("just created group")
+        })
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

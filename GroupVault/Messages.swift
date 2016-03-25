@@ -62,8 +62,8 @@ class Messages: FirebaseType {
         self.sender = sender
         self.text = text
         self.photo = photo
-        self.dateString = ""
-        self.viewedBy = []
+        self.dateString = dateString!
+        self.viewedBy = viewedBy
         self.identifier = identifier
         
     }

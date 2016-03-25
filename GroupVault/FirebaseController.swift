@@ -64,6 +64,7 @@ extension FirebaseType {
             endpointBase = FirebaseController.base.childByAppendingPath(endpoint).childByAutoId()
             self.identifier = endpointBase.key
         }
+        endpointBase.updateChildValues(jsonValue)
     }
     
     func delete() {
