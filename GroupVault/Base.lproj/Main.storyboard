@@ -355,7 +355,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make A Group!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vx-XA-Fbc">
-                                <rect key="frame" x="103" y="97" width="393" height="39"/>
+                                <rect key="frame" x="103" y="80" width="393" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="T9L-NO-J5h"/>
                                     <constraint firstAttribute="width" constant="393" id="fNb-SF-a3G"/>
@@ -365,7 +365,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHw-z8-E8s">
-                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
+                                <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="usersCell" id="l2S-vA-s77">
@@ -382,8 +382,18 @@
                                     <outlet property="delegate" destination="FQQ-N3-y35" id="2nR-l9-BL2"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rqx-Y5-rsk">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pg9-oI-ZyM">
+                                <rect key="frame" x="0.0" y="204" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="FQQ-N3-y35" id="Iek-xX-HqC"/>
+                                </connections>
+                            </searchBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter group name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pha-pD-3mI" userLabel="Group Name Text Field">
-                                <rect key="frame" x="104" y="154" width="392" height="30"/>
+                                <rect key="frame" x="104" y="127" width="392" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2tF-7J-7ga"/>
                                     <constraint firstAttribute="width" constant="392" id="eny-CE-85m"/>
@@ -391,16 +401,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rqx-Y5-rsk">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.24615634750000001" green="0.64524511200000001" blue="0.92081330130000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="pha-pD-3mI" firstAttribute="centerX" secondItem="1Vx-XA-Fbc" secondAttribute="centerX" id="1Qc-vH-rRF"/>
                             <constraint firstItem="pha-pD-3mI" firstAttribute="leading" secondItem="xOs-fO-c4b" secondAttribute="leadingMargin" constant="84" id="7mx-g6-5zP"/>
-                            <constraint firstItem="1Vx-XA-Fbc" firstAttribute="top" secondItem="rlU-0d-zsM" secondAttribute="bottom" constant="33" id="Aal-dk-mJu"/>
-                            <constraint firstItem="pha-pD-3mI" firstAttribute="top" secondItem="1Vx-XA-Fbc" secondAttribute="bottom" constant="18" id="VAK-AZ-wqQ"/>
+                            <constraint firstItem="1Vx-XA-Fbc" firstAttribute="top" secondItem="rlU-0d-zsM" secondAttribute="bottom" constant="16" id="Aal-dk-mJu"/>
+                            <constraint firstItem="pha-pD-3mI" firstAttribute="top" secondItem="1Vx-XA-Fbc" secondAttribute="bottom" constant="8" id="VAK-AZ-wqQ"/>
                             <constraint firstItem="1Vx-XA-Fbc" firstAttribute="centerX" secondItem="xOs-fO-c4b" secondAttribute="centerX" id="xkO-mH-Pmd"/>
                         </constraints>
                     </view>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,  {
+class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
 //    func users(completion: (users: [User]?) -> Void) {
 //        
@@ -25,6 +25,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableViewCell: UITableViewCell!
     
     var usersDataSource: [User] = []
+    var filteredDataSource: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,23 +51,46 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//        filteredDataSource = usersDataSource.filter({ (user) -> Bool in
+//            return user.username.lowercaseString == searchText.lowercaseString
+//        })
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.filteredDataSource = self.usersDataSource.filter({$0.username.containsString(searchText.lowercaseString)})
+            
+            self.tableView.reloadData()
+        }
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return usersDataSource.count
+        if filteredDataSource.count > 0 {
+            return filteredDataSource.count
+        } else {
+            return usersDataSource.count
+        }
         /// return the number of users
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("usersCell", forIndexPath: indexPath)
         
-        let user = usersDataSource[indexPath.row]
+        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
         
         cell.textLabel?.text = user.username
         
         return cell
     }
     //// self.tableview.rowHeight = UITableView UITableViewAutomaticDimension
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            cell.backgroundColor = UIColor.lightGrayColor()
+        }
+        
+    }
     
 
     /*
