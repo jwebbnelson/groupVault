@@ -9,11 +9,11 @@
 import Foundation
 import Firebase
 
-class userController {
+class UserController {
     
     private let kUser = "userKey"
     
-    static let sharedController = userController()
+    static let sharedController = UserController()
     
     var currentUser: User! {
         get {
@@ -29,7 +29,7 @@ class userController {
         set {
             
             if let newValue = newValue {
-                NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: kUser)
+                NSUserDefaults.standardUserDefaults().setValue(newValue.jsonValue, forKey: kUser)
                 NSUserDefaults.standardUserDefaults().synchronize()
             } else {
                 NSUserDefaults.standardUserDefaults().removeObjectForKey(kUser)
@@ -51,19 +51,18 @@ class userController {
         }
     }
     
-//    static func fetchAllUsers(completion: (users: [User]) -> Void) {
-//        
-//        FirebaseController.dataAtEndpoint("users") { (data) in
-//            if let json = data as? [String: AnyObject] {
-//                
-//                let users = json.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
-//                
-//                completion(users: users)
-//            } else {
-//                completion(users: [])
-//            }
-//        }
-//    }
+    static func fetchAllUsers(completion: (users: [User]) -> Void) {
+        FirebaseController.dataAtEndpoint("users") { (data) in
+            if let json = data as? [String: AnyObject] {
+                
+                let users = json.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+                
+                completion(users: users)
+            } else {
+                completion(users: [])
+            }
+        }
+    }
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
         
@@ -74,11 +73,11 @@ class userController {
                 completion(success: false, user: nil)
             } else {
                 print("User ID: \(response.uid) was successfully authenticated")
-                userController.userForIdentifier(response.uid, completion: { (user) -> Void in
+                UserController.userForIdentifier(response.uid, completion: { (user) -> Void in
                     
                     FirebaseController.base.childByAppendingPath("users").childByAppendingPath(response.uid)
                     
-                                        
+                    
                     if let user = user {
                         self.sharedController.currentUser = user
                     }
@@ -88,6 +87,17 @@ class userController {
             }
         }
     }
+    
+//    static func fetchAllUsers(completion: (success: Bool, users: [User]) -> Void) {
+//        FirebaseController.dataAtEndpoint("users") { (data) in
+//            if let data = data as? [String: AnyObject] {
+//                
+//                print(data)
+//            }
+//            
+//        }
+//        
+//    }
     
     static func createUser(email: String, password: String, username: String, completion: (success: Bool, user: User?) -> Void) {
         
@@ -110,7 +120,7 @@ class userController {
     
     static func userAddsUserToGroup(user: User, addsUser: User, completion: (success: Bool) -> Void) {
         
-        var locationOfgroup = FirebaseController.base.childByAppendingPath("users")
+        _ = FirebaseController.base.childByAppendingPath("users")
         
         
     }

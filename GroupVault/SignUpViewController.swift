@@ -19,10 +19,14 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        
+        UserController.fetchAllUsers { (users) in
+            // look at this later
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,7 +36,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signupButtonTapped(sender: AnyObject) {
         
-        userController.createUser(emailTextField.text!, password: passwordTextField.text!, username: usernameTextField.text!) { (success, user) in
+        UserController.createUser(emailTextField.text!, password: passwordTextField.text!, username: usernameTextField.text!) { (success, user) in
             if success {
                 self.performSegueWithIdentifier("fromSignupToWelcome", sender: nil)
             } else {

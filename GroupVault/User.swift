@@ -35,11 +35,10 @@ class User: Equatable, FirebaseType {
     
     required init?(json: [String: AnyObject], identifier: String) {
         
-        guard let username = json[kUsername] as? String ,
-        let groups = json[kGroups] as? [String] else { return nil }
+        guard let username = json[kUsername] as? String else { return nil }
         
         self.username = username
-        self.groups = groups
+        self.groups = []
         self.identifier = identifier
         
     }

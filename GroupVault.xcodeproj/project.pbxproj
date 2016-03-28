@@ -27,7 +27,6 @@
 		AC8E60BF1CA247A1004DDC87 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BE1CA247A1004DDC87 /* Groups.swift */; };
 		AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */; };
 		AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */; };
-		AC8E60C91CA2492F004DDC87 /* AddMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C81CA2492F004DDC87 /* AddMembersTableViewController.swift */; };
 		AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CB1CA249B1004DDC87 /* UserController.swift */; };
 		AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */; };
 		AC8E60D01CA249C8004DDC87 /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupsController.swift */; };
@@ -69,7 +68,6 @@
 		AC8E60BE1CA247A1004DDC87 /* Groups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBoardTableViewController.swift; sourceTree = "<group>"; };
-		AC8E60C81CA2492F004DDC87 /* AddMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMembersTableViewController.swift; path = ../AddMembersTableViewController.swift; sourceTree = "<group>"; };
 		AC8E60CB1CA249B1004DDC87 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = ../UserController.swift; sourceTree = "<group>"; };
 		AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesController.swift; path = ../MessagesController.swift; sourceTree = "<group>"; };
 		AC8E60CF1CA249C8004DDC87 /* GroupsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupsController.swift; path = ../GroupsController.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
-				AC8E60C81CA2492F004DDC87 /* AddMembersTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -255,7 +252,6 @@
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC8E60B71CA1F8F9004DDC87 /* WelcomeTableViewController.swift in Sources */,
 				AC8E60BF1CA247A1004DDC87 /* Groups.swift in Sources */,
-				AC8E60C91CA2492F004DDC87 /* AddMembersTableViewController.swift in Sources */,
 				AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

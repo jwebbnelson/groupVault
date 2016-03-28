@@ -48,7 +48,7 @@ class LoginSignupViewController: UIViewController {
         if let email = emailTextField.text where email != "",
             let password = passwordTextField.text where password != "" {
             
-            userController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success, user) in
+            UserController.authenticateUser(email, password: password, completion: { (success, user) in
                 if success {
                     
                     
