@@ -26,6 +26,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     var usersDataSource: [User] = []
     var filteredDataSource: [User] = []
+    var selectedUserIDs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
+        createGroup()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -76,6 +78,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("usersCell", forIndexPath: indexPath)
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
         
         let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
         
@@ -87,29 +90,58 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            cell.backgroundColor = UIColor.lightGrayColor()
+            
+            let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
+            
+            if selectedUserIDs.contains(user.identifier!) {
+                
+                if let index = selectedUserIDs.indexOf(user.identifier!) {
+                
+                selectedUserIDs.removeAtIndex(index)
+                    
+                cell.backgroundColor = UIColor.whiteColor()
+                }
+                
+            } else {
+                selectedUserIDs.append(user.identifier!)
+                
+                cell.backgroundColor = UIColor.lightGrayColor()
+                
+            }
+            
+            
+            
+            
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
     }
     
+    
+    
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+       
     }
-    */
+    
     
     func createGroup() {
         
-        let groupName = groupNameTextField.text!
+        if let groupName = groupNameTextField.text {
+            
+          GroupsController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
         
-        groupsController.createGroup(groupName, users: [], completion: { (success) in
-            print("just created group")
-        })
+            if (success != nil) {
+                GroupsController.passGroupIDsToUser(UserController.sharedController.currentUser, group:group, key: success!)
+            }
+            
+          })
+        }
+    
     }
 
 }

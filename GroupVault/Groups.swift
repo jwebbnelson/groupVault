@@ -20,7 +20,7 @@ class Groups: Equatable, FirebaseType {
     
     var identifier: String? // is this the same as the groupID
     var endpoint: String {
-        return "Groups"
+        return "groups"
     }
     
     init(groupName: String, users:[String], identifier: String) {

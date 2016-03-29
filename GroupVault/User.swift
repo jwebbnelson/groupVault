@@ -21,7 +21,7 @@ class User: Equatable, FirebaseType {
     
     
     var username = ""
-    var groups: [String]
+    var groupIDs: [String] = []
     
     var identifier: String?
     var endpoint: String {
@@ -30,7 +30,7 @@ class User: Equatable, FirebaseType {
     
     var jsonValue: [String: AnyObject] {
         
-        return [kUsername: username, kGroups: groups]
+        return [kUsername: username, kGroups: groupIDs]
     }
     
     required init?(json: [String: AnyObject], identifier: String) {
@@ -38,14 +38,16 @@ class User: Equatable, FirebaseType {
         guard let username = json[kUsername] as? String else { return nil }
         
         self.username = username
-        self.groups = []
+        if let groupIDs = json[kGroups] as? [String] {
+            self.groupIDs = groupIDs
+        }
         self.identifier = identifier
         
     }
     
     init(username: String, groups: [String], identifier: String) {
         self.username = username
-        self.groups = []
+        self.groupIDs = []
         self.identifier = identifier
     }
 }

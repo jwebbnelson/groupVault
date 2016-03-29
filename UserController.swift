@@ -51,6 +51,20 @@ class UserController {
         }
     }
     
+//    static func groupsForUser(identifier: String, completion: (groupIDs: [String]) -> Void) {
+//        
+//        FirebaseController.dataAtEndpoint("users/\(identifier)") { (data) -> Void in
+//            
+//            if let json = data as? [String: AnyObject] {
+//                let group = Groups(json: json, identifier: identifier)
+//                completion(groupIDs: group)
+//            }
+//            
+//        }
+    // fetch the users groups. Do this by mapping through all groups and seeing if the users identifier is contained inside of the array of group IDs
+    
+    
+    
     static func fetchAllUsers(completion: (users: [User]) -> Void) {
         FirebaseController.dataAtEndpoint("users") { (data) in
             if let json = data as? [String: AnyObject] {
@@ -63,6 +77,24 @@ class UserController {
             }
         }
     }
+    
+    static func fetchGroupsForUser(user: User, completion: (groups: [Groups]) -> Void) {
+        var groups: [Groups] = []
+        let tunnel = dispatch_group_create()
+        for groupID in user.groupIDs {
+            dispatch_group_enter(tunnel)
+            GroupsController.groupForIdentifier(groupID, completion: { (group) in
+                if let group = group {
+                    groups.append(group)
+                }
+                dispatch_group_leave(tunnel)
+            })
+        }
+        dispatch_group_notify(tunnel, dispatch_get_main_queue()) {
+            completion(groups: groups)
+        }
+    }
+
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
         
@@ -88,20 +120,14 @@ class UserController {
         }
     }
     
-//    static func fetchAllUsers(completion: (success: Bool, users: [User]) -> Void) {
-//        FirebaseController.dataAtEndpoint("users") { (data) in
-//            if let data = data as? [String: AnyObject] {
-//                
-//                print(data)
-//            }
-//            
-//        }
-//        
-//    }
-    
     static func createUser(email: String, password: String, username: String, completion: (success: Bool, user: User?) -> Void) {
         
         FirebaseController.base.createUser(email, password: password) { (error, response) -> Void in
+            
+            if error != nil {
+                completion(success: false, user: nil)
+                return
+            }
             
             if let userID = response["uid"] as? String {
                 var user = User(username: username, groups: [], identifier: userID)

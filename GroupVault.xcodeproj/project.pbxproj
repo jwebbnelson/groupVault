@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC3A35031CA9D034006FD36D /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A35021CA9D034006FD36D /* ButtonTableViewCell.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
 		AC8E60981CA1E958004DDC87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60961CA1E958004DDC87 /* Main.storyboard */; };
@@ -48,7 +47,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AC3A35021CA9D034006FD36D /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8E60921CA1E958004DDC87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				AC8E60B41CA1F8E3004DDC87 /* LoginSignupViewController.swift */,
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
-				AC3A35021CA9D034006FD36D /* ButtonTableViewCell.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
 			);
 			name = ViewControllers;
@@ -248,7 +245,6 @@
 				AC8E60D01CA249C8004DDC87 /* GroupsController.swift in Sources */,
 				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
-				AC3A35031CA9D034006FD36D /* ButtonTableViewCell.swift in Sources */,
 				AC8E60BD1CA24794004DDC87 /* Messages.swift in Sources */,
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
