@@ -27,6 +27,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     var usersDataSource: [User] = []
     var filteredDataSource: [User] = []
     var selectedUserIDs: [String] = []
+    var currentUser = UserController.sharedController.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +55,6 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        filteredDataSource = usersDataSource.filter({ (user) -> Bool in
-//            return user.username.lowercaseString == searchText.lowercaseString
-//        })
         
         dispatch_async(dispatch_get_main_queue()) {
             self.filteredDataSource = self.usersDataSource.filter({$0.username.containsString(searchText.lowercaseString)})
@@ -68,6 +66,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
         if filteredDataSource.count > 0 {
             return filteredDataSource.count
         } else {
@@ -132,8 +131,9 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     func createGroup() {
         
         if let groupName = groupNameTextField.text {
-            
-          GroupsController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
+            let myIdentifier = UserController.sharedController.currentUser.identifier
+            selectedUserIDs.append(myIdentifier!)
+            GroupsController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
         
             if (success != nil) {
                 GroupsController.passGroupIDsToUser(UserController.sharedController.currentUser, group:group, key: success!)
