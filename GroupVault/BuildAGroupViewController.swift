@@ -28,13 +28,19 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     var filteredDataSource: [User] = []
     var selectedUserIDs: [String] = []
     var currentUser = UserController.sharedController.currentUser
+    var user: User!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UserController.fetchAllUsers { (users) in
+            self.usersDataSource = users.filter({ (user) -> Bool in
+                return user.identifier != UserController.sharedController.currentUser.identifier
+            })
+
+
             print(users.count)
-            self.usersDataSource = users
             dispatch_async(dispatch_get_main_queue(), { 
                 self.tableView.reloadData()
             })

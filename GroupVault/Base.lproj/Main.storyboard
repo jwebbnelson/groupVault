@@ -394,8 +394,12 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rqx-Y5-rsk">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                             </navigationBar>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pg9-oI-ZyM">
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pg9-oI-ZyM">
                                 <rect key="frame" x="0.0" y="204" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CGP-f4-5VH"/>
+                                    <constraint firstAttribute="width" constant="600" id="rxi-aP-ASp"/>
+                                </constraints>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="FQQ-N3-y35" id="Iek-xX-HqC"/>
@@ -407,7 +411,9 @@
                             <constraint firstItem="pha-pD-3mI" firstAttribute="centerX" secondItem="1Vx-XA-Fbc" secondAttribute="centerX" id="1Qc-vH-rRF"/>
                             <constraint firstItem="pha-pD-3mI" firstAttribute="leading" secondItem="xOs-fO-c4b" secondAttribute="leadingMargin" constant="84" id="7mx-g6-5zP"/>
                             <constraint firstItem="1Vx-XA-Fbc" firstAttribute="top" secondItem="rlU-0d-zsM" secondAttribute="bottom" constant="16" id="Aal-dk-mJu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Pg9-oI-ZyM" secondAttribute="trailing" constant="-20" id="G83-v6-TnQ"/>
                             <constraint firstItem="pha-pD-3mI" firstAttribute="top" secondItem="1Vx-XA-Fbc" secondAttribute="bottom" constant="8" id="VAK-AZ-wqQ"/>
+                            <constraint firstItem="Pg9-oI-ZyM" firstAttribute="leading" secondItem="xOs-fO-c4b" secondAttribute="leadingMargin" constant="-20" id="Yvy-7R-2aj"/>
                             <constraint firstItem="1Vx-XA-Fbc" firstAttribute="centerX" secondItem="xOs-fO-c4b" secondAttribute="centerX" id="xkO-mH-Pmd"/>
                         </constraints>
                     </view>
