@@ -57,7 +57,12 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        createGroup()
+        if groupNameTextField.text == "" && selectedUserIDs == [] {
+            print("group doesn't have a name or no users friends were added to group. Please try again!")
+        } else {
+            createGroup()
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -137,13 +142,12 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     func createGroup() {
         
         if let groupName = groupNameTextField.text {
-            let myIdentifier = UserController.sharedController.currentUser.identifier
-            selectedUserIDs.append(myIdentifier!)
-            GroupsController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
-        
-            if (success != nil) {
-                GroupsController.passGroupIDsToUser(UserController.sharedController.currentUser, group:group, key: success!)
-            }
+            guard let myIdentifier = UserController.sharedController.currentUser.identifier else {return}
+            selectedUserIDs.append(myIdentifier)
+            GroupController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
+                if (success != nil) {
+                    GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
+                }
             
           })
         }

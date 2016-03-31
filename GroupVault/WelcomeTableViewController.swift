@@ -7,51 +7,91 @@
 //
 
 import UIKit
+import Firebase
 
 class WelcomeTableViewController: UITableViewController {
-
+    
+    static let sharedController = WelcomeTableViewController()
+    var groups: [Group] = []
+    var currentUser = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let user = UserController.sharedController.currentUser{
+            currentUser = user.identifier!
+        }else{
+            performSegueWithIdentifier("noUserLoggedIn", sender: nil)
+        }
+        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        
+        if FirebaseController.base.authData == nil {
+            
+            performSegueWithIdentifier("noUserLoggedIn", sender: nil)
+        } else {
+            print("There is a user logged in")
+        }
+        
+    }
+    // Uncomment the following line to preserve selection between presentations
+    // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem())
         
 //        let testGroup = Groups(groupName: "Hello", users: ["jake"], identifier: "77777")
 //        GroupsController.passGroupIDsToUser(UserController.sharedController.currentUser, group: testGroup)
-//       
+    //
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        UserController.observeGroupsForUser(currentUser) { (group) in
+            self.groups = group
+            print("This is the groups")
+            self.tableView.reloadData()
+        }
+        
+//        UserController.fetchGroupsForUser(currentUser) { (groups) in
+//            self.groups = groups
+//            dispatch_async(dispatch_get_main_queue(), { 
+//                self.tableView.reloadData()
+//            })
+//        }
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func LogoutButtonTapped(sender: AnyObject) {
+        FirebaseController.base.unauth()
+        performSegueWithIdentifier("noUserLoggedIn", sender: nil)
+
+        
+    }
+    
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.groups.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("enterAGroup", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let group = self.groups[indexPath.row]
+        
+        cell.textLabel?.text = group.groupName
+        print(group.groupName)
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -88,14 +128,30 @@ class WelcomeTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "enterAGroup"{
+            
+            let messageBoardTableViewController = segue.destinationViewController as? MessageBoardTableViewController
+            
+            _ = messageBoardTableViewController!.view
+            
+            let indexPath = tableView.indexPathForSelectedRow
+            
+            if let selectedRow = indexPath?.row {
+                
+                let group = self.groups[selectedRow]
+                messageBoardTableViewController?.updateWith(group)
+                
+                
+            }
+            
+        }
+        
+        
     }
-    */
-
 }

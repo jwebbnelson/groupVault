@@ -8,19 +8,33 @@
 
 import Foundation
 
-class Groups: Equatable, FirebaseType {
+class Group: Equatable, FirebaseType {
     
     let kGroupName = "groupName"
     let kUsers = "users"
     let kMessages = "messages"
     
-    var groupName: String = ""
-    var users: [String] = []
-    var messages: [String] = []
+    var groupName: String
+    var users: [String]
+    var messages: [String]
     
     var identifier: String? // is this the same as the groupID
     var endpoint: String {
         return "groups"
+    }
+    
+    required init?(json: [String : AnyObject], identifier: String) {
+        
+        guard let groupName = json[kGroupName] as? String,
+            let users = json[kUsers] as? [String] else { return nil }
+        
+        self.groupName = groupName
+        self.users = users
+        if let messages = json[kMessages] as? [String] {
+            self.messages = messages
+        } else {
+            self.messages = []
+        }
     }
     
     init(groupName: String, users:[String], identifier: String) {
@@ -28,26 +42,17 @@ class Groups: Equatable, FirebaseType {
         self.groupName = groupName
         self.users = users
         self.identifier = identifier
+        self.messages = []
     }
     
     var jsonValue: [String: AnyObject] {
         return [kGroupName: groupName, kUsers: users, kMessages: messages]
     }
     
-    required init?(json: [String : AnyObject], identifier: String) {
-        
-        guard let groupName = json[kGroupName] as? String,
-        let users = json[kUsers] as? [String],
-        let messages = json[kMessages] as? [String] else { return }
-        
-        self.groupName = groupName
-        self.users = users
-        self.messages = messages
-    }
     
 }
 
-func == (lhs: Groups, rhs: Groups) -> Bool {
+func == (lhs: Group, rhs: Group) -> Bool {
     
     return (lhs.identifier == rhs.identifier)
 }

@@ -15,6 +15,8 @@ class UserController {
     
     static let sharedController = UserController()
     
+    var groups: [Group] = []
+    
     var currentUser: User! {
         get {
             guard let userID = FirebaseController.base.authData?.uid,
@@ -51,19 +53,30 @@ class UserController {
         }
     }
     
-//    static func groupsForUser(identifier: String, completion: (groupIDs: [String]) -> Void) {
-//        
-//        FirebaseController.dataAtEndpoint("users/\(identifier)") { (data) -> Void in
-//            
-//            if let json = data as? [String: AnyObject] {
-//                let group = Groups(json: json, identifier: identifier)
-//                completion(groupIDs: group)
-//            }
-//            
-//        }
-    // fetch the users groups. Do this by mapping through all groups and seeing if the users identifier is contained inside of the array of group IDs
-    
-    
+    static func observeGroupsForUser(identifier: String, completion: (group: [Group]) -> Void) {
+        FirebaseController.observeDataAtEndpoint("users/\(identifier)/groups") { (data) -> Void in
+            
+            if let groupIdentifierDictionary = data as? [String: AnyObject] {
+                var groups: [Group] = []
+                let tunnel = dispatch_group_create()
+                for identifier in groupIdentifierDictionary.keys {
+                    dispatch_group_enter(tunnel)
+                    GroupController.groupForIdentifier(identifier, completion: { (group) in
+                        if let group = group {
+                            groups.append(group)
+                        }
+                        dispatch_group_leave(tunnel)
+                    })
+                }
+                dispatch_group_notify(tunnel, dispatch_get_main_queue(), { () -> Void in
+                    completion(group: groups)
+                })
+            } else {
+                completion(group: [])
+            }
+        }
+    }
+
     
     static func fetchAllUsers(completion: (users: [User]) -> Void) {
         FirebaseController.dataAtEndpoint("users") { (data) in
@@ -78,12 +91,13 @@ class UserController {
         }
     }
     
-    static func fetchGroupsForUser(user: User, completion: (groups: [Groups]) -> Void) {
-        var groups: [Groups] = []
+    static func fetchGroupsForUser(user: User, completion: (groups: [Group]) -> Void) {
+        var groups: [Group] = []
         let tunnel = dispatch_group_create()
         for groupID in user.groupIDs {
+            print("USER GROUPs Before tunnel: \(user.groupIDs.count)")
             dispatch_group_enter(tunnel)
-            GroupsController.groupForIdentifier(groupID, completion: { (group) in
+            GroupController.groupForIdentifier(groupID, completion: { (group) in
                 if let group = group {
                     groups.append(group)
                 }
@@ -91,10 +105,12 @@ class UserController {
             })
         }
         dispatch_group_notify(tunnel, dispatch_get_main_queue()) {
+            print("USER GROUP COUNT: \(groups.count)")
             completion(groups: groups)
         }
     }
-
+    
+    
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
         
@@ -150,6 +166,8 @@ class UserController {
         
         
     }
+    
+    
 }
 
 
