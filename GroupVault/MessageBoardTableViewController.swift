@@ -19,6 +19,7 @@ class MessageBoardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ///// fetchMessagesForGroup
         
         }
     
@@ -35,6 +36,25 @@ class MessageBoardTableViewController: UITableViewController {
             print("text must be entered in order to send a message")
         } else {
             createMessage()
+        }
+    }
+    
+    func createMessage() {
+        
+        if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
+            if let group = group, let identifier = group.identifier {
+            
+            MessageController.createMessage(userIdentifier, groupID: identifier, text: message, photo: "", completion: { (success, message) in
+                if success == true {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                    })
+                
+                } else {
+                    print("message not saved")
+                }
+            })
+            }
         }
     }
 
@@ -107,24 +127,7 @@ class MessageBoardTableViewController: UITableViewController {
     
     func updateWith(group: Group) {
         self.groupNameLabelOnMessageBoard.text = group.groupName
-    }
-    
-    func createMessage() {
-        
-        if let message = messageTextField.text, let identifier = UserController.sharedController.currentUser.identifier {
-            
-            MessageController.createMessage(identifier, text: message, photo: "", completion: { (success, message) in
-                if success == true {
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        self.tableView.reloadData()
-                    })
-                    
-                } else {
-                    print("message not saved")
-                }
-            })
-
-        }
+        self.group = group
     }
 
 }

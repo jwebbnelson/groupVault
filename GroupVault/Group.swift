@@ -35,6 +35,7 @@ class Group: Equatable, FirebaseType {
         } else {
             self.messages = []
         }
+        self.identifier = identifier
     }
     
     init(groupName: String, users:[String], identifier: String) {

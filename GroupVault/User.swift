@@ -44,16 +44,13 @@ class User: Equatable, FirebaseType {
             for key in groupIDs.keys {
             self.groupIDs.append(key)
             }
-           print("GROUPIDS FireBase: \(self.groupIDs.count)")
         } else {
            // NSUserDefaults - Array
             if let groupIDs = json[kGroups] as? [String] {
                 self.groupIDs = groupIDs
             }
-            print("GROUPIDS NSUSER: \(self.groupIDs.count)")
         }
         self.identifier = identifier
-        
     }
     
     init(username: String, groups: [String], identifier: String) {

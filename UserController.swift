@@ -95,7 +95,6 @@ class UserController {
         var groups: [Group] = []
         let tunnel = dispatch_group_create()
         for groupID in user.groupIDs {
-            print("USER GROUPs Before tunnel: \(user.groupIDs.count)")
             dispatch_group_enter(tunnel)
             GroupController.groupForIdentifier(groupID, completion: { (group) in
                 if let group = group {
@@ -105,7 +104,6 @@ class UserController {
             })
         }
         dispatch_group_notify(tunnel, dispatch_get_main_queue()) {
-            print("USER GROUP COUNT: \(groups.count)")
             completion(groups: groups)
         }
     }
