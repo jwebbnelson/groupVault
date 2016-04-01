@@ -15,17 +15,27 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var groupNameLabelOnMessageBoard: UILabel!
     
+    @IBOutlet weak var messageTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            
         }
     
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func sendButtonTapped(sender: AnyObject) {
+        
+        if messageTextField.text == "" {
+            print("text must be entered in order to send a message")
+        } else {
+            createMessage()
+        }
     }
 
     // MARK: - Table view data source
@@ -98,5 +108,39 @@ class MessageBoardTableViewController: UITableViewController {
     func updateWith(group: Group) {
         self.groupNameLabelOnMessageBoard.text = group.groupName
     }
+    
+    func createMessage() {
+        
+        if let message = messageTextField.text, let identifier = UserController.sharedController.currentUser.identifier {
+            
+            MessageController.createMessage(identifier, text: message, photo: "", completion: { (success, message) in
+                if success == true {
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.tableView.reloadData()
+                    })
+                    
+                } else {
+                    print("message not saved")
+                }
+            })
+
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

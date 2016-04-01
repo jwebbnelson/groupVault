@@ -58,11 +58,11 @@ class Message: FirebaseType {
         
     }
     
-    init(sender: String, text: String, photo: String?, dateString: String?, viewedBy: [String], identifier: String) {
+    init(sender: String, text: String?, photo: String?, dateString: String, viewedBy: [String], identifier: String) {
         self.sender = sender
         self.text = text
         self.photo = photo
-        self.dateString = dateString!
+        self.dateString = dateString
         self.viewedBy = viewedBy
         self.identifier = identifier
         

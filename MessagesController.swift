@@ -12,6 +12,7 @@ import Firebase
 class MessageController {
     
     static let sharedController = MessageController()
+    
     //    var messages: [Messages] = []
     //    var sender: String = ""
     
@@ -27,13 +28,18 @@ class MessageController {
         })
     }
     
-    static func createMessage(sender: String, text: String?, photo: String?, dateString: String, viewedBy: [String], completion: (success: Bool) -> Void) {
+    static func createMessage(sender: String, text: String?, photo: String?, completion: (success: Bool, message: Message) -> Void) {
         
         let messageID = FirebaseController.base.childByAppendingPath("messages").childByAutoId()
         let identifier = messageID.key
-        var message = Message(sender: sender, text: text!, photo: photo, dateString: dateString, viewedBy: viewedBy, identifier: identifier)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "mm-dd"
+        
+        var message = Message(sender: sender, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), viewedBy: [], identifier: identifier)
         message.save()
-        completion(success: true)
+        // Add message ID to group
+        completion(success: true, message: message)
         
         
         
