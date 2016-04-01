@@ -15,11 +15,11 @@ class MessageController {
     //    var messages: [Messages] = []
     //    var sender: String = ""
     
-    static func messageForIdentifier(identifier: String, completion: (message: Message?) -> Void) {
+    static func messageForIdentifier(identifier: String, completion: (message: Messages?) -> Void) {
         
         FirebaseController.dataAtEndpoint("messages/\(identifier)", completion: { (data) in
-            if let json = data as? [String: AnyObject] {
-                let message = Message(json: json, identifier: identifier)
+            if let data = data as? [String: AnyObject] {
+                let message = Messages(json: data, identifier: identifier)
                 completion(message: message)
             } else {
                 completion(message: nil)
@@ -31,8 +31,8 @@ class MessageController {
         
         let messageID = FirebaseController.base.childByAppendingPath("messages").childByAutoId()
         let identifier = messageID.key
-        var message = Message(sender: sender, text: text!, photo: photo, dateString: dateString, viewedBy: viewedBy, identifier: identifier)
-        message.save()
+        var messages = Messages(sender: sender, text: text!, photo: photo, dateString: dateString, viewedBy: viewedBy, identifier: identifier)
+        messages.save()
         completion(success: true)
         
         

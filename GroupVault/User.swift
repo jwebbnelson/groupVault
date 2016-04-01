@@ -38,19 +38,8 @@ class User: Equatable, FirebaseType {
         guard let username = json[kUsername] as? String else { return nil }
         
         self.username = username
-        
-        //FIREBASE - Dictionary
-        if let groupIDs = json[kGroups] as? [String: AnyObject] {
-            for key in groupIDs.keys {
-            self.groupIDs.append(key)
-            }
-           print("GROUPIDS FireBase: \(self.groupIDs.count)")
-        } else {
-           // NSUserDefaults - Array
-            if let groupIDs = json[kGroups] as? [String] {
-                self.groupIDs = groupIDs
-            }
-            print("GROUPIDS NSUSER: \(self.groupIDs.count)")
+        if let groupIDs = json[kGroups] as? [String] {
+            self.groupIDs = groupIDs
         }
         self.identifier = identifier
         

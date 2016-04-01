@@ -22,6 +22,9 @@ class SignUpViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        UserController.fetchAllUsers { (users) in
+            // look at this later
+        }
     }
     
     override func didReceiveMemoryWarning() {

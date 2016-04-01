@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message: FirebaseType {
+class Messages: FirebaseType {
     
     let kSender = "sender"
     let kText = "text"
