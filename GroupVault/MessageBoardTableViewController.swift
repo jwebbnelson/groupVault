@@ -11,7 +11,8 @@ import UIKit
 class MessageBoardTableViewController: UITableViewController {
     
     var group: Group?
-    var messages: [Message] = []
+    var groupMessages: [Message] = []
+    var currentGroup = ""
     
     @IBOutlet weak var groupNameLabelOnMessageBoard: UILabel!
     
@@ -19,9 +20,19 @@ class MessageBoardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ///// fetchMessagesForGroup
+        
+        updateBasedOnGroup()
         
         }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        guard let group = group  else { return }
+        MessageController.fetchMessagesForGroup(group) { (messages) in
+            self.groupMessages = messages
+            self.tableView.reloadData()
+            }
+    }
     
 
     override func didReceiveMemoryWarning() {
@@ -32,10 +43,21 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
+        
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
             createMessage()
+            messageTextField.text = ""
+            
+        }
+    }
+    
+    func updateBasedOnGroup() {
+        guard let group = group else { return }
+        
+        MessageController.fetchMessagesForGroup(group) { (messages) -> Void in
+            self.groupMessages = messages
         }
     }
     
@@ -60,25 +82,24 @@ class MessageBoardTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.groupMessages.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("sentMessage", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let message = groupMessages[indexPath.row]
+        
+        cell.textLabel?.text = message.text
+        
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

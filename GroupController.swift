@@ -34,19 +34,6 @@ class GroupController {
     }
     
     
-    //    static func passGroupIDsToUser (user: User, group: Groups) {
-    //        let user = user
-    //        let group = group
-    //        var groupIdentifier = group.identifier
-    //        var groupIdentifierForUser: [String] = []
-    //
-    //        groupIdentifier = user.groupIDs as? String
-    //        groupIdentifierForUser.append(groupIdentifier!)
-    //
-    //
-    //
-    //    }
-    
     static func passGroupIDsToUsers(userIDs: [String], group: Group, key : String) {
         let allUserIdentifiers = FirebaseController.base.childByAppendingPath("users")
         for userID in userIDs {
