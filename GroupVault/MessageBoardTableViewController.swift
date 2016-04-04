@@ -13,10 +13,13 @@ class MessageBoardTableViewController: UITableViewController {
     var group: Group?
     var groupMessages: [Message] = []
     var currentGroup = ""
+    let currentUser = UserController.sharedController.currentUser.identifier
+    
     
     @IBOutlet weak var groupNameLabelOnMessageBoard: UILabel!
     
     @IBOutlet weak var messageTextField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +69,7 @@ class MessageBoardTableViewController: UITableViewController {
         if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
             if let group = group, let identifier = group.identifier {
             
-            MessageController.createMessage(userIdentifier, groupID: identifier, text: message, photo: "", completion: { (success, message) in
+                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", completion: { (success, message) in
                 if success == true {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
@@ -90,14 +93,40 @@ class MessageBoardTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("sentMessage", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("sentMessage", forIndexPath: indexPath) as! CellMessageTableViewCell
 
         let message = groupMessages[indexPath.row]
         
-        cell.textLabel?.text = message.text
-        
+        cell.messageTextLabel.text = message.text
+
+        if message.sender == self.currentUser {
+            
+            cell.messageTextLabel.textAlignment = NSTextAlignment.Right
+            cell.rightLabel.text = message.senderName
+            cell.rightLabel.textColor = UIColor.blackColor()
+            cell.rightLabel.font = UIFont.boldSystemFontOfSize(20)
+            cell.leftLabel.text = message.dateString
+            cell.leftLabel.font = UIFont.boldSystemFontOfSize(12)
+            cell.leftLabel.textColor = UIColor.lightGrayColor()
+        } else {
+            cell.messageTextLabel.textAlignment = NSTextAlignment.Left
+            cell.leftLabel.text = message.senderName
+            cell.leftLabel.font = UIFont.boldSystemFontOfSize(20)
+            cell.leftLabel.textColor = UIColor.blackColor()
+            cell.rightLabel.text = message.dateString
+            cell.rightLabel.font = UIFont.boldSystemFontOfSize(12)
+            cell.rightLabel.textColor = UIColor.lightGrayColor()
+        }
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 200
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
  
 

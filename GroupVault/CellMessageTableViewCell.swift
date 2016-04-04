@@ -10,6 +10,14 @@ import UIKit
 
 class CellMessageTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var rightLabel: UILabel!
+    
+    @IBOutlet weak var messageTextLabel: UILabel!
+    
+    @IBOutlet weak var leftLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +28,7 @@ class CellMessageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
 
 }

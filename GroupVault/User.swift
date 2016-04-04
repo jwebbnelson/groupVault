@@ -20,7 +20,7 @@ class User: Equatable, FirebaseType {
     let kGroups = "groups"
     
     
-    var username = ""
+    var username: String
     var groupIDs: [String] = []
     
     var identifier: String?

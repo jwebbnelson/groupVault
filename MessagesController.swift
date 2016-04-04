@@ -68,15 +68,15 @@ class MessageController {
     }
 
     
-    static func createMessage(sender: String, groupID: String, text: String?, photo: String?, completion: (success: Bool, message: Message) -> Void) {
+    static func createMessage(sender: String, senderName: String, groupID: String, text: String?, photo: String?, completion: (success: Bool, message: Message) -> Void) {
         
         let messageID = FirebaseController.base.childByAppendingPath("messages").childByAutoId()
         let identifier = messageID.key
         
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "mm-dd"
+        formatter.dateFormat = "MM-dd"
         
-        var message = Message(sender: sender, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), viewedBy: [], identifier: identifier, groupID: groupID)
+        var message = Message(sender: sender, senderName: senderName, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), viewedBy: [], identifier: identifier, groupID: groupID)
         message.save()
         
         completion(success: true, message: message)
