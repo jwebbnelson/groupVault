@@ -1,23 +1,15 @@
 //
-//  CellMessageTableViewCell.swift
+//  ReceiverCell.swift
 //  GroupVault
 //
-//  Created by Jonathan Rogers on 4/4/16.
+//  Created by Jonathan Rogers on 4/5/16.
 //  Copyright © 2016 Jonathan Rogers. All rights reserved.
 //
 
 import UIKit
 
-class CellMessageTableViewCell: UITableViewCell {
+class ReceiverCell: UITableViewCell {
 
-    
-    @IBOutlet weak var rightLabel: UILabel!
-    
-    @IBOutlet weak var messageTextLabel: UILabel!
-    
-    @IBOutlet weak var leftLabel: UILabel!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,7 +20,5 @@ class CellMessageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
 
 }
