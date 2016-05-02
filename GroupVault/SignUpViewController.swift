@@ -37,9 +37,18 @@ class SignUpViewController: UIViewController {
             if success {
                 self.performSegueWithIdentifier("fromSignupToWelcome", sender: nil)
             } else {
+                self.showAlert("Error!", message: "Make sure you filled out all fields!")
                 print("Unable to create user. Please try again.")
             }
         }
+    }
+    
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: "Error!", message: "Make sure you filled out all fields correctly.", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     /*

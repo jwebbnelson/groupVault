@@ -20,24 +20,52 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
+    enum ViewMode {
+        case lockedImage
+        case openedMessage
+        case unlockedImage
+    }
+    
+    var viewMode = ViewMode.lockedImage
+    
+//    func updateViewBasedOnMode() {
+//        
+//        switch viewMode {
+//        case .openedMessage:
+//            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
+//            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
+//                imageView?.hidden = true
+//            }
+//            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
+//              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
+//            
+//        case .lockedImage:
+//            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
+//        if let image = CellMessageTableViewCell.sharedCell.imageView
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateBasedOnGroup()
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+
+    }
+    override func viewDidAppear(animated: Bool) {
         
-        }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        guard let group = group  else { return }
-        MessageController.fetchMessagesForGroup(group) { (messages) in
-            self.groupMessages = messages
-            self.tableView.reloadData()
-            }
+        scrollToBottom()
+
     }
     
-
+    override func viewWillAppear(animated: Bool) {
+//        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
+//        self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,73 +80,76 @@ class MessageBoardTableViewController: UITableViewController {
         } else {
             createMessage()
             messageTextField.text = ""
+            self.tableView.reloadData()
+            scrollToBottom()
             
         }
     }
+
     
-    func updateBasedOnGroup() {
-        guard let group = group else { return }
-        
-        MessageController.fetchMessagesForGroup(group) { (messages) -> Void in
-            self.groupMessages = messages
-        }
+    func scrollToBottom(){
+        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
+        let delay = 0.1 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            if self.groupMessages.count >= 1 {
+            self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
+            }
+        })
     }
     
     func createMessage() {
         
         if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
             if let group = group, let identifier = group.identifier {
-            
-                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", completion: { (success, message) in
-                if success == true {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.reloadData()
-                    })
                 
-                } else {
-                    print("message not saved")
-                }
-            })
+                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", completion: { (success, message) in
+                    if success == true {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.scrollToBottom()
+                            self.tableView.reloadData()
+                            
+                        })
+                        
+                    } else {
+                        print("message not saved")
+                    }
+                })
             }
         }
     }
-
+    
     // MARK: - Table view data source
-
-
+    
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.groupMessages.count
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("sentMessage", forIndexPath: indexPath) as! CellMessageTableViewCell
-
+        
         let message = groupMessages[indexPath.row]
         
-        cell.messageTextLabel.text = message.text
-
+        
         if message.sender == self.currentUser {
             
-            cell.messageTextLabel.textAlignment = NSTextAlignment.Right
-            cell.rightLabel.text = message.senderName
-            cell.rightLabel.textColor = UIColor.blackColor()
-            cell.rightLabel.font = UIFont.boldSystemFontOfSize(20)
-            cell.leftLabel.text = message.dateString
-            cell.leftLabel.font = UIFont.boldSystemFontOfSize(12)
-            cell.leftLabel.textColor = UIColor.lightGrayColor()
+            let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
+            
+            cell.messageViewForSender(message)
+            
+            return cell
         } else {
-            cell.messageTextLabel.textAlignment = NSTextAlignment.Left
-            cell.leftLabel.text = message.senderName
-            cell.leftLabel.font = UIFont.boldSystemFontOfSize(20)
-            cell.leftLabel.textColor = UIColor.blackColor()
-            cell.rightLabel.text = message.dateString
-            cell.rightLabel.font = UIFont.boldSystemFontOfSize(12)
-            cell.rightLabel.textColor = UIColor.lightGrayColor()
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("receiverCell", forIndexPath: indexPath) as! ReceiverCell
+            
+            cell.messageViewForReceiver(message)
+            
+            return cell
+            
         }
-
-        return cell
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -128,6 +159,7 @@ class MessageBoardTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
  
 
     /*
@@ -178,6 +210,23 @@ class MessageBoardTableViewController: UITableViewController {
     func updateWith(group: Group) {
         self.groupNameLabelOnMessageBoard.text = group.groupName
         self.group = group
+        
+        MessageController.fetchMessagesForGroup(group) { (messages) in
+            self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+            self.tableView.reloadData()
+        }
+    }
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func keyboardConfiguration() {
+        
+        
     }
 
 }

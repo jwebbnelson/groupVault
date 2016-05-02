@@ -45,26 +45,30 @@ class LoginSignupViewController: UIViewController {
     
     @IBAction func loginSignUpButtonTapped(sender: AnyObject) {
         
+        if emailTextField.text == "" || passwordTextField.text ==  ""{
+                 self.showAlert("Error!", message: "Make sure you filled out al fields correctly")
+        }else{
+        
         if let email = emailTextField.text where email != "",
             let password = passwordTextField.text where password != "" {
             
             UserController.authenticateUser(email, password: password, completion: { (success, user) in
                 if success {
-                    
-                    
-                    
-                    
+    
                     self.performSegueWithIdentifier("toWelcomView", sender: nil)
                 } else {
+                    self.showAlert("Error!", message: "Make sure you filled out al fields correctly")
                     print("Unable to authenticate user. Please Try again Later")
-                }
-            })
+                    }
+                })
+            }
         }
     }
-    
-    
+
     @IBAction func CreateAccount(sender: AnyObject) {
     }
+    
+
     
 
     /*
@@ -76,5 +80,13 @@ class LoginSignupViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: "Error!", message: "Make sure you filled out all fields correctly.", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
 
 }

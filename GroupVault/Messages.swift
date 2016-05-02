@@ -61,6 +61,7 @@ class Message: FirebaseType {
         self.viewedBy = json[kViewedBy] as? [String] ?? []
         self.groupID = groupID
         self.senderName = senderName
+        self.identifier = identifier
     }
     
     init(sender: String, senderName: String, text: String?, photo: String?, dateString: String, viewedBy: [String], identifier: String, groupID: String) {

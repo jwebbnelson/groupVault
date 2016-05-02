@@ -10,14 +10,14 @@ import UIKit
 
 class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-//    func users(completion: (users: [User]?) -> Void) {
-//        
-//        UserController.fetchAllUsers { (success, users) in
-//            completion(users: users)
-//        }
-//
-//    }
-
+    //    func users(completion: (users: [User]?) -> Void) {
+    //
+    //        UserController.fetchAllUsers { (success, users) in
+    //            completion(users: users)
+    //        }
+    //
+    //    }
+    
     @IBOutlet weak var groupNameTextField: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
@@ -38,14 +38,11 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             self.usersDataSource = users.filter({ (user) -> Bool in
                 return user.identifier != UserController.sharedController.currentUser.identifier
             })
-
-
+            
+            
             print(users.count)
-            dispatch_async(dispatch_get_main_queue(), { 
-                self.tableView.reloadData()
-            })
+            self.tableView.reloadData()
         }
-        
     }
     
     
@@ -57,8 +54,9 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        if groupNameTextField.text == "" && selectedUserIDs == [] {
-            print("group doesn't have a name or no users friends were added to group. Please try again!")
+        if groupNameTextField.text == "" || selectedUserIDs == [] {
+            self.showAlert("Error!", message: "Make sure you create a group name and add members.")
+            
         } else {
             createGroup()
             navigationController?.popViewControllerAnimated(true)
@@ -106,10 +104,10 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             if selectedUserIDs.contains(user.identifier!) {
                 
                 if let index = selectedUserIDs.indexOf(user.identifier!) {
-                
-                selectedUserIDs.removeAtIndex(index)
                     
-                cell.backgroundColor = UIColor.whiteColor()
+                    selectedUserIDs.removeAtIndex(index)
+                    
+                    cell.backgroundColor = UIColor.whiteColor()
                 }
                 
             } else {
@@ -129,13 +127,13 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
+        
     }
     
     
@@ -148,12 +146,19 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
                 if (success != nil) {
                     GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
                 }
-            
-          })
+                
+            })
         }
-    
+        
     }
-
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
 }
 
 

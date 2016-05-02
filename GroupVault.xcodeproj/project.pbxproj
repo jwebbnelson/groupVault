@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC75FFFF1CB2DBFC004D5C41 /* CellMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC75FFFE1CB2DBFC004D5C41 /* CellMessageTableViewCell.swift */; };
+		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
+		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
+		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
+		AC75FFFF1CB2DBFC004D5C41 /* XXXRecieverCell in Sources */ = {isa = PBXBuildFile; fileRef = AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
 		AC8E60981CA1E958004DDC87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60961CA1E958004DDC87 /* Main.storyboard */; };
@@ -48,7 +51,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AC75FFFE1CB2DBFC004D5C41 /* CellMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellMessageTableViewCell.swift; sourceTree = "<group>"; };
+		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
+		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
+		AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XXXRecieverCell; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8E60921CA1E958004DDC87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +149,7 @@
 				AC8E60BA1CA24786004DDC87 /* User.swift */,
 				AC8E60BC1CA24794004DDC87 /* Messages.swift */,
 				AC8E60BE1CA247A1004DDC87 /* Group.swift */,
+				AC01C36B1CB376AF00D1A1CB /* Colors.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -155,7 +162,9 @@
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
-				AC75FFFE1CB2DBFC004D5C41 /* CellMessageTableViewCell.swift */,
+				AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */,
+				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
+				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -244,9 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */,
+				AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */,
 				AC8E60B51CA1F8E3004DDC87 /* LoginSignupViewController.swift in Sources */,
 				AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */,
-				AC75FFFF1CB2DBFC004D5C41 /* CellMessageTableViewCell.swift in Sources */,
+				AC75FFFF1CB2DBFC004D5C41 /* XXXRecieverCell in Sources */,
 				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
 				AC8E60BD1CA24794004DDC87 /* Messages.swift in Sources */,
@@ -254,6 +264,8 @@
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
+				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,
+				AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */,
 				AC8E60B71CA1F8F9004DDC87 /* WelcomeTableViewController.swift in Sources */,
 				AC8E60BF1CA247A1004DDC87 /* Group.swift in Sources */,
 				AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */,

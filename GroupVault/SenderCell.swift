@@ -9,6 +9,13 @@
 import UIKit
 
 class SenderCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var senderDate: UILabel!
+    
+    @IBOutlet weak var senderMessageView: UIView!
+    
+    @IBOutlet weak var senderMessageText: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +27,18 @@ class SenderCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func messageViewForSender(message: Message) {
+    senderMessageView.layer.masksToBounds = true
+    senderMessageView.layer.cornerRadius = 8.0
+    senderMessageView.backgroundColor = UIColor.lightGrayColor()
+    senderMessageView.layer.borderColor = UIColor.blackColor().CGColor
+    senderMessageView.layer.borderWidth = 0.5
+    senderMessageText.textColor = UIColor.blackColor()
+    senderMessageText.text = message.text
+    senderDate.textColor = Color.lightBlueMessageColor()
+    senderDate.text = message.dateString
+    senderDate.font = UIFont.boldSystemFontOfSize(12)
+        
+    }
 }
