@@ -47,5 +47,14 @@ class ReceiverCell: UITableViewCell {
         recieverUserName.font = UIFont.boldSystemFontOfSize(12)
         
     }
+}
 
+protocol RecieverTableViewCellDelegate {
+    func buttonTapped(sender: ReceiverCell)
+}
+
+extension ReceiverCell {
+    func updateWithMessage(message: Message) {
+        
+    }
 }

@@ -10,12 +10,14 @@ import UIKit
 
 class SenderCell: UITableViewCell {
     
+    static let sharedCell = SenderCell()
     
     @IBOutlet weak var senderDate: UILabel!
     
     @IBOutlet weak var senderMessageView: UIView!
     
     @IBOutlet weak var senderMessageText: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,4 +43,13 @@ class SenderCell: UITableViewCell {
     senderDate.font = UIFont.boldSystemFontOfSize(12)
         
     }
+}
+
+protocol SenderTableViewCellDelegate {
+    func senderButtonTapped(sender: SenderCell)
+}
+
+extension SenderCell {
+    func updateWithMessage(message: Message) {
+        
 }

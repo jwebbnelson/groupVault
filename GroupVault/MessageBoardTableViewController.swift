@@ -20,28 +20,29 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
-    enum ViewMode {
-        case lockedImage
-        case openedMessage
-        case unlockedImage
-    }
-    
-    var viewMode = ViewMode.lockedImage
-    
+//    enum ViewMode {
+//        case lockedImage
+//        case openedMessage
+//        case unlockedImage
+//    }
+//    
+//    var viewMode = ViewMode.lockedImage
+//    
 //    func updateViewBasedOnMode() {
 //        
 //        switch viewMode {
 //        case .openedMessage:
-//            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
-//            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
-//                imageView?.hidden = true
-//            }
-//            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
-//              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
-//            
-//        case .lockedImage:
-//            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
-//        if let image = CellMessageTableViewCell.sharedCell.imageView
+//
+////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
+////            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
+////                imageView?.hidden = true
+////            }
+////            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
+////              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
+////            
+////        case .lockedImage:
+////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
+////        if let image = CellMessageTableViewCell.sharedCell.imageView
 //        }
 //    }
     
@@ -51,13 +52,24 @@ class MessageBoardTableViewController: UITableViewController {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
-
+        
+        let presentedTextField = UITextField()
+        
+        messageTextField.inputAccessoryView = presentedTextField
     }
     override func viewDidAppear(animated: Bool) {
         
-        scrollToBottom()
+        scrollToBottom(true)
 
     }
+    
+
+    @IBAction func showMessageButtonTapped(sender: AnyObject) {
+        
+        
+    }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
 //        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
@@ -80,22 +92,16 @@ class MessageBoardTableViewController: UITableViewController {
         } else {
             createMessage()
             messageTextField.text = ""
-            self.tableView.reloadData()
-            scrollToBottom()
-            
         }
     }
 
     
-    func scrollToBottom(){
-        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
-        let delay = 0.1 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            if self.groupMessages.count >= 1 {
-            self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
-            }
-        })
+    func scrollToBottom(bool: Bool){
+        if self.groupMessages.count > 0 {
+            let lastRowNumer = self.groupMessages.count - 1
+            let indexPath = NSIndexPath(forRow: lastRowNumer, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: bool)
+        }
     }
     
     func createMessage() {
@@ -107,8 +113,9 @@ class MessageBoardTableViewController: UITableViewController {
                     if success == true {
                         dispatch_async(dispatch_get_main_queue(), {
                             
-                            self.scrollToBottom()
+                            self.scrollToBottom(true)
                             self.tableView.reloadData()
+                            print("this should be working")
                             
                         })
                         
@@ -180,32 +187,8 @@ class MessageBoardTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     */
+ 
     
     func updateWith(group: Group) {
         self.groupNameLabelOnMessageBoard.text = group.groupName
@@ -216,6 +199,7 @@ class MessageBoardTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    /*
     func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -223,9 +207,11 @@ class MessageBoardTableViewController: UITableViewController {
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
-    
+ */
+ 
     func keyboardConfiguration() {
         
+        let inputAccessoryView = UIInputViewController()
         
     }
 
