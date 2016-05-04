@@ -51,5 +51,7 @@ protocol SenderTableViewCellDelegate {
 
 extension SenderCell {
     func updateWithMessage(message: Message) {
-        
+        print("bitch")
+        //HELLO 
+}
 }
