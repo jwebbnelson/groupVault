@@ -20,34 +20,10 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
-    //    enum ViewMode {
-    //        case lockedImage
-    //        case openedMessage
-    //        case unlockedImage
-    //    }
-    //
-    //    var viewMode = ViewMode.lockedImage
-    //
-    //    func updateViewBasedOnMode() {
-    //
-    //        switch viewMode {
-    //        case .openedMessage:
-    //
-    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
-    ////            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
-    ////                imageView?.hidden = true
-    ////            }
-    ////            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
-    ////              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
-    ////
-    ////        case .lockedImage:
-    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
-    ////        if let image = CellMessageTableViewCell.sharedCell.imageView
-    //        }
-    //    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -72,8 +48,7 @@ class MessageBoardTableViewController: UITableViewController {
     
     
     override func viewWillAppear(animated: Bool) {
-        //        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
-        //        self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
+        
     }
     
     
@@ -148,12 +123,17 @@ class MessageBoardTableViewController: UITableViewController {
             cell.messageViewForSender(message)
             cell.delegate = self
             return cell
+            
         } else {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("receiverCell", forIndexPath: indexPath) as! ReceiverCell
-            
-            cell.messageViewForReceiver(message)
             cell.delegate = self
+            cell.message = message
+            if !cell.isLocked {
+                cell.messageViewForReceiver(message)
+            } else {
+                cell.lockImageViewForReceiver()
+            }
             return cell
             
         }
@@ -225,15 +205,11 @@ extension MessageBoardTableViewController: SenderTableViewCellDelegate, Reciever
         
     }
     
-    func receiverCellbuttonTapped(sender: ReceiverCell) {
-        
-        if let indexPath = tableView.indexPathForCell(sender) {
+    func receiverLockImagebuttonTapped(sender: ReceiverCell) {
+            print("this is working")
             
-            let message = groupMessages[indexPath.row]
-            
-            message.text = "this is working"
+            sender.isLocked = false
             tableView.reloadData()
-        }
     }
 }
 
