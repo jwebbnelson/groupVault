@@ -31,12 +31,6 @@ class ReceiverCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func showMessageButtonTappedOnRecieverCell(sender: AnyObject) {
-        
-        if let delegate = delegate {
-            delegate.receiverCellbuttonTapped(self)
-        }
-    }
     func messageViewForReceiver(message: Message) {
         
         recieverMessageView.layer.masksToBounds = true

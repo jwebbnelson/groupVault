@@ -20,6 +20,31 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
+    //    enum ViewMode {
+    //        case lockedImage
+    //        case openedMessage
+    //        case unlockedImage
+    //    }
+    //
+    //    var viewMode = ViewMode.lockedImage
+    //
+    //    func updateViewBasedOnMode() {
+    //
+    //        switch viewMode {
+    //        case .openedMessage:
+    //
+    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
+    ////            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
+    ////                imageView?.hidden = true
+    ////            }
+    ////            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
+    ////              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
+    ////
+    ////        case .lockedImage:
+    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
+    ////        if let image = CellMessageTableViewCell.sharedCell.imageView
+    //        }
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +62,14 @@ class MessageBoardTableViewController: UITableViewController {
         scrollToBottom(true)
         
     }
-
+    
+    
+    @IBAction func showMessageButtonTapped(sender: AnyObject) {
+        
+        
+    }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         //        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
