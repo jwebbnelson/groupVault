@@ -18,29 +18,37 @@ class SenderCell: UITableViewCell {
     
     @IBOutlet weak var senderMessageText: UILabel!
     
-
+    var delegate: SenderTableViewCellDelegate?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
+    @IBAction func showMessageButtonTapped(sender: AnyObject) {
+        
+        if let delegate = delegate {
+            delegate.senderButtonTapped(self)
+        }
+    }
     func messageViewForSender(message: Message) {
-    senderMessageView.layer.masksToBounds = true
-    senderMessageView.layer.cornerRadius = 8.0
-    senderMessageView.backgroundColor = UIColor.lightGrayColor()
-    senderMessageView.layer.borderColor = UIColor.blackColor().CGColor
-    senderMessageView.layer.borderWidth = 0.5
-    senderMessageText.textColor = UIColor.blackColor()
-    senderMessageText.text = message.text
-    senderDate.textColor = Color.lightBlueMessageColor()
-    senderDate.text = message.dateString
-    senderDate.font = UIFont.boldSystemFontOfSize(12)
+        senderMessageView.layer.masksToBounds = true
+        senderMessageView.layer.cornerRadius = 8.0
+        senderMessageView.backgroundColor = UIColor.lightGrayColor()
+        senderMessageView.layer.borderColor = UIColor.blackColor().CGColor
+        senderMessageView.layer.borderWidth = 0.5
+        senderMessageText.textColor = UIColor.blackColor()
+        senderMessageText.text = message.text
+        senderDate.textColor = Color.lightBlueMessageColor()
+        senderDate.text = message.dateString
+        senderDate.font = UIFont.boldSystemFontOfSize(12)
         
     }
 }
@@ -51,7 +59,6 @@ protocol SenderTableViewCellDelegate {
 
 extension SenderCell {
     func updateWithMessage(message: Message) {
-        print("bitch")
-        //HELLO 
-}
+        
+    }
 }

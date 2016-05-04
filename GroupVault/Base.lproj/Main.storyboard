@@ -324,7 +324,7 @@
                                 <rect key="frame" x="0.0" y="72" width="320" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Te-Xq-H2s" id="Mlm-Qi-Hc3">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5B-t6-ifA" userLabel="Reciever Date">
@@ -386,7 +386,7 @@
                                 <rect key="frame" x="0.0" y="207" width="320" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zmo-lF-AX0" id="bbP-97-2dI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42u-LF-Z2T">
@@ -419,7 +419,7 @@
                                             <rect key="frame" x="21" y="53" width="102" height="30"/>
                                             <state key="normal" title="show Message"/>
                                             <connections>
-                                                <action selector="showMessageButtonTapped:" destination="We5-op-2j2" eventType="touchUpInside" id="djg-Zl-m7I"/>
+                                                <action selector="showMessageButtonTapped:" destination="Zmo-lF-AX0" eventType="touchUpInside" id="Qdh-tL-BE3"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -538,7 +538,7 @@
                                         <rect key="frame" x="0.0" y="28" width="310" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l2S-vA-s77" id="qtu-Wh-Uaf">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

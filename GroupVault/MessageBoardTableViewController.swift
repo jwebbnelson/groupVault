@@ -20,31 +20,31 @@ class MessageBoardTableViewController: UITableViewController {
     
     @IBOutlet weak var messageTextField: UITextField!
     
-//    enum ViewMode {
-//        case lockedImage
-//        case openedMessage
-//        case unlockedImage
-//    }
-//    
-//    var viewMode = ViewMode.lockedImage
-//    
-//    func updateViewBasedOnMode() {
-//        
-//        switch viewMode {
-//        case .openedMessage:
-//
-////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
-////            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
-////                imageView?.hidden = true
-////            }
-////            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
-////              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
-////            
-////        case .lockedImage:
-////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
-////        if let image = CellMessageTableViewCell.sharedCell.imageView
-//        }
-//    }
+    //    enum ViewMode {
+    //        case lockedImage
+    //        case openedMessage
+    //        case unlockedImage
+    //    }
+    //
+    //    var viewMode = ViewMode.lockedImage
+    //
+    //    func updateViewBasedOnMode() {
+    //
+    //        switch viewMode {
+    //        case .openedMessage:
+    //
+    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = false
+    ////            if let image = CellMessageTableViewCell.sharedCell.imageView?.image {
+    ////                imageView?.hidden = true
+    ////            }
+    ////            CellMessageTableViewCell.sharedCell.leftLabel.hidden = false
+    ////              CellMessageTableViewCell.sharedCell.rightLabel.hidden = false
+    ////
+    ////        case .lockedImage:
+    ////            CellMessageTableViewCell.sharedCell.messageTextLabel.hidden = true
+    ////        if let image = CellMessageTableViewCell.sharedCell.imageView
+    //        }
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +60,10 @@ class MessageBoardTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         
         scrollToBottom(true)
-
+        
     }
     
-
+    
     @IBAction func showMessageButtonTapped(sender: AnyObject) {
         
         
@@ -72,8 +72,8 @@ class MessageBoardTableViewController: UITableViewController {
     
     
     override func viewWillAppear(animated: Bool) {
-//        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
-//        self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
+        //        let indexPath = NSIndexPath(forRow: groupMessages.count - 1, inSection: 0)
+        //        self.tableView.scrollToRowAtIndexPath((indexPath), atScrollPosition: .Bottom, animated: true)
     }
     
     
@@ -94,7 +94,7 @@ class MessageBoardTableViewController: UITableViewController {
             messageTextField.text = ""
         }
     }
-
+    
     
     func scrollToBottom(bool: Bool){
         if self.groupMessages.count > 0 {
@@ -146,14 +146,14 @@ class MessageBoardTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
             
             cell.messageViewForSender(message)
-            
+            cell.delegate = self
             return cell
         } else {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("receiverCell", forIndexPath: indexPath) as! ReceiverCell
             
             cell.messageViewForReceiver(message)
-            
+            cell.delegate = self
             return cell
             
         }
@@ -167,28 +167,28 @@ class MessageBoardTableViewController: UITableViewController {
         return UITableViewAutomaticDimension
     }
     
- 
-
+    
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
+     // Override to support conditional editing of the table view.
+     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
      */
- 
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+     if editingStyle == .Delete {
+     // Delete the row from the data source
+     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+     } else if editingStyle == .Insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     
     func updateWith(group: Group) {
         self.groupNameLabelOnMessageBoard.text = group.groupName
@@ -200,21 +200,41 @@ class MessageBoardTableViewController: UITableViewController {
         }
     }
     /*
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
-        alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
-    }
- */
- 
-    func keyboardConfiguration() {
-        
-        let inputAccessoryView = UIInputViewController()
-        
-    }
+     func showAlert(title: String, message: String) {
+     
+     let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+     let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
+     alert.addAction(action)
+     presentViewController(alert, animated: true, completion: nil)
+     }
+     */
+    
+}
 
+extension MessageBoardTableViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
+    
+    func senderButtonTapped(sender: SenderCell) {
+        
+        if let indexPath = tableView.indexPathForCell(sender) {
+            
+            let message = groupMessages[indexPath.row]
+            
+            message.text = "is this working"
+            tableView.reloadData()
+        }
+        
+    }
+    
+    func receiverCellbuttonTapped(sender: ReceiverCell) {
+        
+        if let indexPath = tableView.indexPathForCell(sender) {
+            
+            let message = groupMessages[indexPath.row]
+            
+            message.text = "this is working"
+            tableView.reloadData()
+        }
+    }
 }
 
 

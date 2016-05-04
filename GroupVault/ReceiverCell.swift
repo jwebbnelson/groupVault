@@ -18,6 +18,7 @@ class ReceiverCell: UITableViewCell {
 
     @IBOutlet weak var recieverMessageText: UILabel!
     
+    var delegate: RecieverTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,7 +51,7 @@ class ReceiverCell: UITableViewCell {
 }
 
 protocol RecieverTableViewCellDelegate {
-    func buttonTapped(sender: ReceiverCell)
+    func receiverCellbuttonTapped(sender: ReceiverCell)
 }
 
 extension ReceiverCell {

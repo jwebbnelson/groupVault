@@ -10,7 +10,6 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
-		AC5F0CDA1CD811C100BD3712 /* mockMessageBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F0CD91CD811C100BD3712 /* mockMessageBoardViewController.swift */; };
 		AC75FFFF1CB2DBFC004D5C41 /* XXXRecieverCell in Sources */ = {isa = PBXBuildFile; fileRef = AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
@@ -55,7 +54,6 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
-		AC5F0CD91CD811C100BD3712 /* mockMessageBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mockMessageBoardViewController.swift; sourceTree = "<group>"; };
 		AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XXXRecieverCell; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				AC8E60961CA1E958004DDC87 /* Main.storyboard */,
-				AC5F0CD91CD811C100BD3712 /* mockMessageBoardViewController.swift */,
 				AC8E60C21CA24895004DDC87 /* Models */,
 				AC8E60C51CA248C9004DDC87 /* ViewControllers */,
 				AC8E60CA1CA2497D004DDC87 /* ModelControllers */,
@@ -268,7 +265,6 @@
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,
-				AC5F0CDA1CD811C100BD3712 /* mockMessageBoardViewController.swift in Sources */,
 				AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */,
 				AC8E60B71CA1F8F9004DDC87 /* WelcomeTableViewController.swift in Sources */,
 				AC8E60BF1CA247A1004DDC87 /* Group.swift in Sources */,
