@@ -34,15 +34,7 @@ class WelcomeTableViewController: UITableViewController {
         }
         
     }
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem())
-        
-//        let testGroup = Groups(groupName: "Hello", users: ["jake"], identifier: "77777")
-//        GroupsController.passGroupIDsToUser(UserController.sharedController.currentUser, group: testGroup)
-    //
     
     override func viewWillAppear(animated: Bool) {
         
@@ -52,12 +44,7 @@ class WelcomeTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
-//        UserController.fetchGroupsForUser(currentUser) { (groups) in
-//            self.groups = groups
-//            dispatch_async(dispatch_get_main_queue(), { 
-//                self.tableView.reloadData()
-//            })
-//        }
+
     }
 
     override func didReceiveMemoryWarning() {

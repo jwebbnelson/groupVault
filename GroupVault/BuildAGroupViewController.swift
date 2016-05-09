@@ -10,13 +10,6 @@ import UIKit
 
 class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    //    func users(completion: (users: [User]?) -> Void) {
-    //
-    //        UserController.fetchAllUsers { (success, users) in
-    //            completion(users: users)
-    //        }
-    //
-    //    }
     
     @IBOutlet weak var groupNameTextField: UITextField!
     

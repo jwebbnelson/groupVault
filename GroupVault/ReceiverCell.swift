@@ -22,13 +22,17 @@ class ReceiverCell: UITableViewCell {
     
     @IBOutlet weak var lockAndUnlockButton: UIButton!
     
+    @IBOutlet weak var timerLabel: UILabel!
+    
     var delegate: RecieverTableViewCellDelegate?
     
     var message: Message?
     var isLocked: Bool = true
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        addNSNotificationObserver()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -41,13 +45,11 @@ class ReceiverCell: UITableViewCell {
         if let delegate = delegate {
             delegate.receiverLockImagebuttonTapped(self)
         }
-        
     }
-    
-    
     
     func lockImageViewForReceiver() {
         if let message = self.message {
+            timerLabel.hidden = true
             lockAndUnlockButton.hidden = false
             lockAndUnlockButton.setBackgroundImage(UIImage(named: "lockedLock"), forState: .Normal)
             recieverMessageView.hidden = true
@@ -62,7 +64,12 @@ class ReceiverCell: UITableViewCell {
         }
     }
     
+    func addNSNotificationObserver() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ReceiverCell.updateTimerLabel), name: "secondTick", object: nil)
+    }
+    
     func messageViewForReceiver(message: Message) {
+        timerLabel.hidden = false
         recieverMessageView.hidden = false
         recieverMessageView.layer.masksToBounds = true
         recieverMessageView.layer.cornerRadius = 8.0
@@ -71,7 +78,7 @@ class ReceiverCell: UITableViewCell {
         recieverMessageView.layer.borderWidth = 0.5
         recieverMessageText.hidden = false
         recieverMessageText.textColor = UIColor.blackColor()
-        recieverMessageText.text = "This is cool"
+        recieverMessageText.text = message.text
         recieverDate.textColor = UIColor.lightGrayColor()
         recieverDate.text = message.dateString
         recieverDate.font = UIFont.boldSystemFontOfSize(12)
@@ -82,6 +89,27 @@ class ReceiverCell: UITableViewCell {
         
     }
     
+    func updateTimerLabel() {
+        
+        timerLabel.text = TimerController.sharedInstance.timeAsString()
+        }
+    
+    func goBackToLockImageView() {
+        if let message = self.message where timerLabel.text == "00" {
+            timerLabel.hidden = true
+            lockAndUnlockButton.hidden = false
+            lockAndUnlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
+            recieverMessageView.hidden = true
+            recieverMessageText.hidden = true
+            recieverDate.textColor = UIColor.lightGrayColor()
+            recieverDate.text = message.dateString
+            recieverDate.font = UIFont.boldSystemFontOfSize(9)
+            recieverUserName.font = UIFont.boldSystemFontOfSize(18)
+            recieverUserName.text = message.senderName
+            recieverUserName.font = UIFont.boldSystemFontOfSize(12)
+            print("This is being read")
+        }
+    }
 }
 
 protocol RecieverTableViewCellDelegate {

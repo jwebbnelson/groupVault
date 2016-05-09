@@ -10,8 +10,8 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
-		AC75FFFF1CB2DBFC004D5C41 /* XXXRecieverCell in Sources */ = {isa = PBXBuildFile; fileRef = AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
+		AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BF6891CE0025A0043C40F /* TimerController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
 		AC8E60981CA1E958004DDC87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60961CA1E958004DDC87 /* Main.storyboard */; };
 		AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60991CA1E958004DDC87 /* Assets.xcassets */; };
@@ -27,13 +27,14 @@
 		AC8E60B71CA1F8F9004DDC87 /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */; };
 		AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */; };
 		AC8E60BB1CA24786004DDC87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BA1CA24786004DDC87 /* User.swift */; };
-		AC8E60BD1CA24794004DDC87 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BC1CA24794004DDC87 /* Messages.swift */; };
+		AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BC1CA24794004DDC87 /* Message.swift */; };
 		AC8E60BF1CA247A1004DDC87 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BE1CA247A1004DDC87 /* Group.swift */; };
 		AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */; };
 		AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */; };
 		AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CB1CA249B1004DDC87 /* UserController.swift */; };
 		AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */; };
 		AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupController.swift */; };
+		ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA30A91CDBEDB3006C3498 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,8 +55,8 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
-		AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XXXRecieverCell; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		AC7BF6891CE0025A0043C40F /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8E60921CA1E958004DDC87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8E60971CA1E958004DDC87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,13 +73,14 @@
 		AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
 		AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAGroupViewController.swift; sourceTree = "<group>"; };
 		AC8E60BA1CA24786004DDC87 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AC8E60BC1CA24794004DDC87 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		AC8E60BC1CA24794004DDC87 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AC8E60BE1CA247A1004DDC87 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBoardTableViewController.swift; sourceTree = "<group>"; };
 		AC8E60CB1CA249B1004DDC87 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = ../UserController.swift; sourceTree = "<group>"; };
 		AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesController.swift; path = ../MessagesController.swift; sourceTree = "<group>"; };
 		AC8E60CF1CA249C8004DDC87 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupController.swift; path = ../GroupController.swift; sourceTree = "<group>"; };
+		ACBA30A91CDBEDB3006C3498 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +122,7 @@
 			children = (
 				AC8E60961CA1E958004DDC87 /* Main.storyboard */,
 				AC8E60C21CA24895004DDC87 /* Models */,
-				AC8E60C51CA248C9004DDC87 /* ViewControllers */,
+				AC8E60C51CA248C9004DDC87 /* Controllers */,
 				AC8E60CA1CA2497D004DDC87 /* ModelControllers */,
 				AC8E60921CA1E958004DDC87 /* AppDelegate.swift */,
 				AC8E60991CA1E958004DDC87 /* Assets.xcassets */,
@@ -147,14 +149,43 @@
 			isa = PBXGroup;
 			children = (
 				AC8E60BA1CA24786004DDC87 /* User.swift */,
-				AC8E60BC1CA24794004DDC87 /* Messages.swift */,
+				AC8E60BC1CA24794004DDC87 /* Message.swift */,
 				AC8E60BE1CA247A1004DDC87 /* Group.swift */,
 				AC01C36B1CB376AF00D1A1CB /* Colors.swift */,
+				ACBA30A91CDBEDB3006C3498 /* Timer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		AC8E60C51CA248C9004DDC87 /* ViewControllers */ = {
+		AC8E60C51CA248C9004DDC87 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ACBA30AC1CDBEDDE006C3498 /* ViewControllers */,
+				ACBA30AB1CDBEDBB006C3498 /* Controllers */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		AC8E60CA1CA2497D004DDC87 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC7BF6891CE0025A0043C40F /* TimerController.swift */,
+				AC8E60CB1CA249B1004DDC87 /* UserController.swift */,
+				AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */,
+				AC8E60CF1CA249C8004DDC87 /* GroupController.swift */,
+				AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */,
+			);
+			name = ModelControllers;
+			sourceTree = "<group>";
+		};
+		ACBA30AB1CDBEDBB006C3498 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		ACBA30AC1CDBEDDE006C3498 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */,
@@ -162,22 +193,10 @@
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
-				AC75FFFE1CB2DBFC004D5C41 /* XXXRecieverCell */,
 				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
 				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		AC8E60CA1CA2497D004DDC87 /* ModelControllers */ = {
-			isa = PBXGroup;
-			children = (
-				AC8E60CB1CA249B1004DDC87 /* UserController.swift */,
-				AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */,
-				AC8E60CF1CA249C8004DDC87 /* GroupController.swift */,
-				AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */,
-			);
-			name = ModelControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,13 +275,14 @@
 				AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */,
 				AC8E60B51CA1F8E3004DDC87 /* LoginSignupViewController.swift in Sources */,
 				AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */,
-				AC75FFFF1CB2DBFC004D5C41 /* XXXRecieverCell in Sources */,
 				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
-				AC8E60BD1CA24794004DDC87 /* Messages.swift in Sources */,
+				AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */,
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
+				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
+				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,
 				AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */,

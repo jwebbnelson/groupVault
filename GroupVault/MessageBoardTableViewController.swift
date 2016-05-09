@@ -23,15 +23,10 @@ class MessageBoardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         
-        let presentedTextField = UITextField()
-        
-        messageTextField.inputAccessoryView = presentedTextField
     }
     override func viewDidAppear(animated: Bool) {
         
@@ -44,23 +39,8 @@ class MessageBoardTableViewController: UITableViewController {
         
         
     }
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
+
     @IBAction func sendButtonTapped(sender: AnyObject) {
-        
         
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
@@ -69,6 +49,7 @@ class MessageBoardTableViewController: UITableViewController {
             messageTextField.text = ""
         }
     }
+
     
     
     func scrollToBottom(bool: Bool){
@@ -90,8 +71,6 @@ class MessageBoardTableViewController: UITableViewController {
                             
                             self.scrollToBottom(true)
                             self.tableView.reloadData()
-                            print("this should be working")
-                            
                         })
                         
                     } else {
@@ -130,6 +109,7 @@ class MessageBoardTableViewController: UITableViewController {
             cell.delegate = self
             cell.message = message
             if !cell.isLocked {
+                TimerController.sharedInstance.startTimer()
                 cell.messageViewForReceiver(message)
             } else {
                 cell.lockImageViewForReceiver()
@@ -206,10 +186,13 @@ extension MessageBoardTableViewController: SenderTableViewCellDelegate, Reciever
     }
     
     func receiverLockImagebuttonTapped(sender: ReceiverCell) {
-            print("this is working")
-            
-            sender.isLocked = false
-            tableView.reloadData()
+        print("this is working")
+        sender.delegate = self
+        sender.isLocked = false
+        if sender.timerLabel.text == "00" {
+            sender.goBackToLockImageView()
+        }
+        tableView.reloadData()
     }
 }
 
