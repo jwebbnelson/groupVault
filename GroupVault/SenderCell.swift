@@ -18,7 +18,15 @@ class SenderCell: UITableViewCell {
     
     @IBOutlet weak var senderMessageText: UILabel!
     
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var unlockButton: UIButton!
+    
     var delegate: SenderTableViewCellDelegate?
+    var message: Message?
+    var isLocked: Bool = true
+    var hasBeenRead: Bool = false
+    
     
     
     override func awakeFromNib() {
@@ -32,12 +40,25 @@ class SenderCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func showMessageButtonTapped(sender: AnyObject) {
-        
-        if let delegate = delegate {
-            delegate.senderButtonTapped(self)
+    func lockImageViewForSender() {
+        if let message = self.message {
+            timerLabel.hidden = true
+            unlockButton.hidden = false
+            unlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
+            senderMessageView.hidden = true
+            senderMessageText.hidden = true
+            senderDate.textColor = Color.lightBlueMessageColor()
+            senderDate.text = message.dateString
+            senderDate.font = UIFont.boldSystemFontOfSize(12)
+            
         }
     }
+    
+    func updateTimerLabel() {
+        
+        timerLabel.text = message?.timer?.timeAsString()
+    }
+    
     func messageViewForSender(message: Message) {
         senderMessageView.layer.masksToBounds = true
         senderMessageView.layer.cornerRadius = 8.0
@@ -54,7 +75,7 @@ class SenderCell: UITableViewCell {
 }
 
 protocol SenderTableViewCellDelegate {
-    func senderButtonTapped(sender: SenderCell)
+    func senderTimerComplete(sender: SenderCell)
 }
 
 extension SenderCell {

@@ -20,6 +20,8 @@ class Timer {
         }
     }
     
+    weak var delegate: TimerDelegate?
+    
     var isOn: Bool {
         if endDate == nil {
             return false
@@ -28,5 +30,22 @@ class Timer {
         }
     }
     
-    var isComplete: Bool?
+    func timeAsString() -> String {
+        let timeRemaining = Int(self.timeRemaining)
+        return String(format: "%02d", arguments: [timeRemaining])
+    }
+    
+    func secondTick() {
+        delegate?.updateTimerLabel()
+    }
+    
+    func complete() {
+        delegate?.messageTimerComplete()
+    }
+    
+}
+
+protocol TimerDelegate: class {
+    func updateTimerLabel()
+    func messageTimerComplete()
 }

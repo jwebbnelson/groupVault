@@ -39,17 +39,19 @@ class MessageBoardTableViewController: UITableViewController {
         
         
     }
-
+    
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
             createMessage()
+            
             messageTextField.text = ""
+            scrollToBottom(true)
         }
     }
-
+    
     
     
     func scrollToBottom(bool: Bool){
@@ -65,7 +67,7 @@ class MessageBoardTableViewController: UITableViewController {
         if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
             if let group = group, let identifier = group.identifier {
                 
-                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", completion: { (success, message) in
+                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", timer: Timer(), completion: { (success, message) in
                     if success == true {
                         dispatch_async(dispatch_get_main_queue(), {
                             
@@ -98,9 +100,15 @@ class MessageBoardTableViewController: UITableViewController {
         if message.sender == self.currentUser {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
+            if !cell.isLocked {
+                TimerController.sharedInstance.startTimer(message.timer ?? Timer())
+            } else {
+                cell.lockImageViewForSender()
+            }
             
             cell.messageViewForSender(message)
             cell.delegate = self
+            
             return cell
             
         } else {
@@ -109,7 +117,7 @@ class MessageBoardTableViewController: UITableViewController {
             cell.delegate = self
             cell.message = message
             if !cell.isLocked {
-                TimerController.sharedInstance.startTimer()
+                TimerController.sharedInstance.startTimer(message.timer ?? Timer())
                 cell.messageViewForReceiver(message)
             } else {
                 cell.lockImageViewForReceiver()
@@ -173,25 +181,22 @@ class MessageBoardTableViewController: UITableViewController {
 
 extension MessageBoardTableViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
     
-    func senderButtonTapped(sender: SenderCell) {
-        
-        if let indexPath = tableView.indexPathForCell(sender) {
-            
-            let message = groupMessages[indexPath.row]
-            
-            message.text = "is this working"
-            tableView.reloadData()
-        }
+    func senderTimerComplete(sender: SenderCell) {
         
     }
     
     func receiverLockImagebuttonTapped(sender: ReceiverCell) {
-        print("this is working")
-        sender.delegate = self
-        sender.isLocked = false
-        if sender.timerLabel.text == "00" {
-            sender.goBackToLockImageView()
+        if sender.hasBeenRead == false {
+            sender.isLocked = !sender.isLocked
+            tableView.reloadData()
+            sender.hasBeenRead = true
+            tableView.reloadData()
         }
+    }
+    
+    func receiverTimerComplete(sender: ReceiverCell) {
+        sender.delegate = self
+        sender.goBackToLockImageView()
         tableView.reloadData()
     }
 }

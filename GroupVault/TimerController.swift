@@ -15,57 +15,33 @@ import UIKit
 class TimerController: NSObject {
     
     static let sharedInstance = TimerController()
-    
-    var timer = Timer()
     var localNotification: UILocalNotification?
     
     
-    func startTimer() {
+    func startTimer(timer: Timer) {
         
         if timer.isOn == false {
             timer.endDate = NSDate(timeIntervalSinceNow: 10)
-            secondTick()
-            scheduleLocalNotification()
-            
+            secondTick(timer)
         }
     }
     
-    func stopTimer() {
+    func stopTimer(timer: Timer) {
         if timer.isOn {
             timer.endDate = nil
-            performSelector(#selector(TimerController.cancelLocalNotification), withObject: nil, afterDelay: 0.5)
-            
+            timer.complete()
         }
     }
     
-    func secondTick() {
+    func secondTick(timer: Timer) {
         if timer.timeRemaining > 0 {
-            performSelector(#selector(TimerController.secondTick), withObject: nil, afterDelay: 1)
-            NSNotificationCenter.defaultCenter().postNotificationName("secondTick", object: nil)
+            timer.secondTick()
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC*1)), dispatch_get_main_queue(), { 
+                self.secondTick(timer)
+            })
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName("timerCompleted", object: nil)
-            stopTimer()
-            timer.isComplete = true
+            stopTimer(timer)
         }
     }
     
-    func scheduleLocalNotification() {
-        
-        localNotification = UILocalNotification()
-        localNotification?.alertBody = "It's time to wake up"
-        localNotification?.alertTitle = "Time's up!"
-        localNotification?.fireDate = timer.endDate
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification ?? UILocalNotification())
-        
-    }
-    
-    func cancelLocalNotification() {
-        UIApplication.sharedApplication().cancelLocalNotification(localNotification ?? UILocalNotification())
-    }
-    
-    func timeAsString() -> String {
-        
-        let timeRemaining = Int(timer.timeRemaining)
-        return String(format: "%02d", arguments: [timeRemaining])
-    }
 }

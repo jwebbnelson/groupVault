@@ -15,6 +15,7 @@ class Message: FirebaseType {
     let kPhoto = "photo"
     let kDateString = "dateString"
     let kViewedBy = "viewedBy"
+    let kIsLocked = "isLocked"
     let kGroupID = "group"
     let kSenderName = "senderName"
     
@@ -24,7 +25,8 @@ class Message: FirebaseType {
     var text: String?
     var photo: String?
     var dateString: String
-    var viewedBy: [String]
+    var timer: Timer? = Timer()
+    var viewedBy: [String] = []
     let groupID: String
     
     var identifier: String?
@@ -33,7 +35,7 @@ class Message: FirebaseType {
     }
     
     var jsonValue: [String: AnyObject] {
-        var json: [String: AnyObject] = [kSender: sender, kDateString: dateString, kGroupID: groupID, kSenderName: senderName]
+        var json: [String: AnyObject] = [kSender: sender, kDateString: dateString, kGroupID: groupID, kSenderName: senderName, kViewedBy: viewedBy]
         
         if let text = text {
             json.updateValue(text, forKey: kText)
@@ -64,29 +66,19 @@ class Message: FirebaseType {
         self.identifier = identifier
     }
     
-    init(sender: String, senderName: String, text: String?, photo: String?, dateString: String, viewedBy: [String], identifier: String, groupID: String) {
+    init(sender: String, senderName: String, text: String?, photo: String?, dateString: String, timer: Timer?, viewedBy: [String], isLocked: Bool = false, identifier: String, groupID: String) {
         self.sender = sender
         self.text = text
         self.photo = photo
         self.dateString = dateString
+        self.timer = timer
         self.viewedBy = viewedBy
         self.identifier = identifier
         self.groupID = groupID
         self.senderName = senderName
     }
-    
 }
 
-
-
-
-
-//func timeBomb() {
-//    
-//    // this is where I want to make the function where the user will only see the text/ image for ten seconds.
-//    //Once the ten seconds are up, the text/image will be converted into an image of a lock that has a timestamp.
-//    //something that could end up being useful is the firebase function .willChangeValue
-//}
 
 
 
