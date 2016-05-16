@@ -16,11 +16,12 @@ class Timer {
         if let endDate = endDate {
             return endDate.timeIntervalSinceNow
         } else {
-            return 10
+            return 0
         }
     }
     
     weak var delegate: TimerDelegate?
+    weak var senderDelegate: SenderTimerDelegate?
     
     var isOn: Bool {
         if endDate == nil {
@@ -37,15 +38,24 @@ class Timer {
     
     func secondTick() {
         delegate?.updateTimerLabel()
+        senderDelegate?.updateTimerLabel()
+        
+        /// the delegate method is searching for the word delegate or the word "updateTimerLabel"
     }
     
     func complete() {
         delegate?.messageTimerComplete()
+        senderDelegate?.messageTimerComplete()
     }
     
 }
 
 protocol TimerDelegate: class {
+    func updateTimerLabel()
+    func messageTimerComplete()
+}
+
+protocol SenderTimerDelegate: class {
     func updateTimerLabel()
     func messageTimerComplete()
 }

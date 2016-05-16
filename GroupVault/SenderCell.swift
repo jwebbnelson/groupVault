@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SenderCell: UITableViewCell {
+class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     static let sharedCell = SenderCell()
     
@@ -22,12 +22,10 @@ class SenderCell: UITableViewCell {
     
     @IBOutlet weak var unlockButton: UIButton!
     
-    var delegate: SenderTableViewCellDelegate?
+    weak var delegate: SenderTableViewCellDelegate?
     var message: Message?
-    var isLocked: Bool = true
-    var hasBeenRead: Bool = false
-    
-    
+    var timer: Timer?
+    var isLocked: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,12 +52,8 @@ class SenderCell: UITableViewCell {
         }
     }
     
-    func updateTimerLabel() {
-        
-        timerLabel.text = message?.timer?.timeAsString()
-    }
-    
     func messageViewForSender(message: Message) {
+        message.timer?.senderDelegate = self
         senderMessageView.layer.masksToBounds = true
         senderMessageView.layer.cornerRadius = 8.0
         senderMessageView.backgroundColor = UIColor.lightGrayColor()
@@ -72,10 +66,18 @@ class SenderCell: UITableViewCell {
         senderDate.font = UIFont.boldSystemFontOfSize(12)
         
     }
+    
+    func messageTimerComplete() {
+        lockImageViewForSender()
+    }
+    
+    func updateTimerLabel() {
+        timerLabel.text = message?.timer?.timeAsString()
+    }
 }
 
-protocol SenderTableViewCellDelegate {
-    func senderTimerComplete(sender: SenderCell)
+protocol SenderTableViewCellDelegate: class {
+    func senderMessageSent(sender: SenderCell)
 }
 
 extension SenderCell {

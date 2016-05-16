@@ -26,7 +26,7 @@ class Message: FirebaseType {
     var photo: String?
     var dateString: String
     var timer: Timer? = Timer()
-    var viewedBy: [String] = []
+    var viewedBy: [String]?
     let groupID: String
     
     var identifier: String?
@@ -35,14 +35,17 @@ class Message: FirebaseType {
     }
     
     var jsonValue: [String: AnyObject] {
-        var json: [String: AnyObject] = [kSender: sender, kDateString: dateString, kGroupID: groupID, kSenderName: senderName, kViewedBy: viewedBy]
+        var json: [String: AnyObject] = [kSender: sender,kSenderName: senderName, kDateString: dateString, kGroupID: groupID]
         
         if let text = text {
             json.updateValue(text, forKey: kText)
-        
-        if let photo = photo {
-            json.updateValue(photo, forKey: kPhoto)
             
+            if let photo = photo {
+                json.updateValue(photo, forKey: kPhoto)
+                
+                if let viewedBy = viewedBy {
+                    json.updateValue(viewedBy, forKey: kViewedBy)
+                }
             }
         }
         return json
@@ -51,10 +54,10 @@ class Message: FirebaseType {
     required init?(json: [String: AnyObject], identifier: String) {
         
         guard let sender = json[kSender] as? String,
-        let text = json[kText] as? String,
-        let dateString = json[kDateString] as? String,
-        let groupID = json[kGroupID] as? String,
-        let senderName = json[kSenderName] as? String else { return nil }
+            let text = json[kText] as? String,
+            let dateString = json[kDateString] as? String,
+            let groupID = json[kGroupID] as? String,
+            let senderName = json[kSenderName] as? String else { return nil }
         
         self.sender = sender
         self.text = text

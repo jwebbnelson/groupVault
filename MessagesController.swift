@@ -11,12 +11,9 @@ import Firebase
 
 class MessageController {
     
-    static let sharedController = MessageController()
+    var message: Message?
     
-    static func fetchGroupMessagesForUser(user: User, completion: (messages: [Message]) -> Void) {
-        
-        
-    }
+    static let sharedController = MessageController()
     
     static func messageForIdentifier(identifier: String, completion: (message: Message?) -> Void) {
         
@@ -44,14 +41,27 @@ class MessageController {
         
     }
     
-    static func userViewedMessage(message: Message, completion: (success: Bool) -> Void) {
-        let viewedByArray = FirebaseController.base.childByAppendingPath("messages\(message.identifier)").childByAppendingPath("viewedBy")
-        let hasViewedBoolean = viewedByArray.key
+    ///THIS HAS BEEN MY BIGGEST ACCOMPLISHMENT IN CODE
+    
+    static func userViewedMessage(message: Message, completion: (success: Bool, message: Message?) -> Void) {
         
+        let currentUser = UserController.sharedController.currentUser
+        if let viewedBy = message.viewedBy {
+            var viewedByArray = viewedBy
+            if let currentUserIdentifier = currentUser.identifier {
+                viewedByArray.append(currentUserIdentifier)
+                message.viewedBy = viewedByArray
+            }
+        }
+        let allMessageIDs = FirebaseController.base.childByAppendingPath("messages")
+        let specificMessage = allMessageIDs.childByAppendingPath(message.identifier)
+        specificMessage.childByAppendingPath("viewedBy").setValue(message.viewedBy)
+        
+        completion(success: true, message: message)
     }
     
     
-    static func createMessage(sender: String, senderName: String, groupID: String, text: String?, photo: String?, timer: Timer?, viewedBy: [String] = [], completion: (success: Bool, message: Message) -> Void) {
+    static func createMessage(sender: String, senderName: String, groupID: String, text: String?, photo: String?, timer: Timer?, viewedBy: [String], completion: (success: Bool, message: Message) -> Void) {
         
         let messageID = FirebaseController.base.childByAppendingPath("messages").childByAutoId()
         let identifier = messageID.key
@@ -59,8 +69,10 @@ class MessageController {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM-dd"
         
-        var message = Message(sender: sender, senderName: senderName, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), timer: timer, viewedBy: [], identifier: identifier, groupID: groupID)
+        var message = Message(sender: sender, senderName: senderName, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), timer: timer, viewedBy: viewedBy, identifier: identifier, groupID: groupID)
         message.save()
+        
+        
         
         completion(success: true, message: message)
         
@@ -68,13 +80,13 @@ class MessageController {
     
     
     
-//    static func addMessageIDToGroup(message: Message, groupID: String) {
-//        let allGroups = FirebaseController.base.childByAppendingPath("groups")
-//        let specificGroup = allGroups.childByAppendingPath(groupID)
-//        let messageReference = specificGroup.childByAppendingPath("messages")
-//        let messageIDs = messageReference.childByAppendingPath(message.identifier)
-//        messageIDs.setValue(message.text ?? message.photo ?? "")
-//    }
+    //    static func addMessageIDToGroup(message: Message, groupID: String) {
+    //        let allGroups = FirebaseController.base.childByAppendingPath("groups")
+    //        let specificGroup = allGroups.childByAppendingPath(groupID)
+    //        let messageReference = specificGroup.childByAppendingPath("messages")
+    //        let messageIDs = messageReference.childByAppendingPath(message.identifier)
+    //        messageIDs.setValue(message.text ?? message.photo ?? "")
+    //    }
 }
 
 

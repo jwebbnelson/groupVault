@@ -27,11 +27,12 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     weak var delegate: RecieverTableViewCellDelegate?
     
     var message: Message?
-    var isLocked: Bool = false
+    var isLocked: Bool = true
     var hasBeenRead: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -86,7 +87,7 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     }
     
     func updateTimerLabel() {
-    
+        
         timerLabel.text = message?.timer?.timeAsString()
     }
     
@@ -113,7 +114,6 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
 
 protocol RecieverTableViewCellDelegate: class {
     func receiverLockImagebuttonTapped(sender: ReceiverCell)
-    func receiverTimerComplete(sender: ReceiverCell)
     
 }
 

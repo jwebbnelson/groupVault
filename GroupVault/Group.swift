@@ -16,7 +16,6 @@ class Group: Equatable, FirebaseType {
     
     var groupName: String
     var users: [String]
-    var messages: [String]
     
     var identifier: String? // is this the same as the groupID
     var endpoint: String {
@@ -30,11 +29,6 @@ class Group: Equatable, FirebaseType {
         
         self.groupName = groupName
         self.users = users
-        if let messages = json[kMessages] as? [String] {
-            self.messages = messages
-        } else {
-            self.messages = []
-        }
         self.identifier = identifier
     }
     
@@ -43,11 +37,10 @@ class Group: Equatable, FirebaseType {
         self.groupName = groupName
         self.users = users
         self.identifier = identifier
-        self.messages = []
     }
     
     var jsonValue: [String: AnyObject] {
-        return [kGroupName: groupName, kUsers: users, kMessages: messages]
+        return [kGroupName: groupName, kUsers: users]
     }
     
     

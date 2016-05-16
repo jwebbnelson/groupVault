@@ -66,6 +66,8 @@ class LoginSignupViewController: UIViewController {
     }
 
     @IBAction func CreateAccount(sender: AnyObject) {
+        emailLabel.text = ""
+        passwordLabel.text = ""
     }
     
 
