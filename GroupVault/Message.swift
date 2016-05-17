@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Message: FirebaseType {
+class Message: FirebaseType, Equatable {
     
     let kSender = "sender"
     let kText = "text"
@@ -82,7 +82,9 @@ class Message: FirebaseType {
     }
 }
 
-
+func ==(lhs: Message, rhs: Message) -> Bool {
+    return lhs.identifier == rhs.identifier
+}
 
 
 

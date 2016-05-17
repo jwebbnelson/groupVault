@@ -51,10 +51,14 @@ class MessageBoardTableViewController: UITableViewController {
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
-            createMessage()
-            messageTextField.text = ""
-            scrollToBottom(true)
+            if let group = self.group {
+                self.updateWith(group)
+                createMessage()
+                messageTextField.text = ""
+                scrollToBottom(true)
+            }
         }
+        
     }
     
     
@@ -76,7 +80,10 @@ class MessageBoardTableViewController: UITableViewController {
                         dispatch_async(dispatch_get_main_queue(), {
                             
                             self.scrollToBottom(true)
+                            
                             self.tableView.reloadData()
+                            
+                            // think about cell for row at index Path and number of rows in section
                         })
                         
                     } else {
@@ -167,8 +174,12 @@ class MessageBoardTableViewController: UITableViewController {
         self.group = group
         
         MessageController.fetchMessagesForGroup(group) { (messages) in
-            self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
-            self.tableView.reloadData()
+            if messages.count > self.groupMessages.count {
+                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+                self.tableView.reloadData()
+            } else {
+                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+            }
         }
     }
     /*
