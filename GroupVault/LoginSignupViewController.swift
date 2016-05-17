@@ -57,7 +57,7 @@ class LoginSignupViewController: UIViewController {
     
                     self.performSegueWithIdentifier("toWelcomView", sender: nil)
                 } else {
-                    self.showAlert("Error!", message: "Make sure you filled out al fields correctly")
+                    self.showAlert("Error!", message: "Are you sure that you have already created an account?")
                     print("Unable to authenticate user. Please Try again Later")
                     }
                 })

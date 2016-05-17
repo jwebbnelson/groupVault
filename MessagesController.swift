@@ -45,12 +45,13 @@ class MessageController {
     
     static func userViewedMessage(message: Message, completion: (success: Bool, message: Message?) -> Void) {
         
-        let currentUser = UserController.sharedController.currentUser
-        if let viewedBy = message.viewedBy {
-            var viewedByArray = viewedBy
-            if let currentUserIdentifier = currentUser.identifier {
-                viewedByArray.append(currentUserIdentifier)
-                message.viewedBy = viewedByArray
+        if let currentUser = UserController.sharedController.currentUser {
+            if let viewedBy = message.viewedBy {
+                var viewedByArray = viewedBy
+                if let currentUserIdentifier = currentUser.identifier {
+                    viewedByArray.append(currentUserIdentifier)
+                    message.viewedBy = viewedByArray
+                }
             }
         }
         let allMessageIDs = FirebaseController.base.childByAppendingPath("messages")

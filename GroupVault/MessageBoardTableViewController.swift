@@ -24,12 +24,16 @@ class MessageBoardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         
     }
+    
+    
+    
     override func viewDidAppear(animated: Bool) {
         
         scrollToBottom(true)
@@ -100,30 +104,30 @@ class MessageBoardTableViewController: UITableViewController {
         if message.sender == self.currentUser {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
-            cell.delegate = self
             cell.message = message
-            if cell.isLocked == false {
-                TimerController.sharedInstance.startTimer(message.timer ?? Timer())
-                cell.messageViewForSender(message)
-            } else {
-                cell.lockImageViewForSender()
+            if let viewedByArray = message.viewedBy {
+                if viewedByArray.contains(currentUser ?? "") {
+                    cell.lockImageViewForSender()
+                } else {
+                    TimerController.sharedInstance.startTimer(message.timer ?? Timer())
+                    cell.messageViewForSender(message)
+                }
             }
-            
             return cell
-            
         } else {
-            
             let cell = tableView.dequeueReusableCellWithIdentifier("receiverCell", forIndexPath: indexPath) as! ReceiverCell
             cell.delegate = self
             cell.message = message
-            if !cell.isLocked {
-                TimerController.sharedInstance.startTimer(message.timer ?? Timer())
-                cell.messageViewForReceiver(message)
+            
+            guard let currentUser = UserController.sharedController.currentUser.identifier,
+                viewedByArray = message.viewedBy else { return cell }
+            if viewedByArray.contains(currentUser) {
+                cell.goBackToLockImageView()
             } else {
                 cell.lockImageViewForReceiver()
             }
-            return cell
             
+            return cell
         }
     }
     
@@ -186,19 +190,15 @@ extension MessageBoardTableViewController: SenderTableViewCellDelegate, Reciever
     }
     
     func receiverLockImagebuttonTapped(sender: ReceiverCell) {
-        if sender.hasBeenRead == false {
-            sender.isLocked = !sender.isLocked
-            tableView.reloadData()
-            sender.hasBeenRead = true
-            tableView.reloadData()
-            
-            if let message = sender.message {
-                MessageController.userViewedMessage(message, completion: { (success, message) in
-                    if let message = message {
-                        self.message = message
-                    }
-                })
-            }
+        
+        guard let message = sender.message,
+            currentUser = self.currentUser,
+            viewedByArray = message.viewedBy else { return }
+        if viewedByArray.contains(currentUser) {
+            sender.goBackToLockImageView()
+        } else {
+            TimerController.sharedInstance.startTimer(message.timer ?? Timer())
+            sender.messageViewForReceiver(message)
         }
     }
 }

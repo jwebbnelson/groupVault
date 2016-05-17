@@ -25,11 +25,10 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     weak var delegate: SenderTableViewCellDelegate?
     var message: Message?
     var timer: Timer?
-    var isLocked: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -69,6 +68,10 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     func messageTimerComplete() {
         lockImageViewForSender()
+        message?.viewedBy?.append(UserController.sharedController.currentUser.identifier!)
+        message?.save()
+        
+        // if the user logs out as a timer is going, the timer crashes.
     }
     
     func updateTimerLabel() {

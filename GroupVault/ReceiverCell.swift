@@ -27,13 +27,13 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     weak var delegate: RecieverTableViewCellDelegate?
     
     var message: Message?
-    var isLocked: Bool = true
-    var hasBeenRead: Bool = false
+    var userViewedMessage: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        print("awake from nib")
     }
+    
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -60,7 +60,6 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
             recieverUserName.font = UIFont.boldSystemFontOfSize(18)
             recieverUserName.text = message.senderName
             recieverUserName.font = UIFont.boldSystemFontOfSize(12)
-            print("This is being read")
         }
     }
     
@@ -92,7 +91,12 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     }
     
     func messageTimerComplete() {
-        goBackToLockImageView()
+        if let message = self.message {
+            MessageController.userViewedMessage(message, completion: { (success, message) in
+                self.goBackToLockImageView()
+            })
+        }
+        message?.save()
     }
     
     
@@ -108,7 +112,6 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
         recieverUserName.font = UIFont.boldSystemFontOfSize(18)
         recieverUserName.text = message?.senderName ?? ""
         recieverUserName.font = UIFont.boldSystemFontOfSize(12)
-        print("This is being read")
     }
 }
 
