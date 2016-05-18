@@ -15,6 +15,9 @@ class WelcomeTableViewController: UITableViewController {
     var groups: [Group] = []
     var currentUser = ""
     
+    
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,13 +27,12 @@ class WelcomeTableViewController: UITableViewController {
             performSegueWithIdentifier("noUserLoggedIn", sender: nil)
         }
         
-        
-        
         if FirebaseController.base.authData == nil {
             
             performSegueWithIdentifier("noUserLoggedIn", sender: nil)
         }
         
+        welcomeLabelForUser()
     }
     
     
@@ -40,8 +42,6 @@ class WelcomeTableViewController: UITableViewController {
             self.groups = group
             self.tableView.reloadData()
         }
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,8 +52,10 @@ class WelcomeTableViewController: UITableViewController {
     @IBAction func LogoutButtonTapped(sender: AnyObject) {
         FirebaseController.base.unauth()
         performSegueWithIdentifier("noUserLoggedIn", sender: nil)
-        
-        
+    }
+    
+    func welcomeLabelForUser() {
+        welcomeLabel.text = "Welcome, \(UserController.sharedController.currentUser.username)!"
     }
     
     

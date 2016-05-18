@@ -18,9 +18,10 @@ class User: Equatable, FirebaseType {
     
     let kUsername = "username"
     let kGroups = "groups"
-    
+    let kImageString = "image"
     
     var username: String
+    var imageString: String?
     var groupIDs: [String] = []
     
     var identifier: String?
@@ -29,7 +30,9 @@ class User: Equatable, FirebaseType {
     }
     
     var jsonValue: [String: AnyObject] {
-        
+        if let imageString = imageString {
+            return [kUsername: username, kImageString: imageString, kGroups: groupIDs]
+        }
         return [kUsername: username, kGroups: groupIDs]
     }
     
@@ -42,13 +45,16 @@ class User: Equatable, FirebaseType {
         //FIREBASE - Dictionary
         if let groupIDs = json[kGroups] as? [String: AnyObject] {
             for key in groupIDs.keys {
-            self.groupIDs.append(key)
+                self.groupIDs.append(key)
             }
         } else {
-           // NSUserDefaults - Array
+            // NSUserDefaults - Array
             if let groupIDs = json[kGroups] as? [String] {
                 self.groupIDs = groupIDs
             }
+        }
+        if let imageString = json[kImageString] as? String {
+            self.imageString = imageString
         }
         self.identifier = identifier
     }

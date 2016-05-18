@@ -40,7 +40,15 @@ class MessageBoardTableViewController: UITableViewController {
         
     }
     
-    
+    override func viewDidDisappear(animated: Bool) {
+        
+        let allMessages = groupMessages
+        for message in allMessages {
+            if message.timer != nil {
+                TimerController.sharedInstance.stopTimer(message.timer ?? Timer())
+            }
+        }
+    }
     @IBAction func showMessageButtonTapped(sender: AnyObject) {
         
         
@@ -51,12 +59,9 @@ class MessageBoardTableViewController: UITableViewController {
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
-            if let group = self.group {
-                self.updateWith(group)
-                createMessage()
-                messageTextField.text = ""
-                scrollToBottom(true)
-            }
+            createMessage()
+            scrollToBottom(true)
+            messageTextField.text = ""
         }
         
     }
@@ -72,10 +77,9 @@ class MessageBoardTableViewController: UITableViewController {
     }
     
     func createMessage() {
-        
         if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
             if let group = group, let identifier = group.identifier {
-                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, photo: "", timer: Timer(),viewedBy: [], completion: { (success, message) in
+                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, image: "", timer: Timer(), viewedBy: [], completion: { (success, message) in
                     if success == true {
                         dispatch_async(dispatch_get_main_queue(), {
                             
@@ -85,10 +89,10 @@ class MessageBoardTableViewController: UITableViewController {
                             
                             // think about cell for row at index Path and number of rows in section
                         })
-                        
                     } else {
                         print("message not saved")
                     }
+                    
                 })
             }
         }
@@ -113,7 +117,7 @@ class MessageBoardTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
             cell.message = message
             if let viewedByArray = message.viewedBy {
-                if viewedByArray.contains(currentUser ?? "") {
+                if viewedByArray.contains(message.sender) {
                     cell.lockImageViewForSender()
                 } else {
                     TimerController.sharedInstance.startTimer(message.timer ?? Timer())

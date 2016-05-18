@@ -12,7 +12,7 @@ class Message: FirebaseType, Equatable {
     
     let kSender = "sender"
     let kText = "text"
-    let kPhoto = "photo"
+    let kImage = "image"
     let kDateString = "dateString"
     let kViewedBy = "viewedBy"
     let kIsLocked = "isLocked"
@@ -23,7 +23,7 @@ class Message: FirebaseType, Equatable {
     var sender = ""
     var senderName: String
     var text: String?
-    var photo: String?
+    var image: String?
     var dateString: String
     var timer: Timer? = Timer()
     var viewedBy: [String]?
@@ -40,8 +40,8 @@ class Message: FirebaseType, Equatable {
         if let text = text {
             json.updateValue(text, forKey: kText)
             
-            if let photo = photo {
-                json.updateValue(photo, forKey: kPhoto)
+            if let image = image {
+                json.updateValue(image, forKey: kImage)
                 
                 if let viewedBy = viewedBy {
                     json.updateValue(viewedBy, forKey: kViewedBy)
@@ -61,7 +61,7 @@ class Message: FirebaseType, Equatable {
         
         self.sender = sender
         self.text = text
-        self.photo = json[kPhoto] as? String
+        self.image = json[kImage] as? String
         self.dateString = dateString
         self.viewedBy = json[kViewedBy] as? [String] ?? []
         self.groupID = groupID
@@ -69,10 +69,10 @@ class Message: FirebaseType, Equatable {
         self.identifier = identifier
     }
     
-    init(sender: String, senderName: String, text: String?, photo: String?, dateString: String, timer: Timer?, viewedBy: [String], isLocked: Bool = false, identifier: String, groupID: String) {
+    init(sender: String, senderName: String, text: String?, image: String?, dateString: String, timer: Timer?, viewedBy: [String], isLocked: Bool = false, identifier: String, groupID: String) {
         self.sender = sender
         self.text = text
-        self.photo = photo
+        self.image = image
         self.dateString = dateString
         self.timer = timer
         self.viewedBy = viewedBy

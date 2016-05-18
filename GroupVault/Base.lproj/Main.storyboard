@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="viH-V2-pKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="461"/>
+            <point key="canvasLocation" x="566" y="461"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="uoT-7F-3DX">
@@ -235,17 +235,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.24615634750000001" green="0.64524511200000001" blue="0.92081330130000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter or Create A Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6O7-QZ-QWO">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" id="m7f-sx-J8q">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.24615634750000001" green="0.64524511200000001" blue="0.92081330130000005" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVK-Iq-wFe">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                                    <color key="backgroundColor" red="0.1948550336" green="0.74286666639999999" blue="0.99126602559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Or Create A Group!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmM-ji-8Xd">
+                                    <rect key="frame" x="0.0" y="32" width="320" height="32"/>
+                                    <color key="backgroundColor" red="0.1948550336" green="0.74286666639999999" blue="0.99126602559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.1948550336" green="0.74286666639999999" blue="0.99126602559999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </stackView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="enterAGroup" textLabel="RLd-SB-AJG" style="IBUITableViewCellStyleDefault" id="7y9-cC-3vJ">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7y9-cC-3vJ" id="wv1-cO-io7">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
@@ -283,12 +296,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="welcomeLabel" destination="xVK-Iq-wFe" id="CKt-bN-Jrw"/>
                         <segue destination="PZF-po-090" kind="modal" identifier="noUserLoggedIn" id="thr-yV-kbR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XR4-8c-Qmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1395.2" y="461.02666666666664"/>
+            <point key="canvasLocation" x="1395" y="461"/>
         </scene>
         <!--Message Board Table View Controller-->
         <scene sceneID="XyZ-dG-BC5">

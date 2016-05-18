@@ -34,6 +34,7 @@
 		AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CB1CA249B1004DDC87 /* UserController.swift */; };
 		AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */; };
 		AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupController.swift */; };
+		ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB676861CECDEBD00BFE3FB /* ImageController.swift */; };
 		ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA30A91CDBEDB3006C3498 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		AC8E60CB1CA249B1004DDC87 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = ../UserController.swift; sourceTree = "<group>"; };
 		AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesController.swift; path = ../MessagesController.swift; sourceTree = "<group>"; };
 		AC8E60CF1CA249C8004DDC87 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupController.swift; path = ../GroupController.swift; sourceTree = "<group>"; };
+		ACB676861CECDEBD00BFE3FB /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		ACBA30A91CDBEDB3006C3498 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 		AC8E60CA1CA2497D004DDC87 /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				ACB676861CECDEBD00BFE3FB /* ImageController.swift */,
 				AC7BF6891CE0025A0043C40F /* TimerController.swift */,
 				AC8E60CB1CA249B1004DDC87 /* UserController.swift */,
 				AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */,
@@ -232,6 +235,7 @@
 				TargetAttributes = {
 					AC8E608E1CA1E958004DDC87 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = Q56HB3529L;
 					};
 				};
 			};
@@ -283,6 +287,7 @@
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
 				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
 				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
+				ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,
 				AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */,
@@ -399,6 +404,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -407,6 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Devmountain.GroupVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -414,6 +422,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -422,6 +432,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Devmountain.GroupVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -62,7 +62,7 @@ class MessageController {
     }
     
     
-    static func createMessage(sender: String, senderName: String, groupID: String, text: String?, photo: String?, timer: Timer?, viewedBy: [String], completion: (success: Bool, message: Message) -> Void) {
+    static func createMessage(sender: String, senderName: String, groupID: String, text: String?, image: String?, timer: Timer?, viewedBy: [String], completion: (success: Bool, message: Message) -> Void) {
         
         let messageID = FirebaseController.base.childByAppendingPath("messages").childByAutoId()
         let identifier = messageID.key
@@ -70,7 +70,7 @@ class MessageController {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM-dd"
         
-        var message = Message(sender: sender, senderName: senderName, text: text, photo: photo, dateString: formatter.stringFromDate(NSDate()), timer: timer, viewedBy: viewedBy, identifier: identifier, groupID: groupID)
+        var message = Message(sender: sender, senderName: senderName, text: text, image: image, dateString: formatter.stringFromDate(NSDate()), timer: timer, viewedBy: viewedBy, identifier: identifier, groupID: groupID)
         message.save()
         
         
@@ -78,16 +78,6 @@ class MessageController {
         completion(success: true, message: message)
         
     }
-    
-    
-    
-    //    static func addMessageIDToGroup(message: Message, groupID: String) {
-    //        let allGroups = FirebaseController.base.childByAppendingPath("groups")
-    //        let specificGroup = allGroups.childByAppendingPath(groupID)
-    //        let messageReference = specificGroup.childByAppendingPath("messages")
-    //        let messageIDs = messageReference.childByAppendingPath(message.identifier)
-    //        messageIDs.setValue(message.text ?? message.photo ?? "")
-    //    }
 }
 
 
