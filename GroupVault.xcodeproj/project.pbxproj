@@ -10,6 +10,8 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
+		AC5CCB461CEE6E6A00DD8F3B /* CreateAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5CCB451CEE6E6A00DD8F3B /* CreateAGroupTableViewCell.swift */; };
+		AC5CCB4C1CEF7CE400DD8F3B /* Build2File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5CCB4B1CEF7CE400DD8F3B /* Build2File.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BF6891CE0025A0043C40F /* TimerController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
@@ -17,7 +19,6 @@
 		AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60991CA1E958004DDC87 /* Assets.xcassets */; };
 		AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E609B1CA1E958004DDC87 /* LaunchScreen.storyboard */; };
 		AC8E60A61CA1EA27004DDC87 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A41CA1EA1C004DDC87 /* Firebase.framework */; };
-		AC8E60A71CA1EA27004DDC87 /* Firebase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A41CA1EA1C004DDC87 /* Firebase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC8E60AA1CA1EA38004DDC87 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A91CA1EA38004DDC87 /* CFNetwork.framework */; };
 		AC8E60AC1CA1ED7A004DDC87 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60AB1CA1ED7A004DDC87 /* Security.framework */; };
 		AC8E60AE1CA1ED83004DDC87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60AD1CA1ED83004DDC87 /* SystemConfiguration.framework */; };
@@ -45,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AC8E60A71CA1EA27004DDC87 /* Firebase.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +56,8 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
+		AC5CCB451CEE6E6A00DD8F3B /* CreateAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAGroupTableViewCell.swift; sourceTree = "<group>"; };
+		AC5CCB4B1CEF7CE400DD8F3B /* Build2File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build2File.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC7BF6891CE0025A0043C40F /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC5CCB4D1CEF7E2600DD8F3B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
+				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
+				AC5CCB451CEE6E6A00DD8F3B /* CreateAGroupTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		AC8E60861CA1E958004DDC87 = {
 			isa = PBXGroup;
 			children = (
@@ -196,8 +208,8 @@
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
-				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
-				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
+				AC5CCB4B1CEF7CE400DD8F3B /* Build2File.swift */,
+				AC5CCB4D1CEF7E2600DD8F3B /* Cells */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -282,11 +294,13 @@
 				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
 				AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */,
+				AC5CCB461CEE6E6A00DD8F3B /* CreateAGroupTableViewCell.swift in Sources */,
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
 				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
 				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
+				AC5CCB4C1CEF7CE400DD8F3B /* Build2File.swift in Sources */,
 				ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,
