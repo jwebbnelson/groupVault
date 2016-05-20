@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageBoardTableViewController: UITableViewController {
+class MessageBoardTableViewController: UITableViewController, UITextFieldDelegate {
     
     var group: Group?
     var groupMessages: [Message] = []
@@ -55,25 +55,14 @@ class MessageBoardTableViewController: UITableViewController {
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
-        
+        self.scrollToLastRow(true)
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
             createMessage()
-            scrollToBottom(true)
             messageTextField.text = ""
         }
         
-    }
-    
-    
-    
-    func scrollToBottom(bool: Bool){
-        if self.groupMessages.count > 0 {
-            let lastRowNumer = self.groupMessages.count - 1
-            let indexPath = NSIndexPath(forRow: lastRowNumer, inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: bool)
-        }
     }
     
     func createMessage() {
@@ -82,8 +71,6 @@ class MessageBoardTableViewController: UITableViewController {
                 MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, image: "", timer: Timer(), viewedBy: [], completion: { (success, message) in
                     if success == true {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            self.scrollToBottom(true)
                             
                             self.tableView.reloadData()
                             
@@ -99,7 +86,6 @@ class MessageBoardTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -186,15 +172,24 @@ class MessageBoardTableViewController: UITableViewController {
             }
         }
     }
-    /*
-     func showAlert(title: String, message: String) {
-     
-     let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-     let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
-     alert.addAction(action)
-     presentViewController(alert, animated: true, completion: nil)
-     }
-     */
+    
+    func scrollToBottom(bool: Bool){
+        if self.groupMessages.count > 0 {
+            let lastRowNumer = self.groupMessages.count - 1
+            let indexPath = NSIndexPath(forRow: lastRowNumer, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: bool)
+        }
+    }
+    
+    func scrollToLastRow(bool: Bool) {
+        let indexPath = NSIndexPath(forRow: self.groupMessages.count - 1, inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        messageTextField.resignFirstResponder()
+        return true
+    }
     
 }
 

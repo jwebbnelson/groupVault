@@ -8,8 +8,11 @@
 
 import UIKit
 
-class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    @IBOutlet weak var userLabel: UILabel!
+    
+    @IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var groupNameTextField: UITextField!
     
@@ -36,6 +39,10 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             print(users.count)
             self.tableView.reloadData()
         }
+        
+        downSwipeGesture()
+        upSwipeGesture()
+        tapGestureToDismissKeyBoard()
     }
     
     
@@ -56,15 +63,6 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.filteredDataSource = self.usersDataSource.filter({$0.username.containsString(searchText.lowercaseString)})
-            
-            self.tableView.reloadData()
-        }
-    }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -78,12 +76,15 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("usersCell", forIndexPath: indexPath)
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! BuildAGroupTableViewCell
+        cell.userLabel.backgroundColor = UIColor.clearColor()
         
         let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
         
-        cell.textLabel?.text = user.username
+        cell.userLabel.text = user.username
+        //cell.imageView?.image = user.imageString
+        
+        
         
         return cell
     }
@@ -152,6 +153,45 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    func downSwipeGesture() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(SignUpViewController.swiped))
+        swipeDown.direction = .Down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    func upSwipeGesture() {
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(SignUpViewController.swiped)
+        )
+        swipeUp.direction = .Up
+        self.view.addGestureRecognizer(swipeUp)
+    }
+    
+    func swiped(gesture: UISwipeGestureRecognizer) {
+        switch gesture.direction {
+        case UISwipeGestureRecognizerDirection.Down:
+            groupNameTextField.resignFirstResponder()
+        case UISwipeGestureRecognizerDirection.Up:
+            groupNameTextField.resignFirstResponder()
+        default:
+            break
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        groupNameTextField.resignFirstResponder()
+        return true
+    }
+    
+    func tapGestureToDismissKeyBoard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
+        tapGesture.cancelsTouchesInView = true
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func hidesKeyboard() {
+        view.endEditing(true)
+    }
+    
 }
+
 
 

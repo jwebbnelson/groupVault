@@ -10,6 +10,7 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
+		AC733F2D1CEF8E9000716810 /* BuildAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BF6891CE0025A0043C40F /* TimerController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
@@ -17,13 +18,12 @@
 		AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60991CA1E958004DDC87 /* Assets.xcassets */; };
 		AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E609B1CA1E958004DDC87 /* LaunchScreen.storyboard */; };
 		AC8E60A61CA1EA27004DDC87 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A41CA1EA1C004DDC87 /* Firebase.framework */; };
-		AC8E60A71CA1EA27004DDC87 /* Firebase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A41CA1EA1C004DDC87 /* Firebase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC8E60AA1CA1EA38004DDC87 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A91CA1EA38004DDC87 /* CFNetwork.framework */; };
 		AC8E60AC1CA1ED7A004DDC87 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60AB1CA1ED7A004DDC87 /* Security.framework */; };
 		AC8E60AE1CA1ED83004DDC87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60AD1CA1ED83004DDC87 /* SystemConfiguration.framework */; };
 		AC8E60B01CA1ED92004DDC87 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60AF1CA1ED92004DDC87 /* libicucore.tbd */; };
 		AC8E60B21CA1ED9E004DDC87 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60B11CA1ED9E004DDC87 /* libc++.tbd */; };
-		AC8E60B51CA1F8E3004DDC87 /* LoginSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B41CA1F8E3004DDC87 /* LoginSignupViewController.swift */; };
+		AC8E60B51CA1F8E3004DDC87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B41CA1F8E3004DDC87 /* LoginViewController.swift */; };
 		AC8E60B71CA1F8F9004DDC87 /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */; };
 		AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */; };
 		AC8E60BB1CA24786004DDC87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BA1CA24786004DDC87 /* User.swift */; };
@@ -45,7 +45,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AC8E60A71CA1EA27004DDC87 /* Firebase.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +55,7 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
+		AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAGroupTableViewCell.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC7BF6891CE0025A0043C40F /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +70,7 @@
 		AC8E60AD1CA1ED83004DDC87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AC8E60AF1CA1ED92004DDC87 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AC8E60B11CA1ED9E004DDC87 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		AC8E60B41CA1F8E3004DDC87 /* LoginSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignupViewController.swift; sourceTree = "<group>"; };
+		AC8E60B41CA1F8E3004DDC87 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
 		AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAGroupViewController.swift; sourceTree = "<group>"; };
 		AC8E60BA1CA24786004DDC87 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				ACBA30AC1CDBEDDE006C3498 /* ViewControllers */,
-				ACBA30AB1CDBEDBB006C3498 /* Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -181,23 +180,17 @@
 			name = ModelControllers;
 			sourceTree = "<group>";
 		};
-		ACBA30AB1CDBEDBB006C3498 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		ACBA30AC1CDBEDDE006C3498 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */,
-				AC8E60B41CA1F8E3004DDC87 /* LoginSignupViewController.swift */,
+				AC8E60B41CA1F8E3004DDC87 /* LoginViewController.swift */,
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
 				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
 				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
+				AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -277,7 +270,8 @@
 			files = (
 				AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */,
 				AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */,
-				AC8E60B51CA1F8E3004DDC87 /* LoginSignupViewController.swift in Sources */,
+				AC733F2D1CEF8E9000716810 /* BuildAGroupTableViewCell.swift in Sources */,
+				AC8E60B51CA1F8E3004DDC87 /* LoginViewController.swift in Sources */,
 				AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */,
 				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
