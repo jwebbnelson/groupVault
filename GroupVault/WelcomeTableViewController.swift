@@ -55,11 +55,7 @@ class WelcomeTableViewController: UITableViewController {
     }
     
     func welcomeLabelForUser() {
-        if let currentUser = UserController.sharedController.currentUser {
-        welcomeLabel.text = "Welcome, \(currentUser.username)!"
-        } else {
-            welcomeLabel.text = "Welcome!"
-        }
+        welcomeLabel.text = "Welcome, \(UserController.sharedController.currentUser.username)!"
     }
     
     

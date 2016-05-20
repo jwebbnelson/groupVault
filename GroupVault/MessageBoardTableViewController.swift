@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageBoardTableViewController: UITableViewController, UITextFieldDelegate {
+class MessageBoardTableViewController: UITableViewController {
     
     var group: Group?
     var groupMessages: [Message] = []
@@ -150,10 +150,7 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
         return UITableViewAutomaticDimension
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        messageTextField.resignFirstResponder()
-        return true
-    }
+    
     
     /*
      // Override to support conditional editing of the table view.

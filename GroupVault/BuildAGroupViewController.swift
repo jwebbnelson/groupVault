@@ -8,13 +8,8 @@
 
 import UIKit
 
-class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
+class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-//    @IBOutlet weak var selectButton: UIButton!
-//    
-//    @IBOutlet weak var usernameLabel: UILabel!
-//    
-//    @IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var groupNameTextField: UITextField!
     
@@ -68,11 +63,6 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             
             self.tableView.reloadData()
         }
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        groupNameTextField.resignFirstResponder()
-        return true
     }
     
     
@@ -163,6 +153,5 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
 }
-
 
 
