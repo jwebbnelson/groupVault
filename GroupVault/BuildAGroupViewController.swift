@@ -42,7 +42,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
         downSwipeGesture()
         upSwipeGesture()
-        tapGestureToDismissKeyBoard()
+//        tapGestureToDismissKeyBoard()
     }
     
     
@@ -91,7 +91,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     //// self.tableview.rowHeight = UITableView UITableViewAutomaticDimension
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BuildAGroupTableViewCell{
             
             let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
             
@@ -181,15 +181,15 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-    func tapGestureToDismissKeyBoard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
-        tapGesture.cancelsTouchesInView = true
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    func hidesKeyboard() {
-        view.endEditing(true)
-    }
+//    func tapGestureToDismissKeyBoard() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
+//        tapGesture.cancelsTouchesInView = true
+//        view.addGestureRecognizer(tapGesture)
+//    }
+//    
+//    func hidesKeyboard() {
+//        view.endEditing(true)
+//    }
     
 }
 

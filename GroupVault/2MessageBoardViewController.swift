@@ -1,14 +1,15 @@
 //
-//  MessageBoardTableViewController.swift
+//  2MessageBoardViewController.swift
 //  GroupVault
 //
-//  Created by Jonathan Rogers on 3/22/16.
+//  Created by Jonathan Rogers on 5/20/16.
 //  Copyright © 2016 Jonathan Rogers. All rights reserved.
 //
 
 import UIKit
 
-class MessageBoardTableViewController: UITableViewController, UITextFieldDelegate {
+class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
     
     var group: Group?
     var groupMessages: [Message] = []
@@ -17,14 +18,15 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
     var message: Message?
     let currentUser = UserController.sharedController.currentUser.identifier
     
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var groupNameLabelOnMessageBoard: UILabel!
+    @IBOutlet weak var groupNameLabel: UILabel!
     
     @IBOutlet weak var messageTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
+        self.tableView.reloadData()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -55,7 +57,7 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
-        self.scrollToLastRow(true)
+//        self.scrollToLastRow(true)
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
@@ -87,13 +89,13 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.groupMessages.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let message = groupMessages[indexPath.row]
         
@@ -128,39 +130,16 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 200
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    
     func updateWith(group: Group) {
-        self.groupNameLabelOnMessageBoard.text = group.groupName
+        self.groupNameLabel.text = group.groupName
         self.group = group
         
         MessageController.fetchMessagesForGroup(group) { (messages) in
@@ -181,10 +160,10 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
         }
     }
     
-    func scrollToLastRow(bool: Bool) {
-        let indexPath = NSIndexPath(forRow: self.groupMessages.count - 1, inSection: 0)
-        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
-    }
+//    func scrollToLastRow(bool: Bool) {
+//        let indexPath = NSIndexPath(forRow: self.groupMessages.count - 1, inSection: 0)
+//        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+//    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         messageTextField.resignFirstResponder()
@@ -193,7 +172,7 @@ class MessageBoardTableViewController: UITableViewController, UITextFieldDelegat
     
 }
 
-extension MessageBoardTableViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
+extension _MessageBoardViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
     
     func senderMessageSent(sender: SenderCell) {
         
@@ -212,19 +191,5 @@ extension MessageBoardTableViewController: SenderTableViewCellDelegate, Reciever
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

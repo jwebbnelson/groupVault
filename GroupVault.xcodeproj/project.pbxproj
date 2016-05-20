@@ -10,11 +10,13 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
-		AC733F2D1CEF8E9000716810 /* BuildAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */; };
+		AC733F311CEFB90400716810 /* MessageBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */; };
+		AC733F331CEFB91D00716810 /* 2MessageBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */; };
+		AC733F351CEFC59C00716810 /* MainOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC733F341CEFC59C00716810 /* MainOne.storyboard */; };
+		AC733F371CEFC8E500716810 /* BuildAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BF6891CE0025A0043C40F /* TimerController.swift */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
-		AC8E60981CA1E958004DDC87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60961CA1E958004DDC87 /* Main.storyboard */; };
 		AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60991CA1E958004DDC87 /* Assets.xcassets */; };
 		AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E609B1CA1E958004DDC87 /* LaunchScreen.storyboard */; };
 		AC8E60A61CA1EA27004DDC87 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E60A41CA1EA1C004DDC87 /* Firebase.framework */; };
@@ -30,7 +32,6 @@
 		AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BC1CA24794004DDC87 /* Message.swift */; };
 		AC8E60BF1CA247A1004DDC87 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60BE1CA247A1004DDC87 /* Group.swift */; };
 		AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */; };
-		AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */; };
 		AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CB1CA249B1004DDC87 /* UserController.swift */; };
 		AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */; };
 		AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupController.swift */; };
@@ -55,12 +56,14 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
-		AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAGroupTableViewCell.swift; sourceTree = "<group>"; };
+		AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageBoardTableViewController.swift; path = ../../../.Trash/MessageBoardTableViewController.swift; sourceTree = "<group>"; };
+		AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2MessageBoardViewController.swift; sourceTree = "<group>"; };
+		AC733F341CEFC59C00716810 /* MainOne.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainOne.storyboard; path = ../../../.Trash/MainOne.storyboard; sourceTree = "<group>"; };
+		AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuildAGroupTableViewCell.swift; path = ../../../.Trash/BuildAGroupTableViewCell.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC7BF6891CE0025A0043C40F /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8E60921CA1E958004DDC87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AC8E60971CA1E958004DDC87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC8E60991CA1E958004DDC87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC8E609C1CA1E958004DDC87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC8E609E1CA1E958004DDC87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,7 +80,6 @@
 		AC8E60BC1CA24794004DDC87 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AC8E60BE1CA247A1004DDC87 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AC8E60C01CA2488F004DDC87 /* FirebaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
-		AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBoardTableViewController.swift; sourceTree = "<group>"; };
 		AC8E60CB1CA249B1004DDC87 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = ../UserController.swift; sourceTree = "<group>"; };
 		AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesController.swift; path = ../MessagesController.swift; sourceTree = "<group>"; };
 		AC8E60CF1CA249C8004DDC87 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupController.swift; path = ../GroupController.swift; sourceTree = "<group>"; };
@@ -122,7 +124,7 @@
 		AC8E60911CA1E958004DDC87 /* GroupVault */ = {
 			isa = PBXGroup;
 			children = (
-				AC8E60961CA1E958004DDC87 /* Main.storyboard */,
+				AC733F341CEFC59C00716810 /* MainOne.storyboard */,
 				AC8E60C21CA24895004DDC87 /* Models */,
 				AC8E60C51CA248C9004DDC87 /* Controllers */,
 				AC8E60CA1CA2497D004DDC87 /* ModelControllers */,
@@ -187,10 +189,11 @@
 				AC8E60B41CA1F8E3004DDC87 /* LoginViewController.swift */,
 				AC8E60B61CA1F8F9004DDC87 /* WelcomeTableViewController.swift */,
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
-				AC8E60C61CA24910004DDC87 /* MessageBoardTableViewController.swift */,
 				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
 				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
-				AC733F2C1CEF8E9000716810 /* BuildAGroupTableViewCell.swift */,
+				AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */,
+				AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */,
+				AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -255,9 +258,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC733F351CEFC59C00716810 /* MainOne.storyboard in Resources */,
 				AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */,
 				AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */,
-				AC8E60981CA1E958004DDC87 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,16 +273,17 @@
 			files = (
 				AC8E60C11CA2488F004DDC87 /* FirebaseController.swift in Sources */,
 				AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */,
-				AC733F2D1CEF8E9000716810 /* BuildAGroupTableViewCell.swift in Sources */,
 				AC8E60B51CA1F8E3004DDC87 /* LoginViewController.swift in Sources */,
 				AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */,
-				AC8E60C71CA24910004DDC87 /* MessageBoardTableViewController.swift in Sources */,
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
 				AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */,
+				AC733F371CEFC8E500716810 /* BuildAGroupTableViewCell.swift in Sources */,
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
+				AC733F311CEFB90400716810 /* MessageBoardTableViewController.swift in Sources */,
 				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
+				AC733F331CEFB91D00716810 /* 2MessageBoardViewController.swift in Sources */,
 				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
 				ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
@@ -294,14 +298,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AC8E60961CA1E958004DDC87 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AC8E60971CA1E958004DDC87 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AC8E609B1CA1E958004DDC87 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

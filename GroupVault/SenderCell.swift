@@ -16,11 +16,13 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var senderMessageView: UIView!
     
-    @IBOutlet weak var senderMessageText: UILabel!
+    @IBOutlet weak var senderMessageLabel: UILabel!
     
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var senderTimerLabel: UILabel!
     
-    @IBOutlet weak var unlockButton: UIButton!
+    @IBOutlet weak var senderLockAndUnlockButton: UIButton!
+    
+    @IBOutlet weak var rightBubbleConstraint: NSLayoutConstraint!
     
     weak var delegate: SenderTableViewCellDelegate?
     var message: Message?
@@ -39,11 +41,11 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     func lockImageViewForSender() {
         if let message = self.message {
-            timerLabel.hidden = true
-            unlockButton.hidden = false
-            unlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
+            senderTimerLabel.hidden = true
+            senderLockAndUnlockButton.hidden = false
+            senderLockAndUnlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
             senderMessageView.hidden = true
-            senderMessageText.hidden = true
+            senderMessageLabel.hidden = true
             senderDate.textColor = Color.lightBlueMessageColor()
             senderDate.text = message.dateString
             senderDate.font = UIFont.boldSystemFontOfSize(12)
@@ -58,8 +60,8 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
         senderMessageView.backgroundColor = UIColor.lightGrayColor()
         senderMessageView.layer.borderColor = UIColor.blackColor().CGColor
         senderMessageView.layer.borderWidth = 0.5
-        senderMessageText.textColor = UIColor.blackColor()
-        senderMessageText.text = message.text
+        senderMessageLabel.textColor = UIColor.blackColor()
+        senderMessageLabel.text = message.text
         senderDate.textColor = Color.lightBlueMessageColor()
         senderDate.text = message.dateString
         senderDate.font = UIFont.boldSystemFontOfSize(12)
@@ -75,7 +77,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     }
     
     func updateTimerLabel() {
-        timerLabel.text = message?.timer?.timeAsString()
+        senderTimerLabel.text = message?.timer?.timeAsString()
     }
 }
 

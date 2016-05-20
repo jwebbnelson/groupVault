@@ -12,17 +12,21 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     
     static let sharedCell = ReceiverCell()
     
-    @IBOutlet weak var recieverDate: UILabel!
+    @IBOutlet weak var receiverDate: UILabel!
     
-    @IBOutlet weak var recieverUserName: UILabel!
+    @IBOutlet weak var receiverUserName: UILabel!
     
-    @IBOutlet weak var recieverMessageView: UIView!
+    @IBOutlet weak var receiverImageView: UIImageView!
     
-    @IBOutlet weak var recieverMessageText: UILabel!
+    @IBOutlet weak var receiverMessageView: UIView!
+    
+    @IBOutlet weak var receiverMessageText: UILabel!
     
     @IBOutlet weak var lockAndUnlockButton: UIButton!
     
     @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var leftBubbleConstraint: NSLayoutConstraint!
     
     weak var delegate: RecieverTableViewCellDelegate?
     
@@ -50,35 +54,37 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
             timerLabel.hidden = true
             lockAndUnlockButton.hidden = false
             lockAndUnlockButton.setBackgroundImage(UIImage(named: "lockedLock"), forState: .Normal)
-            recieverMessageView.hidden = true
-            recieverMessageText.hidden = true
-            recieverDate.textColor = UIColor.lightGrayColor()
-            recieverDate.text = message.dateString
-            recieverDate.font = UIFont.boldSystemFontOfSize(9)
-            recieverUserName.font = UIFont.boldSystemFontOfSize(18)
-            recieverUserName.text = message.senderName
-            recieverUserName.font = UIFont.boldSystemFontOfSize(12)
+            receiverImageView.hidden = false
+            receiverMessageView.hidden = true
+            receiverMessageText.hidden = true
+            receiverDate.textColor = UIColor.lightGrayColor()
+            receiverDate.text = message.dateString
+            receiverDate.font = UIFont.boldSystemFontOfSize(9)
+            receiverUserName.font = UIFont.boldSystemFontOfSize(18)
+            receiverUserName.text = message.senderName
+            receiverUserName.font = UIFont.boldSystemFontOfSize(12)
         }
     }
     
     func messageViewForReceiver(message: Message) {
         message.timer?.delegate = self
         timerLabel.hidden = false
-        recieverMessageView.hidden = false
-        recieverMessageView.layer.masksToBounds = true
-        recieverMessageView.layer.cornerRadius = 8.0
-        recieverMessageView.backgroundColor = Color.lightBlueMessageColor()
-        recieverMessageView.layer.borderColor = UIColor.blackColor().CGColor
-        recieverMessageView.layer.borderWidth = 0.5
-        recieverMessageText.hidden = false
-        recieverMessageText.textColor = UIColor.blackColor()
-        recieverMessageText.text = message.text
-        recieverDate.textColor = UIColor.lightGrayColor()
-        recieverDate.text = message.dateString
-        recieverDate.font = UIFont.boldSystemFontOfSize(12)
-        recieverUserName.font = UIFont.boldSystemFontOfSize(12)
-        recieverUserName.text = message.senderName
-        recieverUserName.font = UIFont.boldSystemFontOfSize(12)
+        receiverImageView.hidden = false
+        receiverMessageView.hidden = false
+        receiverMessageView.layer.masksToBounds = true
+        receiverMessageView.layer.cornerRadius = 8.0
+        receiverMessageView.backgroundColor = Color.lightBlueMessageColor()
+        receiverMessageView.layer.borderColor = UIColor.blackColor().CGColor
+        receiverMessageView.layer.borderWidth = 0.5
+        receiverMessageText.hidden = false
+        receiverMessageText.textColor = UIColor.blackColor()
+        receiverMessageText.text = message.text
+        receiverDate.textColor = UIColor.lightGrayColor()
+        receiverDate.text = message.dateString
+        receiverDate.font = UIFont.boldSystemFontOfSize(12)
+        receiverUserName.font = UIFont.boldSystemFontOfSize(12)
+        receiverUserName.text = message.senderName
+        receiverUserName.font = UIFont.boldSystemFontOfSize(12)
         lockAndUnlockButton.hidden = true
         
     }
@@ -102,14 +108,15 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
         timerLabel.hidden = true
         lockAndUnlockButton.hidden = false
         lockAndUnlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
-        recieverMessageView.hidden = true
-        recieverMessageText.hidden = true
-        recieverDate.textColor = UIColor.lightGrayColor()
-        recieverDate.text = message?.dateString ?? ""
-        recieverDate.font = UIFont.boldSystemFontOfSize(9)
-        recieverUserName.font = UIFont.boldSystemFontOfSize(18)
-        recieverUserName.text = message?.senderName ?? ""
-        recieverUserName.font = UIFont.boldSystemFontOfSize(12)
+        receiverImageView.hidden = false
+        receiverMessageView.hidden = true
+        receiverMessageText.hidden = true
+        receiverDate.textColor = UIColor.lightGrayColor()
+        receiverDate.text = message?.dateString ?? ""
+        receiverDate.font = UIFont.boldSystemFontOfSize(9)
+        receiverUserName.font = UIFont.boldSystemFontOfSize(18)
+        receiverUserName.text = message?.senderName ?? ""
+        receiverUserName.font = UIFont.boldSystemFontOfSize(12)
     }
 }
 

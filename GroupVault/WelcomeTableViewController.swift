@@ -123,16 +123,16 @@ class WelcomeTableViewController: UITableViewController {
         
         if segue.identifier == "enterAGroup"{
             
-            let messageBoardTableViewController = segue.destinationViewController as? MessageBoardTableViewController
+            let messageBoardViewController = segue.destinationViewController as? _MessageBoardViewController
             
-            _ = messageBoardTableViewController!.view
+            _ = messageBoardViewController!.view
             
             let indexPath = tableView.indexPathForSelectedRow
             
             if let selectedRow = indexPath?.row {
                 
                 let group = self.groups[selectedRow]
-                messageBoardTableViewController?.updateWith(group)
+                messageBoardViewController?.updateWith(group)
                 
                 
             }
