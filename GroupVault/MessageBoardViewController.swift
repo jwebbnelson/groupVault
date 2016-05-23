@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageBoardViewController: UIViewController, UITextFieldDelegate {
+class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     var group: Group?
@@ -24,6 +24,9 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var messageTextField: UITextField!
     
+    @IBOutlet weak var cameraImage: UIButton!
+    
+    @IBOutlet weak var practiceImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.reloadData()
@@ -32,6 +35,12 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let cameraTapGesture = UITapGestureRecognizer(target: self, action: #selector(MessageBoardViewController.cameraImageTapped))
+        cameraImage.userInteractionEnabled = true
+        cameraImage.addGestureRecognizer(cameraTapGesture)
     }
     
     
@@ -55,6 +64,9 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate {
         
         
     }
+    
+    
+    
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
         //        self.scrollToLastRow(true)
@@ -153,6 +165,70 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func cameraImageTapped() {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let cameraAlert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            cameraAlert.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: { (_) -> Void in
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .PhotoLibrary
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }))
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            
+            if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+                cameraAlert.addAction(UIAlertAction(title: "Take Photo or Video", style: .Default, handler: { (_) in
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .Camera
+                    imagePicker.cameraCaptureMode = .Photo
+                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                }))
+            }
+        }
+        
+        cameraAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        presentViewController(cameraAlert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        if let user = UserController.sharedController.currentUser, image = pickedImage {
+            ImageController.uploadImage(user, image: image) { (identifier) in
+                self.practiceImageView.image = pickedImage
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("user cancelled image")
+        dismissViewControllerAnimated(true) {
+            // anything you want to happen when the user selects cancel
+        }
+    }
+    
+    func imageWasSavedSuccessfully(image: UIImage, didFinishSavingWithError error: NSError!, context: UnsafeMutablePointer<()>) {
+        print("Image saved")
+        if let error = error {
+            print("An error occured while waving the image. \(error.localizedDescription)")
+        } else {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.practiceImageView.image = image
+            })
+        }
+    }
+    
+    
+    
     func scrollToBottom(bool: Bool){
         if self.groupMessages.count > 0 {
             let lastRowNumer = self.groupMessages.count - 1
@@ -167,6 +243,7 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
+
 
 extension MessageBoardViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
     

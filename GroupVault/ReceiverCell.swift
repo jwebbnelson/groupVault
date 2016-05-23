@@ -16,6 +16,8 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     
     @IBOutlet weak var receiverUserName: UILabel!
     
+    @IBOutlet weak var receiverProfileImageView: UIImageView!
+    
     @IBOutlet weak var receiverImageView: UIImageView!
     
     @IBOutlet weak var receiverMessageView: UIView!
