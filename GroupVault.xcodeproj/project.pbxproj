@@ -10,8 +10,7 @@
 		AC01C36C1CB376AF00D1A1CB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36B1CB376AF00D1A1CB /* Colors.swift */; };
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
-		AC733F311CEFB90400716810 /* MessageBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */; };
-		AC733F331CEFB91D00716810 /* 2MessageBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */; };
+		AC733F331CEFB91D00716810 /* MessageBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F321CEFB91D00716810 /* MessageBoardViewController.swift */; };
 		AC733F351CEFC59C00716810 /* MainOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC733F341CEFC59C00716810 /* MainOne.storyboard */; };
 		AC733F371CEFC8E500716810 /* BuildAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
@@ -56,8 +55,7 @@
 		AC01C36B1CB376AF00D1A1CB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
-		AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageBoardTableViewController.swift; path = ../../../.Trash/MessageBoardTableViewController.swift; sourceTree = "<group>"; };
-		AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2MessageBoardViewController.swift; sourceTree = "<group>"; };
+		AC733F321CEFB91D00716810 /* MessageBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBoardViewController.swift; sourceTree = "<group>"; };
 		AC733F341CEFC59C00716810 /* MainOne.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainOne.storyboard; path = ../../../.Trash/MainOne.storyboard; sourceTree = "<group>"; };
 		AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuildAGroupTableViewCell.swift; path = ../../../.Trash/BuildAGroupTableViewCell.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -191,8 +189,7 @@
 				AC8E60B81CA1FDB4004DDC87 /* BuildAGroupViewController.swift */,
 				AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */,
 				AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */,
-				AC733F301CEFB90400716810 /* MessageBoardTableViewController.swift */,
-				AC733F321CEFB91D00716810 /* 2MessageBoardViewController.swift */,
+				AC733F321CEFB91D00716810 /* MessageBoardViewController.swift */,
 				AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */,
 			);
 			name = ViewControllers;
@@ -281,9 +278,8 @@
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
-				AC733F311CEFB90400716810 /* MessageBoardTableViewController.swift in Sources */,
 				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
-				AC733F331CEFB91D00716810 /* 2MessageBoardViewController.swift in Sources */,
+				AC733F331CEFB91D00716810 /* MessageBoardViewController.swift in Sources */,
 				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
 				ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,

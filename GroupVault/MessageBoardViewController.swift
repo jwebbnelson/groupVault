@@ -1,5 +1,5 @@
-//
-//  2MessageBoardViewController.swift
+
+//  MessageBoardViewController.swift
 //  GroupVault
 //
 //  Created by Jonathan Rogers on 5/20/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class MessageBoardViewController: UIViewController, UITextFieldDelegate {
     
     
     var group: Group?
@@ -57,7 +57,7 @@ class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject) {
-//        self.scrollToLastRow(true)
+        //        self.scrollToLastRow(true)
         if messageTextField.text == "" {
             print("text must be entered in order to send a message")
         } else {
@@ -92,6 +92,7 @@ class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.groupMessages.count
+        
     }
     
     
@@ -160,11 +161,6 @@ class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-//    func scrollToLastRow(bool: Bool) {
-//        let indexPath = NSIndexPath(forRow: self.groupMessages.count - 1, inSection: 0)
-//        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
-//    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         messageTextField.resignFirstResponder()
         return true
@@ -172,7 +168,7 @@ class _MessageBoardViewController: UIViewController, UITableViewDelegate, UITabl
     
 }
 
-extension _MessageBoardViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
+extension MessageBoardViewController: SenderTableViewCellDelegate, RecieverTableViewCellDelegate {
     
     func senderMessageSent(sender: SenderCell) {
         

@@ -56,7 +56,7 @@ class WelcomeTableViewController: UITableViewController {
     
     func welcomeLabelForUser() {
         if UserController.sharedController.currentUser != nil {
-        welcomeLabel.text = "Welcome, \(UserController.sharedController.currentUser.username)!"
+            welcomeLabel.text = "Welcome, \(UserController.sharedController.currentUser.username)!"
         }
     }
     
@@ -121,24 +121,31 @@ class WelcomeTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "enterAGroup"{
+        if segue.identifier == "toEnterAGroup" {
             
-            let messageBoardViewController = segue.destinationViewController as? _MessageBoardViewController
-            
+            let messageBoardViewController = segue.destinationViewController as? MessageBoardViewController
+        
             _ = messageBoardViewController!.view
             
-            let indexPath = tableView.indexPathForSelectedRow
+            let cell = sender as? UITableViewCell
             
-            if let selectedRow = indexPath?.row {
+            let indexPath = tableView.indexPathForCell(cell!)
                 
-                let group = self.groups[selectedRow]
-                messageBoardViewController?.updateWith(group)
-                
-                
+                if let selectedRow = indexPath?.row {
+                    
+                    let group = self.groups[selectedRow]
+                    messageBoardViewController!.updateWith(group)
+                }
             }
             
+            //else if segue.identifier == "toConversation" {
+            //                if let cell = sender as? UITableViewCell, indexPath = tableView.indexPathForCell(cell) {
+            //                    let chatViewController = segue.destinationViewController as! ChatViewController
+            //                    let conversation = conversationsArray[indexPath.row]
+            //                    chatViewController.conversation = conversation
+            //                    chatViewController.usersGroup = self.usersGroup
+            //                    chatViewController.observeChatThread(conversation)
+            //                }
+            
         }
-        
-        
     }
-}
