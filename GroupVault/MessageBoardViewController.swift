@@ -13,10 +13,11 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     
     var group: Group?
     var groupMessages: [Message] = []
+    var groupImages: [Image] = []
     var currentGroup = ""
     var timer: Timer?
     var message: Message?
-    let currentUser = UserController.sharedController.currentUser.identifier
+    let currentUser = UserController.sharedController.currentUser
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,6 +28,7 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     @IBOutlet weak var cameraImage: UIButton!
     
     @IBOutlet weak var practiceImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.reloadData()
@@ -59,6 +61,12 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
                 TimerController.sharedInstance.stopTimer(message.timer ?? Timer())
             }
         }
+        let allImages = groupImages
+        for image in allImages {
+            if image.timer != nil {
+                TimerController.sharedInstance.stopTimer(image.timer ?? Timer())
+            }
+        }
     }
     @IBAction func showMessageButtonTapped(sender: AnyObject) {
         
@@ -80,9 +88,9 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     }
     
     func createMessage() {
-        if let message = messageTextField.text, let userIdentifier = UserController.sharedController.currentUser.identifier {
+        if let message = messageTextField.text, currentUser = self.currentUser, currentUserID = self.currentUser.identifier, currentUserImage = self.currentUser.imageString {
             if let group = group, let identifier = group.identifier {
-                MessageController.createMessage(userIdentifier, senderName: UserController.sharedController.currentUser.username, groupID: identifier, text: message, image: "", timer: Timer(), viewedBy: [], completion: { (success, message) in
+                MessageController.createMessage(currentUserID, senderName: currentUser.username, senderImageString: currentUserImage, groupID: identifier, text: message, timer: Timer(), viewedBy: [], completion: { (success, message) in
                     if success == true {
                         dispatch_async(dispatch_get_main_queue(), {
                             
@@ -111,9 +119,10 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let message = groupMessages[indexPath.row]
+//        let image = groupImages[indexPath.row]
         
         
-        if message.sender == self.currentUser {
+        if message.sender == self.currentUser.identifier {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("senderCell", forIndexPath: indexPath) as! SenderCell
             cell.message = message
@@ -141,6 +150,7 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
             
             return cell
         }
+        
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -155,6 +165,15 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
         self.groupNameLabel.text = group.groupName
         self.group = group
         
+//        ImageController.fetchImagesForGroup(group) { (images) in
+//            if images.count > self.groupMessages.count {
+//                self.groupImages = images.sort({ $0.identifier < $1.identifier })
+//                self.tableView.reloadData()
+//            } else {
+//                self.groupImages = images.sort({ $0.identifier < $1.identifier })
+//
+//            }
+//        }
         MessageController.fetchMessagesForGroup(group) { (messages) in
             if messages.count > self.groupMessages.count {
                 self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
@@ -202,11 +221,24 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
         
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         
-        if let user = UserController.sharedController.currentUser, image = pickedImage {
-            ImageController.uploadImage(user, image: image) { (identifier) in
-                self.practiceImageView.image = pickedImage
-            }
+        guard let image = pickedImage,
+        currentUser = self.currentUser,
+        currentUserID = self.currentUser.identifier,
+            currentUserImage = self.currentUser.imageString else { return }
+        if let group = group, let identifier = group.identifier {
+            ImageController.uploadGroupMessageImage(currentUserID, senderName: currentUser.username, groupID: identifier, image: image, timer: Timer(), viewedBy: [], completion: { (success, image) in
+                if success == true {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        self.practiceImageView.image = pickedImage
+                        self.tableView.reloadData()
+                    })
+                } else {
+                    print("image not saved")
+                }
+            })
         }
+        
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -254,9 +286,9 @@ extension MessageBoardViewController: SenderTableViewCellDelegate, RecieverTable
     func receiverLockImagebuttonTapped(sender: ReceiverCell) {
         
         guard let message = sender.message,
-            currentUser = self.currentUser,
+            currentUserID = self.currentUser.identifier,
             viewedByArray = message.viewedBy else { return }
-        if viewedByArray.contains(currentUser) {
+        if viewedByArray.contains(currentUserID) {
             sender.goBackToLockImageView()
         } else {
             TimerController.sharedInstance.startTimer(message.timer ?? Timer())

@@ -36,6 +36,8 @@
 		AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupController.swift */; };
 		ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB676861CECDEBD00BFE3FB /* ImageController.swift */; };
 		ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA30A91CDBEDB3006C3498 /* Timer.swift */; };
+		ACEE3B671CF418D80072C3FE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEE3B661CF418D80072C3FE /* Image.swift */; };
+		ACEE3B691CF41D2A0072C3FE /* ZImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEE3B681CF41D2A0072C3FE /* ZImageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +85,8 @@
 		AC8E60CF1CA249C8004DDC87 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupController.swift; path = ../GroupController.swift; sourceTree = "<group>"; };
 		ACB676861CECDEBD00BFE3FB /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		ACBA30A91CDBEDB3006C3498 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		ACEE3B661CF418D80072C3FE /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		ACEE3B681CF41D2A0072C3FE /* ZImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZImageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 			children = (
 				AC8E60BA1CA24786004DDC87 /* User.swift */,
 				AC8E60BC1CA24794004DDC87 /* Message.swift */,
+				ACEE3B661CF418D80072C3FE /* Image.swift */,
 				AC8E60BE1CA247A1004DDC87 /* Group.swift */,
 				AC01C36B1CB376AF00D1A1CB /* Colors.swift */,
 				ACBA30A91CDBEDB3006C3498 /* Timer.swift */,
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				ACB676861CECDEBD00BFE3FB /* ImageController.swift */,
+				ACEE3B681CF41D2A0072C3FE /* ZImageController.swift */,
 				AC7BF6891CE0025A0043C40F /* TimerController.swift */,
 				AC8E60CB1CA249B1004DDC87 /* UserController.swift */,
 				AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */,
@@ -275,12 +281,14 @@
 				AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */,
 				AC8E60BD1CA24794004DDC87 /* Message.swift in Sources */,
 				AC733F371CEFC8E500716810 /* BuildAGroupTableViewCell.swift in Sources */,
+				ACEE3B671CF418D80072C3FE /* Image.swift in Sources */,
 				AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */,
 				AC8E60B91CA1FDB4004DDC87 /* BuildAGroupViewController.swift in Sources */,
 				AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */,
 				ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */,
 				AC733F331CEFB91D00716810 /* MessageBoardViewController.swift in Sources */,
 				AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */,
+				ACEE3B691CF41D2A0072C3FE /* ZImageController.swift in Sources */,
 				ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */,
 				AC8E60BB1CA24786004DDC87 /* User.swift in Sources */,
 				AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */,

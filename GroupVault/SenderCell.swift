@@ -14,6 +14,8 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var senderDate: UILabel!
     
+     @IBOutlet weak var senderProfileImageView: UIImageView!
+    
     @IBOutlet weak var senderMessageView: UIView!
     
     @IBOutlet weak var senderMessageLabel: UILabel!
@@ -24,8 +26,10 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var rightBubbleConstraint: NSLayoutConstraint!
     
+    
     weak var delegate: SenderTableViewCellDelegate?
     var message: Message?
+    var imageMessage: Image?
     var timer: Timer?
     
     override func awakeFromNib() {
@@ -42,8 +46,16 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     func lockImageViewForSender() {
         if let message = self.message {
             senderTimerLabel.hidden = true
+            senderProfileImageView.hidden = false
             senderLockAndUnlockButton.hidden = false
             senderLockAndUnlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
+            ImageController.imageForUser(message.senderImageString) { (success, image) in
+                if success {
+                    self.senderProfileImageView.image = image
+                } else {
+                    self.senderProfileImageView.image = UIImage(named: "defaultProfileImage")
+                }
+            }
             senderMessageView.hidden = true
             senderMessageLabel.hidden = true
             senderDate.textColor = Color.lightBlueMessageColor()
@@ -55,6 +67,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     func messageViewForSender(message: Message) {
         message.timer?.senderDelegate = self
+        senderProfileImageView.hidden = false
         senderMessageView.layer.masksToBounds = true
         senderMessageView.layer.cornerRadius = 8.0
         senderMessageView.backgroundColor = UIColor.lightGrayColor()
@@ -62,7 +75,13 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
         senderMessageView.layer.borderWidth = 0.5
         senderMessageLabel.textColor = UIColor.blackColor()
         senderMessageLabel.text = message.text
-        senderDate.textColor = Color.lightBlueMessageColor()
+        ImageController.imageForUser(message.senderImageString) { (success, image) in
+            if success {
+                self.senderProfileImageView.image = image
+            } else {
+                self.senderProfileImageView.image = UIImage(named: "defaultProfileImage")
+            }
+        }
         senderDate.text = message.dateString
         senderDate.font = UIFont.boldSystemFontOfSize(12)
         
@@ -83,6 +102,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
 
 protocol SenderTableViewCellDelegate: class {
     func senderMessageSent(sender: SenderCell)
+    
 }
 
 extension SenderCell {

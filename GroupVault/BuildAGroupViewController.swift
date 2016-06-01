@@ -42,8 +42,8 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
         downSwipeGesture()
         upSwipeGesture()
-        tapGestureToDismissKeyBoard()
-        hidesKeyboard()
+        //        tapGestureToDismissKeyBoard()
+        //        hidesKeyboard()
         self.tableView.keyboardDismissMode = .OnDrag
     }
     
@@ -79,12 +79,19 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! BuildAGroupTableViewCell
-        cell.userLabel.backgroundColor = UIColor.clearColor()
         
         let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
         
         cell.userLabel.text = user.username
-        //cell.imageView?.image = user.imageString
+        if let userImageString = user.imageString {
+            ImageController.imageForUser(userImageString) { (success, image) in
+                if success {
+                    cell.userProfileImageView.image = image
+                } else {
+                    cell.userProfileImageView.image = UIImage(named: "defaultProfileImage")
+                }
+            }
+        }
         
         
         
@@ -112,19 +119,12 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.backgroundColor = UIColor.lightGrayColor()
                 
             }
-            
-            
-            
-            
+
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
     }
-    
-    
-    
-    
-    
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -183,15 +183,15 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-    func tapGestureToDismissKeyBoard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
-        tapGesture.cancelsTouchesInView = true
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    func hidesKeyboard() {
-        view.endEditing(true)
-    }
+    //    func tapGestureToDismissKeyBoard() {
+    //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
+    //        tapGesture.cancelsTouchesInView = true
+    //        view.addGestureRecognizer(tapGesture)
+    //    }
+    //
+    //    func hidesKeyboard() {
+    //        view.endEditing(true)
+    //    }
     
 }
 
