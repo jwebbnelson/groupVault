@@ -14,9 +14,11 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var senderDate: UILabel!
     
-     @IBOutlet weak var senderProfileImageView: UIImageView!
+    @IBOutlet weak var senderProfileImageView: UIImageView!
     
     @IBOutlet weak var senderMessageView: UIView!
+    
+    @IBOutlet weak var senderImageView: UIImageView!
     
     @IBOutlet weak var senderMessageLabel: UILabel!
     
@@ -29,7 +31,6 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     weak var delegate: SenderTableViewCellDelegate?
     var message: Message?
-    var imageMessage: Image?
     var timer: Timer?
     
     override func awakeFromNib() {
@@ -49,7 +50,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
             senderProfileImageView.hidden = false
             senderLockAndUnlockButton.hidden = false
             senderLockAndUnlockButton.setBackgroundImage(UIImage(named: "unlockedLock"), forState: .Normal)
-            ImageController.imageForUser(message.senderImageString) { (success, image) in
+            ImageController.imageForUser(message.senderProfileImage) { (success, image) in
                 if success {
                     self.senderProfileImageView.image = image
                 } else {
@@ -75,7 +76,32 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
         senderMessageView.layer.borderWidth = 0.5
         senderMessageLabel.textColor = UIColor.blackColor()
         senderMessageLabel.text = message.text
-        ImageController.imageForUser(message.senderImageString) { (success, image) in
+        ImageController.imageForUser(message.senderProfileImage) { (success, image) in
+            if success {
+                self.senderProfileImageView.image = image
+            } else {
+                self.senderProfileImageView.image = UIImage(named: "defaultProfileImage")
+            }
+        }
+        senderDate.text = message.dateString
+        senderDate.font = UIFont.boldSystemFontOfSize(12)
+        
+    }
+    
+    func imageViewForSender(message: Message) {
+        message.timer?.senderDelegate = self
+        senderProfileImageView.hidden = false
+        senderMessageView.hidden = false
+        senderLockAndUnlockButton.hidden = true
+        senderDate.hidden = false
+        senderImageView.hidden = false
+        senderImageView.layer.masksToBounds = true
+        senderImageView.layer.cornerRadius = 10.0
+        senderImageView.layer.borderColor = UIColor.blackColor().CGColor
+        senderImageView.layer.borderWidth = 0.5
+        senderImageView.image = message.image
+        senderMessageLabel.hidden = true
+        ImageController.imageForUser(message.senderProfileImage) { (success, image) in
             if success {
                 self.senderProfileImageView.image = image
             } else {
@@ -88,11 +114,15 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     }
     
     func messageTimerComplete() {
-        lockImageViewForSender()
-        message?.viewedBy?.append(UserController.sharedController.currentUser.identifier!)
+        
+        if let message = self.message {
+            MessageController.userViewedMessage(message, completion: { (success, message) in
+                self.lockImageViewForSender()
+                
+            })
+        }
         message?.save()
         
-        // if the user logs out as a timer is going, the timer crashes.
     }
     
     func updateTimerLabel() {
