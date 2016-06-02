@@ -20,7 +20,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var senderImageView: UIImageView!
     
-    @IBOutlet weak var senderMessageLabel: UILabel!
+    @IBOutlet weak var  senderMessageText: UILabel!
     
     @IBOutlet weak var senderTimerLabel: UILabel!
     
