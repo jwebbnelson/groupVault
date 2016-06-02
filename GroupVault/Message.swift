@@ -7,14 +7,12 @@
 //
 
 import Foundation
-import UIKit
 
 class Message: FirebaseType, Equatable {
     
     let kSender = "sender"
-    let kSenderProfileImage = "senderProfileImage"
+    let kSenderImageString = "senderImageString"
     let kText = "text"
-    var kImage = "image"
     let kDateString = "dateString"
     let kViewedBy = "viewedBy"
     let kGroupID = "group"
@@ -23,9 +21,8 @@ class Message: FirebaseType, Equatable {
     
     var sender = ""
     var senderName: String
-    var senderProfileImage: String
+    var senderImageString: String
     var text: String?
-    var image: UIImage?
     var dateString: String
     var timer: Timer? = Timer()
     var viewedBy: [String]?
@@ -36,19 +33,15 @@ class Message: FirebaseType, Equatable {
         return "messages"
     }
     
-    
     var jsonValue: [String: AnyObject] {
-        var json: [String: AnyObject] = [kSender: sender,kSenderName: senderName, kSenderProfileImage: senderProfileImage, kDateString: dateString, kGroupID: groupID]
+        var json: [String: AnyObject] = [kSender: sender,kSenderName: senderName, kSenderImageString: senderImageString, kDateString: dateString, kGroupID: groupID]
         
         if let text = text {
             json.updateValue(text, forKey: kText)
             
-            if let image = image?.base64String {
-                json.updateValue(image, forKey: kImage)
-                
-                if let viewedBy = viewedBy {
-                    json.updateValue(viewedBy, forKey: kViewedBy)
-                }
+            
+            if let viewedBy = viewedBy {
+                json.updateValue(viewedBy, forKey: kViewedBy)
             }
         }
         return json
@@ -57,20 +50,15 @@ class Message: FirebaseType, Equatable {
     required init?(json: [String: AnyObject], identifier: String) {
         
         guard let sender = json[kSender] as? String,
-            let senderProfileImage = json[kSenderProfileImage] as? String,
+            let senderImageString = json[kSenderImageString] as? String,
             let text = json[kText] as? String,
             let dateString = json[kDateString] as? String,
             let groupID = json[kGroupID] as? String,
             let senderName = json[kSenderName] as? String else { return nil }
         
         self.sender = sender
-        self.senderProfileImage = senderProfileImage
+        self.senderImageString = senderImageString
         self.text = text
-        if let image = json[kImage] as? String {
-            self.image = UIImage(base64: image)
-        } else {
-            self.image = nil
-        }
         self.dateString = dateString
         self.viewedBy = json[kViewedBy] as? [String] ?? []
         self.groupID = groupID
@@ -78,12 +66,11 @@ class Message: FirebaseType, Equatable {
         self.identifier = identifier
     }
     
-    init(sender: String, senderName: String, senderProfileImage: String,text: String?, image: UIImage?, dateString: String, timer: Timer?, viewedBy: [String], isLocked: Bool = false, identifier: String, groupID: String) {
+    init(sender: String, senderName: String, senderImageString: String,text: String?, dateString: String, timer: Timer?, viewedBy: [String], isLocked: Bool = false, identifier: String, groupID: String) {
         self.sender = sender
         self.senderName = senderName
-        self.senderProfileImage = senderProfileImage
+        self.senderImageString = senderImageString
         self.text = text
-        self.image = image
         self.dateString = dateString
         self.timer = timer
         self.viewedBy = viewedBy
