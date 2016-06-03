@@ -437,7 +437,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="receiverCell" rowHeight="141" id="EDH-BH-kMl" userLabel="receiverCell" customClass="ReceiverCell" customModule="GroupVault" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="senderCell" rowHeight="141" id="EDH-BH-kMl" userLabel="receiverCell" customClass="ReceiverCell" customModule="GroupVault" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="141"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EDH-BH-kMl" id="VfN-pL-zik" userLabel="receiverMainView">
@@ -486,12 +486,6 @@
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqr-oZ-jIY" userLabel="receiverUsername">
-                                                                    <rect key="frame" x="8" y="8" width="96" height="16"/>
-                                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
-                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDi-q4-KGt" userLabel="receiverDate">
                                                                     <rect key="frame" x="116" y="8" width="96" height="16"/>
                                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
@@ -506,6 +500,12 @@
                                                                         <constraint firstAttribute="width" constant="45" id="krX-56-xzy"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqr-oZ-jIY" userLabel="receiverUsername">
+                                                                    <rect key="frame" x="8" y="8" width="96" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -575,46 +575,6 @@
                                             <outlet property="receiverUserName" destination="lqr-oZ-jIY" id="8ew-n2-n4K"/>
                                             <outlet property="sendersProfileImageView" destination="YPq-BI-uGs" id="k9e-LV-5Ji"/>
                                             <outlet property="timerLabel" destination="PFN-6e-kLP" id="dcp-41-Byw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="receiverCell" rowHeight="141" id="5oZ-Xv-LCv" userLabel="senderCell" customClass="ReceiverCell" customModule="GroupVault" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="169" width="320" height="141"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5oZ-Xv-LCv" id="2Ie-be-0Wz" userLabel="senderMainView">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mMu-za-z4m" userLabel="senderProfileImageView">
-                                                    <rect key="frame" x="267" y="57" width="45" height="45"/>
-                                                    <color key="backgroundColor" red="0.1948550336" green="0.74286666639999999" blue="0.99126602559999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1s-wa-Lx3" userLabel="senderLockAndUnlockButton">
-                                                    <rect key="frame" x="41" y="65" width="31" height="30"/>
-                                                    <connections>
-                                                        <action selector="showMessageButtonTapped:" destination="5oZ-Xv-LCv" eventType="touchUpInside" id="mcF-FI-7Hr"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Hp-Ij-8yR" userLabel="senderTimerLabel">
-                                                    <rect key="frame" x="8" y="69" width="97" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dj4-5Y-Xa3">
-                                                    <rect key="frame" x="72" y="0.0" width="240" height="128"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZkA-zY-wVK" userLabel="senderMainView2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="lockAndUnlockButton" destination="g1s-wa-Lx3" id="fvu-bW-E6s"/>
-                                            <outlet property="sendersProfileImageView" destination="mMu-za-z4m" id="zpB-e0-eMJ"/>
-                                            <outlet property="timerLabel" destination="3Hp-Ij-8yR" id="Jvn-h9-5hW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

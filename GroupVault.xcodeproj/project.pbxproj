@@ -11,11 +11,9 @@
 		AC01C36E1CB4332A00D1A1CB /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */; };
 		AC01C3701CB434CF00D1A1CB /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */; };
 		AC733F331CEFB91D00716810 /* MessageBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F321CEFB91D00716810 /* MessageBoardViewController.swift */; };
-		AC733F351CEFC59C00716810 /* MainOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC733F341CEFC59C00716810 /* MainOne.storyboard */; };
 		AC733F371CEFC8E500716810 /* BuildAGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */; };
 		AC79795F1CA4860E00ACBEF8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */; };
 		AC7BF68A1CE0025A0043C40F /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BF6891CE0025A0043C40F /* TimerController.swift */; };
-		AC883BDA1D00B68A00E21A82 /* MainOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC883BD91D00B68A00E21A82 /* MainOne.storyboard */; };
 		AC8E60931CA1E958004DDC87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60921CA1E958004DDC87 /* AppDelegate.swift */; };
 		AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8E60991CA1E958004DDC87 /* Assets.xcassets */; };
 		AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8E609B1CA1E958004DDC87 /* LaunchScreen.storyboard */; };
@@ -35,6 +33,7 @@
 		AC8E60CC1CA249B1004DDC87 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CB1CA249B1004DDC87 /* UserController.swift */; };
 		AC8E60CE1CA249BC004DDC87 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */; };
 		AC8E60D01CA249C8004DDC87 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8E60CF1CA249C8004DDC87 /* GroupController.swift */; };
+		ACAE62E61D01F965003D8E30 /* MainOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACAE62E41D01F965003D8E30 /* MainOne.storyboard */; };
 		ACB676871CECDEBD00BFE3FB /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB676861CECDEBD00BFE3FB /* ImageController.swift */; };
 		ACBA30AA1CDBEDB3006C3498 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA30A91CDBEDB3006C3498 /* Timer.swift */; };
 		ACEE3B671CF418D80072C3FE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEE3B661CF418D80072C3FE /* Image.swift */; };
@@ -59,11 +58,9 @@
 		AC01C36D1CB4332A00D1A1CB /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		AC01C36F1CB434CF00D1A1CB /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
 		AC733F321CEFB91D00716810 /* MessageBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBoardViewController.swift; sourceTree = "<group>"; };
-		AC733F341CEFC59C00716810 /* MainOne.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainOne.storyboard; path = /Users/JPR/.Trash/MainOne.storyboard; sourceTree = "<absolute>"; };
 		AC733F361CEFC8E500716810 /* BuildAGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuildAGroupTableViewCell.swift; path = ../../../.Trash/BuildAGroupTableViewCell.swift; sourceTree = "<group>"; };
 		AC79795E1CA4860E00ACBEF8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AC7BF6891CE0025A0043C40F /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
-		AC883BD91D00B68A00E21A82 /* MainOne.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainOne.storyboard; sourceTree = "<group>"; };
 		AC8E608F1CA1E958004DDC87 /* GroupVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8E60921CA1E958004DDC87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8E60991CA1E958004DDC87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +82,7 @@
 		AC8E60CB1CA249B1004DDC87 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = ../UserController.swift; sourceTree = "<group>"; };
 		AC8E60CD1CA249BC004DDC87 /* MessagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesController.swift; path = ../MessagesController.swift; sourceTree = "<group>"; };
 		AC8E60CF1CA249C8004DDC87 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupController.swift; path = ../GroupController.swift; sourceTree = "<group>"; };
+		ACAE62E51D01F965003D8E30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainOne.storyboard; sourceTree = "<group>"; };
 		ACB676861CECDEBD00BFE3FB /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		ACBA30A91CDBEDB3006C3498 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		ACEE3B661CF418D80072C3FE /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -128,7 +126,7 @@
 		AC8E60911CA1E958004DDC87 /* GroupVault */ = {
 			isa = PBXGroup;
 			children = (
-				AC883BD91D00B68A00E21A82 /* MainOne.storyboard */,
+				ACAE62E41D01F965003D8E30 /* MainOne.storyboard */,
 				AC8E60C21CA24895004DDC87 /* Models */,
 				AC8E60C51CA248C9004DDC87 /* Controllers */,
 				AC8E60CA1CA2497D004DDC87 /* ModelControllers */,
@@ -263,10 +261,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC883BDA1D00B68A00E21A82 /* MainOne.storyboard in Resources */,
-				AC733F351CEFC59C00716810 /* MainOne.storyboard in Resources */,
 				AC8E609D1CA1E958004DDC87 /* LaunchScreen.storyboard in Resources */,
 				AC8E609A1CA1E958004DDC87 /* Assets.xcassets in Resources */,
+				ACAE62E61D01F965003D8E30 /* MainOne.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +308,14 @@
 				AC8E609C1CA1E958004DDC87 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		ACAE62E41D01F965003D8E30 /* MainOne.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACAE62E51D01F965003D8E30 /* Base */,
+			);
+			name = MainOne.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
