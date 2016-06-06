@@ -276,7 +276,7 @@ extension MessageBoardViewController: SenderTableViewCellDelegate, RecieverTable
         } else if message.image != nil {
             TimerController.sharedInstance.startTimer(message.timer ?? Timer())
             sender.imageViewForReceiver(message)
-        } else {
+        } else if message.text != "" {
             TimerController.sharedInstance.startTimer(message.timer ?? Timer())
             sender.messageViewForReceiver(message)
         }

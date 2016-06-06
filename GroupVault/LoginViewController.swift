@@ -24,7 +24,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         emailTextField.text = ""
         passwordTextField.text = ""
@@ -48,9 +49,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let email = emailTextField.text,
             password = passwordTextField.text {
             UserController.authenticateUser(email, password: password, completion: { (success, user) in
+                
+//                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 if success {
-                    
                     self.performSegueWithIdentifier("toWelcomView", sender: nil)
+                    
                 } else {
                     
                     self.showLoginAlert("Invalid information", message: "Provide:\n-email\n-password (6 or more characters)")

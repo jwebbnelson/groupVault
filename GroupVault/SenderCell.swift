@@ -14,13 +14,15 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     @IBOutlet weak var senderDate: UILabel!
     
+    @IBOutlet weak var senderUsername: UILabel!
+    
     @IBOutlet weak var senderProfileImageView: UIImageView!
     
     @IBOutlet weak var senderMessageView: UIView!
     
     @IBOutlet weak var senderImageView: UIImageView!
     
-    @IBOutlet weak var senderMessageLabel: UILabel!
+    @IBOutlet weak var senderMessageText: UILabel!
     
     @IBOutlet weak var senderTimerLabel: UILabel!
     
@@ -58,7 +60,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
                 }
             }
             senderMessageView.hidden = true
-            senderMessageLabel.hidden = true
+            senderMessageText.hidden = true
             senderDate.textColor = Color.lightBlueMessageColor()
             senderDate.text = message.dateString
             senderDate.font = UIFont.boldSystemFontOfSize(12)
@@ -74,8 +76,8 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
         senderMessageView.backgroundColor = UIColor.lightGrayColor()
         senderMessageView.layer.borderColor = UIColor.blackColor().CGColor
         senderMessageView.layer.borderWidth = 0.5
-        senderMessageLabel.textColor = UIColor.blackColor()
-        senderMessageLabel.text = message.text
+        senderMessageText.textColor = UIColor.blackColor()
+        senderMessageText.text = message.text
         ImageController.imageForUser(message.senderProfileImage) { (success, image) in
             if success {
                 self.senderProfileImageView.image = image
@@ -100,7 +102,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
         senderImageView.layer.borderColor = UIColor.blackColor().CGColor
         senderImageView.layer.borderWidth = 0.5
         senderImageView.image = message.image
-        senderMessageLabel.hidden = true
+        senderMessageText.hidden = true
         ImageController.imageForUser(message.senderProfileImage) { (success, image) in
             if success {
                 self.senderProfileImageView.image = image
