@@ -28,8 +28,15 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     
     @IBOutlet weak var practiceImageView: UIImageView!
     
+    @IBOutlet weak var blurryView: UIView!
+    
+    @IBOutlet weak var fetchingGroupMessagesIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchingGroupMessagesIndicator.hidesWhenStopped = true
+        fetchingGroupMessagesIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        blurryView.hidden = true
         self.tableView.reloadData()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -65,7 +72,7 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
         
         
     }
-
+    
     @IBAction func sendButtonTapped(sender: AnyObject) {
         
         if messageTextField.text != "" {
@@ -155,15 +162,25 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
     }
     
     func updateWith(group: Group) {
+        
         self.groupNameLabel.text = group.groupName
         self.group = group
         
-        MessageController.fetchMessagesForGroup(group) { (messages) in
-            if messages.count > self.groupMessages.count {
-                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
-                self.tableView.reloadData()
-            } else {
-                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+        self.startFetchingDataIndicator()
+        MessageController.fetchMessagesForGroup(group) { (success, messages) in
+            if success == true {
+                if messages.count == 0 {
+                    self.stopFetchingDataIndicator()
+                } else if messages.count != 0 {
+                    self.stopFetchingDataIndicator()
+                }
+                if messages.count > self.groupMessages.count {
+                    self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+                    self.tableView.reloadData()
+                } else if success == false {
+                    self.stopFetchingDataIndicator()
+                    self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+                }
             }
         }
     }
@@ -256,6 +273,15 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
         return true
     }
     
+    func startFetchingDataIndicator() {
+        self.blurryView.hidden = false
+        fetchingGroupMessagesIndicator.startAnimating()
+    }
+    
+    func stopFetchingDataIndicator() {
+        self.blurryView.hidden = true
+        fetchingGroupMessagesIndicator.stopAnimating()
+    }
 }
 
 

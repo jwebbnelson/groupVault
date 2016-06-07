@@ -18,8 +18,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var blurryView: UIView!
+    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        blurryView.hidden = true
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         profileImage.alpha = 0
         downSwipeGesture()
         upSwipeGesture()
@@ -44,6 +52,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if let newUsersUsername = usernameTextField.text,
             email = emailTextField.text,
             password = passwordTextField.text where email.characters.contains("@") && password.characters.count >= 6 {
+            self.startFetchingDataIndicator()
             let usernameDictionaries = FirebaseController.base.childByAppendingPath("users")
             usernameDictionaries.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 var usernames: [String] = []
@@ -58,8 +67,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 }
                 
                 if usernames.contains(newUsersUsername) {
+                    self.stopFetchingDataIndicator()
                     self.showSignupAlert("Sorry!", message: "That username is being used. Please try another.")
                 } else {
+                    self.stopFetchingDataIndicator()
                     UserController.createUser(email, password: password, username: newUsersUsername, completion: { (success, user) in
                         if success {
                             self.almostDoneAlert("Account succefully created!", message: "Now set a profile picture to continue!")
@@ -204,6 +215,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func startFetchingDataIndicator() {
+        self.blurryView.hidden = false
+        self.loadingIndicator.startAnimating()
+        
+        
+    }
+    
+    func stopFetchingDataIndicator() {
+        self.blurryView.hidden = true
+        self.loadingIndicator.stopAnimating()
+    }
+
+    
+    
     
     
     /*

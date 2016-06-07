@@ -28,15 +28,15 @@ class MessageController {
         })
     }
     
-    static func fetchMessagesForGroup(group: Group, completion: (messages: [Message]) -> Void) {
-        guard let groupID = group.identifier else {completion(messages: []); return}
+    static func fetchMessagesForGroup(group: Group, completion: (success: Bool, messages: [Message]) -> Void) {
+        guard let groupID = group.identifier else {completion(success: false, messages: []); return}
         
         FirebaseController.base.childByAppendingPath("messages").queryOrderedByChild("group").queryEqualToValue(groupID).observeEventType(.Value, withBlock: { snapshot in
             if let messageDictionaries = snapshot.value as? [String: AnyObject] {
                 let message = messageDictionaries.flatMap({Message(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
-                completion(messages: message)
+                completion(success: true, messages: message)
             } else {
-                completion(messages: [])
+                completion(success: false, messages: [])
             }
         })
         

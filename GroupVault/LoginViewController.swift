@@ -12,6 +12,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var user: User?
     
+    var visualEffectView: UIVisualEffectView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -20,12 +22,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var fetchingDataIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var createAccountOutlet: UIButton!
+    
+    @IBOutlet weak var loginButtonOutlet: UIButton!
+    
+    @IBOutlet weak var blurryView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        self.blurryView.hidden = true
+        fetchingDataIndicator.hidesWhenStopped = true
+        fetchingDataIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         
         emailTextField.text = ""
         passwordTextField.text = ""
@@ -37,6 +46,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -46,25 +56,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButtonTapped(sender: AnyObject) {
         
+        self.hideKeyboard()
+        
+//        self.disableUserInteraction(true)
+        
         if let email = emailTextField.text,
             password = passwordTextField.text {
+            
+            self.startFetchingDataIndicator()
             UserController.authenticateUser(email, password: password, completion: { (success, user) in
                 
-//                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 if success {
+                    self.stopFetchingDataIndicator()
                     self.performSegueWithIdentifier("toWelcomView", sender: nil)
                     
                 } else {
-                    
+                    self.stopFetchingDataIndicator()
                     self.showLoginAlert("Invalid information", message: "Provide:\n-email\n-password (6 or more characters)")
                 }
             })
         }
+        
     }
+    
     
     @IBAction func CreateAccount(sender: AnyObject) {
         emailTextField.text = ""
         passwordTextField.text = ""
+        print("AAAAAA")
         
     }
     
@@ -112,16 +131,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     func showLoginAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "ok", style: .Default, handler: nil)
@@ -129,6 +138,52 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    func startFetchingDataIndicator() {
+        self.blurryView.hidden = false
+        fetchingDataIndicator.startAnimating()
+        
+        
+    }
     
+    func stopFetchingDataIndicator() {
+        self.blurryView.hidden = true
+        fetchingDataIndicator.stopAnimating()
+    }
+    
+    //        func addBackGroundBlurEffect() {
+    //            view.backgroundColor = UIColor.clearColor()
+    //
+    //            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    //            visualEffectView = UIVisualEffectView(effect: blurEffect)
+    //
+    //            visualEffectView.frame = self.blurryView.bounds
+    //            visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    //            self.view.addSubview(visualEffectView)
+    //        }
+    //
+    //        func removeBackgroundBlurEffect() {
+    //            visualEffectView.removeFromSuperview()
+    //            self.view.backgroundColor = UIColor.whiteColor()
+    //
+    //        }
 }
+
+
+
+
+
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
+
 

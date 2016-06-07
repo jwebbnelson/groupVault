@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SenderCell: UITableViewCell, SenderTimerDelegate {
     
     static let sharedCell = SenderCell()
@@ -61,6 +62,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
             }
             senderMessageView.hidden = true
             senderMessageText.hidden = true
+            senderUsername.text = message.senderName
             senderDate.textColor = Color.lightBlueMessageColor()
             senderDate.text = message.dateString
             senderDate.font = UIFont.boldSystemFontOfSize(12)
@@ -85,6 +87,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
                 self.senderProfileImageView.image = UIImage(named: "defaultProfileImage")
             }
         }
+        senderUsername.text = message.senderName
         senderDate.text = message.dateString
         senderDate.font = UIFont.boldSystemFontOfSize(12)
         
@@ -110,6 +113,7 @@ class SenderCell: UITableViewCell, SenderTimerDelegate {
                 self.senderProfileImageView.image = UIImage(named: "defaultProfileImage")
             }
         }
+        senderUsername.text = message.senderName
         senderDate.text = message.dateString
         senderDate.font = UIFont.boldSystemFontOfSize(12)
         

@@ -138,14 +138,5 @@ class WelcomeTableViewController: UITableViewController {
                 }
             }
             
-            //else if segue.identifier == "toConversation" {
-            //                if let cell = sender as? UITableViewCell, indexPath = tableView.indexPathForCell(cell) {
-            //                    let chatViewController = segue.destinationViewController as! ChatViewController
-            //                    let conversation = conversationsArray[indexPath.row]
-            //                    chatViewController.conversation = conversation
-            //                    chatViewController.usersGroup = self.usersGroup
-            //                    chatViewController.observeChatThread(conversation)
-            //                }
-            
         }
     }

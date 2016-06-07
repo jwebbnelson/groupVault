@@ -20,31 +20,39 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableViewCell: UITableViewCell!
     
+    @IBOutlet weak var blurryView: UIView!
+    
+    @IBOutlet weak var fetchAllUsersIndicator: UIActivityIndicatorView!
+    
+    
     var usersDataSource: [User] = []
     var filteredDataSource: [User] = []
     var selectedUserIDs: [String] = []
     var currentUser = UserController.sharedController.currentUser
-    var user: User!
+    var user: User?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserController.fetchAllUsers { (users) in
-            self.usersDataSource = users.filter({ (user) -> Bool in
-                return user.identifier != UserController.sharedController.currentUser.identifier
-            })
-            
-            
-            print(users.count)
-            self.tableView.reloadData()
-        }
+        self.blurryView.hidden = true
+        self.fetchAllUsersIndicator.hidesWhenStopped = true
+        self.fetchAllUsersIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         
-        downSwipeGesture()
-        upSwipeGesture()
-        //        tapGestureToDismissKeyBoard()
-        //        hidesKeyboard()
-        self.tableView.keyboardDismissMode = .OnDrag
+        self.startFetchingDataIndicator()
+        UserController.fetchAllUsers { (success, users) in
+            if success == true {
+                self.usersDataSource = users.filter({ (user) -> Bool in
+                    return user.identifier != UserController.sharedController.currentUser.identifier
+                })
+                self.stopFetchingDataIndicator()
+                self.tableView.reloadData()
+            }
+            self.downSwipeGesture()
+            self.upSwipeGesture()
+            self.tableView.keyboardDismissMode = .OnDrag
+
+        }
     }
     
     
@@ -119,12 +127,12 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.backgroundColor = UIColor.lightGrayColor()
                 
             }
-
+            
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
     }
-
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -178,22 +186,48 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         groupNameTextField.resignFirstResponder()
         return true
     }
     
-    //    func tapGestureToDismissKeyBoard() {
-    //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BuildAGroupViewController.hidesKeyboard))
-    //        tapGesture.cancelsTouchesInView = true
-    //        view.addGestureRecognizer(tapGesture)
-    //    }
-    //
-    //    func hidesKeyboard() {
-    //        view.endEditing(true)
-    //    }
+    func startFetchingDataIndicator() {
+        self.blurryView.hidden = false
+        self.fetchAllUsersIndicator.startAnimating()
+        
+        
+    }
+    
+    func stopFetchingDataIndicator() {
+        self.blurryView.hidden = true
+        self.fetchAllUsersIndicator.stopAnimating()
+    }
     
 }
+
+extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
+    
+    func addUserButtonTapped(sender: BuildAGroupTableViewCell) {
+        
+        guard let user = self.user else { return }
+        guard let userID = user.identifier else { return }
+        
+        
+        
+        
+        
+        
+    }
+}
+
+
+
+
+
+
+
+
 
 
 

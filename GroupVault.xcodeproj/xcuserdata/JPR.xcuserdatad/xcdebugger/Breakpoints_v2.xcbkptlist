@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GroupVault/ReceiverCell.swift"
-            timestampString = "486506770.619694"
+            filePath = "GroupVault/MessageBoardViewController.swift"
+            timestampString = "487015740.201432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "imageViewForReceiver(_:)"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "updateWith(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

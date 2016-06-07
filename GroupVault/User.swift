@@ -23,6 +23,7 @@ class User: Equatable, FirebaseType {
     var username: String
     var imageString: String?
     var groupIDs: [String] = []
+    var selectedForGroup: Bool = false
     
     var identifier: String?
     var endpoint: String {
