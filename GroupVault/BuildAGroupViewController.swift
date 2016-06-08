@@ -8,17 +8,11 @@
 
 import UIKit
 
-class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-    
-    @IBOutlet weak var userLabel: UILabel!
-    
-    @IBOutlet weak var userImageView: UIImageView!
+class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var tableViewCell: UITableViewCell!
     
     @IBOutlet weak var blurryView: UIView!
     
@@ -68,6 +62,17 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         print(selectedUserIDs.count)
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.filteredDataSource = self.usersDataSource.filter({$0.username.containsString(searchText.lowercaseString)})
+            
+            self.tableView.reloadData()
+        }
+        
+//        self.tableView.reloadData()
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -88,7 +93,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.delegate = self
         
-        let user = usersDataSource[indexPath.row]
+        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
         
         cell.userViewOnCell(user)
         
@@ -171,6 +176,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         print(selectedUserIDs.count)
+        
         
         if groupNameTextField.text == "" || selectedUserIDs.count <= 1 {
             self.showAlert("Error!", message: "Make sure you create a group name and add members.")
@@ -258,7 +264,11 @@ extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
     
     func userStatus(indexPath: NSIndexPath) -> User {
         
-        return usersDataSource[indexPath.row]
+        if filteredDataSource.count > 0 {
+            return filteredDataSource[indexPath.row]
+        } else {
+            return usersDataSource[indexPath.row]
+        }
         
         
     }

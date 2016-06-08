@@ -15,8 +15,11 @@ class WelcomeTableViewController: UITableViewController {
     var groups: [Group] = []
     var currentUser = ""
     
+    @IBOutlet weak var groupImageView: UIImageView!
     
     @IBOutlet weak var welcomeLabel: UILabel!
+    
+    @IBOutlet weak var groupNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +52,7 @@ class WelcomeTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func LogoutButtonTapped(sender: AnyObject) {
+    @IBAction func toolbarButtonTapped(sender: AnyObject) {
         FirebaseController.base.unauth()
         performSegueWithIdentifier("noUserLoggedIn", sender: nil)
     }
@@ -75,6 +78,8 @@ class WelcomeTableViewController: UITableViewController {
         let group = self.groups[indexPath.row]
         
         cell.textLabel?.text = group.groupName
+//        self.groupNameLabel.text = group.groupName
+//        self.groupImageView.image = UIImage(named: "defaultProfileImage")
         
         return cell
     }
