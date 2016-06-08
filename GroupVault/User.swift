@@ -19,6 +19,7 @@ class User: Equatable, FirebaseType {
     let kUsername = "username"
     let kGroups = "groups"
     let kImageString = "image"
+    let kSelectedForGroup = "selectedForGroup"
     
     var username: String
     var imageString: String?
@@ -28,6 +29,10 @@ class User: Equatable, FirebaseType {
     var identifier: String?
     var endpoint: String {
         return "users"
+    }
+    
+    var dictionaryCopy: [String: AnyObject] {
+        return [kSelectedForGroup: selectedForGroup]
     }
     
     var jsonValue: [String: AnyObject] {
@@ -60,11 +65,18 @@ class User: Equatable, FirebaseType {
         self.identifier = identifier
     }
     
+//    init?(dictionary: [String: AnyObject]) {
+//        guard let selectedForGroup = dictionary[kSelectedForGroup] as? Bool else { return nil }
+//        self.selectedForGroup = selectedForGroup
+//    }
+    
     init(username: String, groups: [String], identifier: String) {
         self.username = username
         self.groupIDs = []
+        self.selectedForGroup = false
         self.identifier = identifier
     }
+    
 }
 
 func == (lhs: User, rhs: User)-> Bool {

@@ -17,6 +17,10 @@ class UserController {
     
     var groups: [Group] = []
     
+    var kSelectedForGroup = "selectedForGroup"
+    
+    var users: [User] = []
+    
     var currentUser: User! {
         get {
             guard let userID = FirebaseController.base.authData?.uid,
@@ -164,6 +168,32 @@ class UserController {
         
         
     }
+    
+    func saveToPersistentStorage() {
+        
+        var selectedForGroupDictionariesArray: [[String: AnyObject]] = []
+        
+        for user in self.users {
+            
+            let dictionaryCopy = user.dictionaryCopy
+            selectedForGroupDictionariesArray.append(dictionaryCopy)
+        }
+        NSUserDefaults.standardUserDefaults().setObject(selectedForGroupDictionariesArray, forKey: kSelectedForGroup)
+    }
+    
+//    func loadFromPersistentStorage() {
+//        
+//        if let selectedForGroupDictionariesArray = NSUserDefaults.standardUserDefaults().objectForKey(kSelectedForGroup) as? [[String: AnyObject]] {
+//            var selectedForGroupArray: [User] = []
+//            
+//            for selectedForGroupDictionary in selectedForGroupDictionariesArray {
+//                if let selectedForGroup = User(dictionary: selectedForGroupDictionary) {
+//                    selectedForGroupArray.append(selectedForGroup)
+//                }
+//            }
+//            self.users = selectedForGroupArray
+//        }
+//    }
     
     
 }

@@ -51,7 +51,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             self.downSwipeGesture()
             self.upSwipeGesture()
             self.tableView.keyboardDismissMode = .OnDrag
-
+            
         }
     }
     
@@ -66,7 +66,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
         if groupNameTextField.text == "" || selectedUserIDs == [] {
             self.showAlert("Error!", message: "Make sure you create a group name and add members.")
-            
+
         } else {
             createGroup()
             navigationController?.popViewControllerAnimated(true)
@@ -86,75 +86,93 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! BuildAGroupTableViewCell
         
-        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
+        cell.delegate = self
         
-        cell.userLabel.text = user.username
-        if let userImageString = user.imageString {
-            ImageController.imageForUser(userImageString) { (success, image) in
-                if success {
-                    cell.userProfileImageView.image = image
-                } else {
-                    cell.userProfileImageView.image = UIImage(named: "defaultProfileImage")
-                }
-            }
+        let user = usersDataSource[indexPath.row]
+        
+        cell.userViewOnCell(user)
+        
+        let selectedForGroup = user.selectedForGroup
+        
+        if selectedForGroup == true {
+            cell.userSelectedForGroup(user)
+            
+        } else if selectedForGroup == false {
+            cell.userNotSelectedForGroup(user)
         }
         
         
+        //        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
+        //
+        //        cell.userLabel.text = user.username
+        //        if let userImageString = user.imageString {
+        //            ImageController.imageForUser(userImageString) { (success, image) in
+        //                if success {
+        //                    cell.userProfileImageView.image = image
+        //                } else {
+        //                    cell.userProfileImageView.image = UIImage(named: "defaultProfileImage")
+        //                }
+        //            }
+        //        }
         
         return cell
     }
     //// self.tableview.rowHeight = UITableView UITableViewAutomaticDimension
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BuildAGroupTableViewCell{
-            
-            let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
-            
-            if selectedUserIDs.contains(user.identifier!) {
-                
-                if let index = selectedUserIDs.indexOf(user.identifier!) {
-                    
-                    selectedUserIDs.removeAtIndex(index)
-                    
-                    cell.backgroundColor = UIColor.whiteColor()
-                }
-                
-            } else {
-                selectedUserIDs.append(user.identifier!)
-                
-                cell.backgroundColor = UIColor.lightGrayColor()
-                
-            }
-            
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-        
-    }
+    //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //
+    //        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BuildAGroupTableViewCell{
+    //
+    //            let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
+    //
+    //            if selectedUserIDs.contains(user.identifier!) {
+    //
+    //                if let index = selectedUserIDs.indexOf(user.identifier!) {
+    //
+    //                    selectedUserIDs.removeAtIndex(index)
+    //
+    //                    cell.backgroundColor = UIColor.whiteColor()
+    //                }
+    //
+    //            } else {
+    //                selectedUserIDs.append(user.identifier!)
+    //
+    //                cell.backgroundColor = UIColor.lightGrayColor()
+    //
+    //            }
+    //
+    //            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    //        }
+    //
+    //    }
     
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-    }
+    
+    
+    
     
     
     func createGroup() {
         
-        if let groupName = groupNameTextField.text {
-            guard let myIdentifier = UserController.sharedController.currentUser.identifier else {return}
-            selectedUserIDs.append(myIdentifier)
-            GroupController.createGroup(groupName, users: selectedUserIDs, completion: { (success, group) in
-                if (success != nil) {
-                    GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
-                }
-                
-            })
-        }
+        guard let myIdentifier = UserController.sharedController.currentUser.identifier else {return}
+        selectedUserIDs.append(myIdentifier)
+        GroupController.createGroup(groupNameTextField.text!, users: selectedUserIDs, completion: { (success, group) in
+            print(self.selectedUserIDs.count)
+            if (success != nil) {
+                GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
+            }
+            
+        })
         
     }
+    
     func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -208,17 +226,48 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
 
 extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
     
+    
+    
     func addUserButtonTapped(sender: BuildAGroupTableViewCell) {
         
-        guard let user = self.user else { return }
-        guard let userID = user.identifier else { return }
+        let indexPath = tableView.indexPathForCell(sender)
         
+        let user = userStatus(indexPath!)
         
+        user.selectedForGroup = !user.selectedForGroup
         
+        tableView.reloadData()
         
+        if user.selectedForGroup == true {
+            selectedUserIDs.append(user.identifier!)
+        }
+    }
+    
+    func userStatus(indexPath: NSIndexPath) -> User {
+        
+        return usersDataSource[indexPath.row]
         
         
     }
+    
+    
+    //        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
+    //
+    //        if selectedUserIDs.contains(user.identifier!) {
+    //
+    //            if let index = selectedUserIDs.indexOf(user.identifier!) {
+    //
+    //                selectedUserIDs.removeAtIndex(index)
+    //
+    //            }
+    //
+    //        } else {
+    //            selectedUserIDs.append(user.identifier!)
+    //
+    //        }
+    //        return self.usersDataSource[indexPath.row]
+    //    }
+    
 }
 
 

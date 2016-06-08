@@ -169,18 +169,14 @@ class MessageBoardViewController: UIViewController, UITextFieldDelegate, UIImage
         self.startFetchingDataIndicator()
         MessageController.fetchMessagesForGroup(group) { (success, messages) in
             if success == true {
-                if messages.count == 0 {
-                    self.stopFetchingDataIndicator()
-                } else if messages.count != 0 {
-                    self.stopFetchingDataIndicator()
+                self.stopFetchingDataIndicator()
+            if messages.count > self.groupMessages.count {
+                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
+                self.tableView.reloadData()
                 }
-                if messages.count > self.groupMessages.count {
-                    self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
-                    self.tableView.reloadData()
-                } else if success == false {
-                    self.stopFetchingDataIndicator()
-                    self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
-                }
+            } else {
+                self.stopFetchingDataIndicator()
+                self.groupMessages = messages.sort({ $0.identifier < $1.identifier })
             }
         }
     }

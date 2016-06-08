@@ -32,8 +32,6 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
     
     weak var delegate: RecieverTableViewCellDelegate?
     
-//    var imageMessage: Image?
-    
     var message: Message?
     
     
@@ -188,7 +186,7 @@ class ReceiverCell: UITableViewCell, TimerDelegate {
 
 protocol RecieverTableViewCellDelegate: class {
     func receiverLockImagebuttonTapped(sender: ReceiverCell)
-    
+
 }
 
 extension ReceiverCell {
