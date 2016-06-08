@@ -64,13 +64,8 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
-        if groupNameTextField.text == "" || selectedUserIDs == [] {
-            self.showAlert("Error!", message: "Make sure you create a group name and add members.")
-
-        } else {
-            createGroup()
-            navigationController?.popViewControllerAnimated(true)
-        }
+        createGroup()
+        print(selectedUserIDs.count)
     }
     
     
@@ -161,16 +156,34 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     func createGroup() {
         
-        guard let myIdentifier = UserController.sharedController.currentUser.identifier else {return}
-        selectedUserIDs.append(myIdentifier)
-        GroupController.createGroup(groupNameTextField.text!, users: selectedUserIDs, completion: { (success, group) in
-            print(self.selectedUserIDs.count)
-            if (success != nil) {
-                GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
-            }
-            
-        })
+        guard let myIdentifier = UserController.sharedController.currentUser.identifier else { return }
         
+        for user in usersDataSource {
+            if user.selectedForGroup == true {
+                selectedUserIDs.append(user.identifier!)
+            }
+        }
+        
+        print(selectedUserIDs.count)
+        
+        if !selectedUserIDs.contains(myIdentifier) {
+            selectedUserIDs.append(myIdentifier)
+        }
+        
+        print(selectedUserIDs.count)
+        
+        if groupNameTextField.text == "" || selectedUserIDs.count <= 1 {
+            self.showAlert("Error!", message: "Make sure you create a group name and add members.")
+            selectedUserIDs = []
+        } else {
+            GroupController.createGroup(groupNameTextField.text!, users: selectedUserIDs, completion: { (success, group) in
+                
+                if (success != nil) {
+                    GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
+                }
+            })
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     func showAlert(title: String, message: String) {
@@ -236,11 +249,11 @@ extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
         
         user.selectedForGroup = !user.selectedForGroup
         
+        print(user.username)
+        print(user.selectedForGroup)
+        
         tableView.reloadData()
         
-        if user.selectedForGroup == true {
-            selectedUserIDs.append(user.identifier!)
-        }
     }
     
     func userStatus(indexPath: NSIndexPath) -> User {
