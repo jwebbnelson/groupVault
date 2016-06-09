@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate {
+class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     
@@ -24,6 +24,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     var selectedUserIDs: [String] = []
     var currentUser = UserController.sharedController.currentUser
     var user: User?
+    var group: Group?
     
     
     override func viewDidLoad() {
@@ -59,7 +60,6 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
         createGroup()
-        print(selectedUserIDs.count)
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -70,7 +70,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             self.tableView.reloadData()
         }
         
-//        self.tableView.reloadData()
+        //        self.tableView.reloadData()
     }
     
     
@@ -106,58 +106,8 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
             cell.userNotSelectedForGroup(user)
         }
         
-        
-        //        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
-        //
-        //        cell.userLabel.text = user.username
-        //        if let userImageString = user.imageString {
-        //            ImageController.imageForUser(userImageString) { (success, image) in
-        //                if success {
-        //                    cell.userProfileImageView.image = image
-        //                } else {
-        //                    cell.userProfileImageView.image = UIImage(named: "defaultProfileImage")
-        //                }
-        //            }
-        //        }
-        
         return cell
     }
-    //// self.tableview.rowHeight = UITableView UITableViewAutomaticDimension
-    
-    //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    //
-    //        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BuildAGroupTableViewCell{
-    //
-    //            let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
-    //
-    //            if selectedUserIDs.contains(user.identifier!) {
-    //
-    //                if let index = selectedUserIDs.indexOf(user.identifier!) {
-    //
-    //                    selectedUserIDs.removeAtIndex(index)
-    //
-    //                    cell.backgroundColor = UIColor.whiteColor()
-    //                }
-    //
-    //            } else {
-    //                selectedUserIDs.append(user.identifier!)
-    //
-    //                cell.backgroundColor = UIColor.lightGrayColor()
-    //
-    //            }
-    //
-    //            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    //        }
-    //
-    //    }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
-    
-    
-    
     
     func createGroup() {
         
@@ -186,9 +136,10 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 if (success != nil) {
                     GroupController.passGroupIDsToUsers(self.selectedUserIDs, group:group, key: success!)
+                    self.group = group
+                    self.selectAPhotoPickerController()
                 }
             })
-            navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -241,6 +192,78 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         self.fetchAllUsersIndicator.stopAnimating()
     }
     
+    //    func almostDoneAlert(title: String, message: String) {
+    //
+    //        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    //        let action = UIAlertAction(title: "Ok", style: .Default) { (action) in
+    //            self.okButtonTapped()
+    //        }
+    //        alert.addAction(action)
+    //        presentViewController(alert, animated: true, completion: nil)
+    //    }
+    
+    func selectAPhotoPickerController() {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alert = UIAlertController(title: "Select a group Image", message: nil, preferredStyle: .ActionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            alert.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: { (_) -> Void in
+                imagePicker.sourceType = .PhotoLibrary
+                imagePicker.allowsEditing = true
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }))
+        }
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            
+            if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+                alert.addAction(UIAlertAction(title: "Take Photo or Video", style: .Default, handler: { (_) in
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .Camera
+                    imagePicker.cameraCaptureMode = .Photo
+                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                }))
+            }
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        if let image = pickedImage {
+            if let group = self.group {
+                ImageController.uploadGroupImage(group, image: image, completion: { (identifier) in
+                    print("Image Saved")
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("user cancelled image")
+        dismissViewControllerAnimated(true) {
+            // anything you want to happen when the user selects cancel
+        }
+    }
+    
+    func imageWasSavedSuccessfully(image: UIImage, didFinishSavingWithError error: NSError!, context: UnsafeMutablePointer<()>) {
+        print("Image saved")
+        if let error = error {
+            print("An error occured while waving the image. \(error.localizedDescription)")
+        } else {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+            })
+        }
+    }
 }
 
 extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
@@ -272,24 +295,6 @@ extension BuildAGroupViewController: BuildAGroupTableViewCellDelegate {
         
         
     }
-    
-    
-    //        let user = filteredDataSource.count > 0 ? filteredDataSource[indexPath.row]:usersDataSource[indexPath.row]
-    //
-    //        if selectedUserIDs.contains(user.identifier!) {
-    //
-    //            if let index = selectedUserIDs.indexOf(user.identifier!) {
-    //
-    //                selectedUserIDs.removeAtIndex(index)
-    //
-    //            }
-    //
-    //        } else {
-    //            selectedUserIDs.append(user.identifier!)
-    //
-    //        }
-    //        return self.usersDataSource[indexPath.row]
-    //    }
     
 }
 

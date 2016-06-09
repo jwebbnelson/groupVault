@@ -44,6 +44,7 @@ class WelcomeTableViewController: UITableViewController {
         UserController.observeGroupsForUser(currentUser) { (group) in
             self.groups = group
             self.tableView.reloadData()
+            
         }
     }
     
@@ -73,13 +74,11 @@ class WelcomeTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("enterAGroup", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("enterAGroup", forIndexPath: indexPath) as! WelcomeTableViewCell
         
         let group = self.groups[indexPath.row]
         
-        cell.textLabel?.text = group.groupName
-//        self.groupNameLabel.text = group.groupName
-//        self.groupImageView.image = UIImage(named: "defaultProfileImage")
+        cell.groupViewOnCell(group)
         
         return cell
     }

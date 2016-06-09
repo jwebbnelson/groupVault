@@ -80,6 +80,20 @@ class UserController {
             }
         }
     }
+    
+//    static func fetchImagesForGroup(group: Group, completion: (success: Bool, groupImage: String?) -> Void) {
+//        guard let groupImageString = group.identifier else { completion(success: false, groupImage: nil); return}
+//        
+//        FirebaseController.base.childByAppendingPath("users").queryOrderedByChild("group").queryEqualToValue(groupImageString).observeEventType(.Value, withBlock: { snapshot in
+//            if let userDictionaries = snapshot.value as? [String: AnyObject] {
+//                let user = userDictionaries.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+//                completion(success: true, groupImage: )
+//            } else {
+//                completion(success: false, messages: [])
+//            }
+//        })
+//        
+    }
 
     
     static func fetchAllUsers(completion: (success: Bool, users: [User]) -> Void) {
@@ -168,33 +182,6 @@ class UserController {
         
         
     }
-    
-    func saveToPersistentStorage() {
-        
-        var selectedForGroupDictionariesArray: [[String: AnyObject]] = []
-        
-        for user in self.users {
-            
-            let dictionaryCopy = user.dictionaryCopy
-            selectedForGroupDictionariesArray.append(dictionaryCopy)
-        }
-        NSUserDefaults.standardUserDefaults().setObject(selectedForGroupDictionariesArray, forKey: kSelectedForGroup)
-    }
-    
-//    func loadFromPersistentStorage() {
-//        
-//        if let selectedForGroupDictionariesArray = NSUserDefaults.standardUserDefaults().objectForKey(kSelectedForGroup) as? [[String: AnyObject]] {
-//            var selectedForGroupArray: [User] = []
-//            
-//            for selectedForGroupDictionary in selectedForGroupDictionariesArray {
-//                if let selectedForGroup = User(dictionary: selectedForGroupDictionary) {
-//                    selectedForGroupArray.append(selectedForGroup)
-//                }
-//            }
-//            self.users = selectedForGroupArray
-//        }
-//    }
-    
     
 }
 

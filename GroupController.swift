@@ -31,6 +31,7 @@ class GroupController {
         var group = Group(groupName: groupName, users: users, identifier: identifier)
         group.save()
         completion(success: identifier, group: group)
+        print(group.identifier)
     }
     
     

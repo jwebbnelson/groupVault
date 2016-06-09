@@ -31,10 +31,6 @@ class User: Equatable, FirebaseType {
         return "users"
     }
     
-    var dictionaryCopy: [String: AnyObject] {
-        return [kSelectedForGroup: selectedForGroup]
-    }
-    
     var jsonValue: [String: AnyObject] {
         if let imageString = imageString {
             return [kUsername: username, kImageString: imageString, kGroups: groupIDs]

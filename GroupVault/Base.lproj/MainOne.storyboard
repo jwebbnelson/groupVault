@@ -336,11 +336,11 @@
                             <color key="backgroundColor" red="0.1948550336" green="0.74286666639999999" blue="0.99126602559999999" alpha="1" colorSpace="calibratedRGB"/>
                         </stackView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="enterAGroup" id="7y9-cC-3vJ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="enterAGroup" id="7y9-cC-3vJ" customClass="WelcomeTableViewCell" customModule="GroupVault" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="156" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7y9-cC-3vJ" id="wv1-cO-io7">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="97D-vj-wDA">
@@ -369,6 +369,11 @@
                                         <constraint firstItem="97D-vj-wDA" firstAttribute="top" secondItem="wv1-cO-io7" secondAttribute="top" id="kLc-Yp-jV5"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="groupImageView" destination="omQ-jo-BF8" id="mrx-hd-N04"/>
+                                    <outlet property="groupNameLabel" destination="05V-XV-5vJ" id="Edd-N1-u0c"/>
+                                    <segue destination="upb-FA-2s5" kind="push" identifier="toEnterAGroup" id="7ee-72-03q"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
