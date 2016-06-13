@@ -81,20 +81,21 @@ class UserController {
         }
     }
     
-//    static func fetchImagesForGroup(group: Group, completion: (success: Bool, groupImage: String?) -> Void) {
-//        guard let groupImageString = group.identifier else { completion(success: false, groupImage: nil); return}
-//        
-//        FirebaseController.base.childByAppendingPath("users").queryOrderedByChild("group").queryEqualToValue(groupImageString).observeEventType(.Value, withBlock: { snapshot in
-//            if let userDictionaries = snapshot.value as? [String: AnyObject] {
-//                let user = userDictionaries.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
-//                completion(success: true, groupImage: )
-//            } else {
-//                completion(success: false, messages: [])
-//            }
-//        })
-//        
-    }
-
+    //    static func fetchImagesForGroup(group: Group, completion: (success: Bool, groupImage: String?) -> Void) {
+    //        guard let groupImageString = group.identifier else { completion(success: false, groupImage: nil); return}
+    //
+    //        FirebaseController.base.childByAppendingPath("users").queryOrderedByChild("group").queryEqualToValue(groupImageString).observeEventType(.Value, withBlock: { snapshot in
+    //            if let userDictionaries = snapshot.value as? [String: AnyObject] {
+    //                let user = userDictionaries.flatMap({User(json: $0.1 as! [String: AnyObject], identifier: $0.0)})
+    //                completion(success: true, groupImage: )
+    //            } else {
+    //                completion(success: false, messages: [])
+    //            }
+    //        })
+    //
+    
+    
+    
     
     static func fetchAllUsers(completion: (success: Bool, users: [User]) -> Void) {
         FirebaseController.dataAtEndpoint("users") { (data) in

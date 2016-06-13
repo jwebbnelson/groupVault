@@ -28,6 +28,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginButtonOutlet: UIButton!
     
+    @IBOutlet weak var buttonStackView: UIStackView!
+    
+    
     @IBOutlet weak var blurryView: UIView!
     
     override func viewDidLoad() {
@@ -58,7 +61,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.hideKeyboard()
         
-//        self.disableUserInteraction(true)
+        //        self.disableUserInteraction(true)
         
         if let email = emailTextField.text,
             password = passwordTextField.text {
@@ -72,7 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                 } else {
                     self.stopFetchingDataIndicator()
-                    self.showLoginAlert("Invalid information", message: "Provide:\n-email\n-password (6 or more characters)")
+                    self.showLoginAlert("Invalid information", message: "Provide:\n-jemail\n-password (6 or more characters)")
                 }
             })
         }
@@ -121,6 +124,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if passwordTextField.text != "" {
+            self.createAccountOutlet.hidden = true
+            self.buttonStackView.frame = CGRect(x: buttonStackView.frame.origin.x, y: buttonStackView.frame.origin.y, width: 50, height: 20)
+        }
+    }
+    
     func tapGestureToDismissKeyBoard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.hideKeyboard))
         tapGesture.cancelsTouchesInView = true

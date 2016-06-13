@@ -11,6 +11,7 @@ import UIKit
 
 class ZImageController {
     
+    
     static func uploadImage(image: UIImage, completion: (identifier: String?) -> Void) {
         
         if let base64Image = image.base64String {
@@ -26,6 +27,19 @@ class ZImageController {
     static func imageForIdentifier(identifier: String, completion: (image: UIImage?) -> Void) {
         
         FirebaseController.dataAtEndpoint("images/\(identifier)") { (data) -> Void in
+            
+            if let data = data as? String {
+                let image = UIImage(base64: data)
+                completion(image: image)
+            } else {
+                completion(image: nil)
+            }
+        }
+    }
+    
+    static func groupImageForIdentifier(group: Group, identifier: String, completion: (image: UIImage?) -> Void) {
+        
+        FirebaseController.dataAtEndpoint("groups/\(group.identifier)/image") { (data) -> Void in
             
             if let data = data as? String {
                 let image = UIImage(base64: data)

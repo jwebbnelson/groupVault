@@ -112,9 +112,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 }))
             }
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (_) in
+            self.performSegueWithIdentifier("fromSignupToWelcome", sender: nil)
+        }))
         
         presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -137,7 +140,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         print("user cancelled image")
         dismissViewControllerAnimated(true) {
-            // anything you want to happen when the user selects cancel
+            self.performSegueWithIdentifier("fromSignupToWelcome", sender: nil)
         }
     }
     

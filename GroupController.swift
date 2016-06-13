@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 class GroupController {
     
@@ -44,5 +45,16 @@ class GroupController {
             specificGroup.setValue(group.groupName)
         }
     }
+    
+//    static func passGroupImageToGroup(group: Group, completion: (succes: Bool, image: UIImage) -> Void) {
+//        
+//        FirebaseController.observeDataAtEndpoint("groups/\(group.identifier)/image") { (data) in
+//            
+//            if let json = data as? [String: AnyObject] {
+//                let groupImage = Group(json: <#T##[String : AnyObject]#>, identifier: <#T##String#>)
+//            }
+//            
+//        }
+//    }
 }
 

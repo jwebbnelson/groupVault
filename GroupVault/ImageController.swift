@@ -46,6 +46,19 @@ class ImageController {
         }
     }
     
+    static func groupImageForIdentifier(identifier: String, completion: (image: UIImage?) -> Void) {
+        
+        FirebaseController.dataAtEndpoint("groups/\(identifier)/image") { (data) -> Void in
+            
+            if let data = data as? String {
+                let image = UIImage(base64: data)
+                completion(image: image)
+            } else {
+                completion(image: nil)
+            }
+        }
+    }
+    
     static func imageForUser(imageString: String, completion: (success: Bool, image: UIImage?) -> Void) {
         
         

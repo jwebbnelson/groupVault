@@ -18,6 +18,7 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var fetchAllUsersIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var groupImageView: UIImageView!
     
     var usersDataSource: [User] = []
     var filteredDataSource: [User] = []
@@ -227,7 +228,9 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
                 }))
             }
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (_) in
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
         
         presentViewController(alert, animated: true, completion: nil)
     }
@@ -239,18 +242,26 @@ class BuildAGroupViewController: UIViewController, UITableViewDelegate, UITableV
         
         if let image = pickedImage {
             if let group = self.group {
+                
                 ImageController.uploadGroupImage(group, image: image, completion: { (identifier) in
-                    print("Image Saved")
-                    self.navigationController?.popViewControllerAnimated(true)
+                    UIView.animateWithDuration(4.0, animations: {
+                        self.groupNameTextField.hidden = true
+                        self.groupImageView.alpha = 1.0
+                        self.groupImageView.image = image
+                        }, completion: { (_) in
+                            sleep(1)
+                            self.navigationController?.popViewControllerAnimated(true)
+                    })
                 })
             }
         }
     }
     
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         print("user cancelled image")
         dismissViewControllerAnimated(true) {
-            // anything you want to happen when the user selects cancel
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
